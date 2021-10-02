@@ -3,9 +3,9 @@
 ## Steps to remediate
 
 - Stops browser sessions
-- Removes from filesystem.
-- Removes scheduled task
-- Removes registry keys
+- Removes WaveBrowser from the filesystem.
+- Removes WaveBrowser scheduled tasks.
+- Removes WaveBrowser registry keys
 
 ### Why two scripts?
 I created an automated script that works well for a single local device. However, this script doesn't work with CrowdStrike due to issues with the environmental variables, so I created a simplified script for this reason.
