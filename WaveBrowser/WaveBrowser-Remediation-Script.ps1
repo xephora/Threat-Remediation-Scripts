@@ -29,6 +29,7 @@ Function BrowserProcesses {
 
 Function RemoveWavesorFS {
     "Cleaning WaveBrowser Files"
+    
     rm "$env:USERPROFILE\Wavesor Software" -Force -Recurse -ErrorAction SilentlyContinue -ErrorVariable DirectoryError
     rm "$env:USERPROFILE\WebNavigatorBrowser" -Force -Recurse -ErrorAction SilentlyContinue -ErrorVariable DirectoryError
     rm "$env:USERPROFILE\appdata\local\WaveBrowser" -Force -Recurse -ErrorAction SilentlyContinue -ErrorVariable DirectoryError
@@ -38,6 +39,7 @@ Function RemoveWavesorFS {
 
 Function RemoveScheduledTasks {
     "Cleaning Scheduled Tasks"
+    
     $tasks = Get-ScheduledTask -TaskName *Wave* | Select-Object -ExpandProperty TaskName
     foreach ($i in $tasks) {
         Unregister-ScheduledTask -TaskName $i -Confirm:$false -ErrorAction SilentlyContinue -ErrorVariable DirectoryError
@@ -46,6 +48,7 @@ Function RemoveScheduledTasks {
 
 Function RemoveRegistryKey {
     "Cleaning Registry Keys.."
+    
     Remove-Item -Path HKCU:\Software\WaveBrowser -Force -ErrorAction SilentlyContinue
     Remove-Item -Path HKCU:\Software\Wavesor -Force -ErrorAction SilentlyContinue
     Remove-Item -Path HKCU:\Software\WebNavigatorBrowser -Force -ErrorAction SilentlyContinue
