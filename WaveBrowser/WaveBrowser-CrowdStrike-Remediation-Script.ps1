@@ -1,4 +1,5 @@
 $username = "USERNAME_HERE"
+$sid_id = "SID_HERE"
 
 Get-Process chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 Get-Process firefox -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
@@ -17,7 +18,7 @@ foreach ($i in $tasks) {
 	Unregister-ScheduledTask -TaskName $i -Confirm:$false -ErrorAction SilentlyContinue -ErrorVariable DirectoryError
 }
 
-Remove-Item -Path HKCU:\Software\WaveBrowser -Force -ErrorAction SilentlyContinue
-Remove-Item -Path HKCU:\Software\Wavesor -Force -ErrorAction SilentlyContinue
-Remove-Item -Path HKCU:\Software\WebNavigatorBrowser -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run.Wavesor SWUpdater" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path Registry::HKU\$sid_id\Software\WaveBrowser -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path Registry::HKU\$sid_id\Software\Wavesor -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path Registry::HKU\$sid_id\Software\WebNavigatorBrowser -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path "Registry::HKU\$sid_id\Software\Microsoft\Windows\CurrentVersion\Run.Wavesor SWUpdater" -Recurse -ErrorAction SilentlyContinue
