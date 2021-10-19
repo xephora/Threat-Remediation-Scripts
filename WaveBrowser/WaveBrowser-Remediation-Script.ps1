@@ -50,10 +50,10 @@ Function RemoveScheduledTasks {
 Function RemoveRegistryKey {
     "Cleaning Registry Keys.."
     
-    Remove-Item -Path HKCU:\Software\WaveBrowser -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path HKCU:\Software\Wavesor -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path HKCU:\Software\WebNavigatorBrowser -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run.Wavesor SWUpdater" -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path HKCU:\Software\WaveBrowser -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path HKCU:\Software\Wavesor -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path HKCU:\Software\WebNavigatorBrowser -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run.Wavesor SWUpdater" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
 BrowserProcesses
