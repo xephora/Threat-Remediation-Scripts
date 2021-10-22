@@ -53,7 +53,7 @@ Function RemoveRegistryKey {
     Remove-Item -Path HKCU:\Software\WaveBrowser -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path HKCU:\Software\Wavesor -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path HKCU:\Software\WebNavigatorBrowser -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run.Wavesor SWUpdater" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Wavesor SWUpdater" -ErrorAction SilentlyContinue
 }
 
 BrowserProcesses
