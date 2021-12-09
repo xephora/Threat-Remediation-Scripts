@@ -15,6 +15,7 @@ foreach ($i in $user_list) {
 
 rm "C:\programdata\Driver Support" -Force -Recurse -ErrorAction SilentlyContinue
 rm "C:\program files (x86)\Driver Support" -Force -Recurse -ErrorAction SilentlyContinue
+rm "C:\program files\Driver Support" -Force -Recurse -ErrorAction SilentlyContinue
 
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 
@@ -36,6 +37,11 @@ if ($result -eq "True") {
 $result = test-path -Path "C:\programdata\Driver Support"
 if ($result -eq "True") {
 	"DriverSupportAOsvc wasn't removed => on C:\programdata\Driver Support"
+}
+
+$result = test-path -Path "C:\program files\Driver Support"
+if ($result -eq "True") {
+	"DriverSupportAOsvc wasn't removed => on C:\program files\Driver Support"
 }
 
 $result = test-path -Path Registry::HKLM\SOFTWARE\WOW6432Node\ActiveOptimization
