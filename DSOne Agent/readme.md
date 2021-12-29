@@ -1,4 +1,4 @@
-# DSOne Agent Adware Remediation script *NEW
+# DSOne Agent Adware Remediation script
 
 ### Actions
 - Terminates processes associated with DSOne *TODO LIST
