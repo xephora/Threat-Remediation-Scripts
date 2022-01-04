@@ -1,4 +1,3 @@
-# Removal
 Get-Process DSOne -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 Get-Process DSOneWD -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 sleep 2
@@ -13,8 +12,6 @@ foreach ($i in $user_list) {
         rm "C:\users\$i\downloads\DSOne*.exe" -Force -ErrorAction SilentlyContinue -ErrorVariable DirectoryError	
     }
 }
-
-# Check removal
 
 $result = test-path -Path "C:\windows\system32\tasks\DSOne Agent"
 if ($result -eq "True") {
