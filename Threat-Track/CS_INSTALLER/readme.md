@@ -20,6 +20,7 @@ Universal Chat Spammer.iso
 Roblox Muscle Legends Script _ AutoFarm + More ....iso
 [UPDATED] Bee Swarm Simulator Script GUI _ Hack....iso
 This_Young_Maidenhead_Family_Now_Makes_15800_..._1.iso
+How To Install Shaders For Minecraft 1.18.1_1....iso => reported by reddit user remuchiiee
 ```
 
 https://www.virustotal.com/gui/file/fa52844b5b7fcc0192d0822d0099ea52ed1497134a45a2f06670751ef5b33cd3
