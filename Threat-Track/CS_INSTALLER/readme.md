@@ -15,6 +15,13 @@ hxxps[://]brokenna[.]work
 
 The Naming convention of the ISOs appear to be targeting young adults.
 
+```
+Universal Chat Spammer.iso
+Roblox Muscle Legends Script _ AutoFarm + More ....iso
+[UPDATED] Bee Swarm Simulator Script GUI _ Hack....iso
+This_Young_Maidenhead_Family_Now_Makes_15800_..._1.iso
+```
+
 https://www.virustotal.com/gui/file/fa52844b5b7fcc0192d0822d0099ea52ed1497134a45a2f06670751ef5b33cd3
 
 mounted ISO mainly contains:
