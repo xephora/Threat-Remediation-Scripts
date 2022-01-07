@@ -136,4 +136,4 @@ if($isOpen){
 }
 ```
 
-#### If you found additional IOCs that is not listed here, feel free to provide the domain and ISO name as an issue.
+#### If you found additional IOCs that is not listed here, feel free to provide the *defanged* domain and ISO name as an issue.
