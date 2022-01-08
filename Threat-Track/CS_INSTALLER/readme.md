@@ -24,7 +24,8 @@ The Sims 4 [w_ ALL DLC] Free Download.iso
 How To Install Shaders For Minecraft 1.18.1_1....iso => reported by reddit user remuchiiee
 ```
 
-https://www.virustotal.com/gui/file/fa52844b5b7fcc0192d0822d0099ea52ed1497134a45a2f06670751ef5b33cd3
+https://www.virustotal.com/gui/file/fa52844b5b7fcc0192d0822d0099ea52ed1497134a45a2f06670751ef5b33cd3  
+https://www.virustotal.com/gui/file/b43767a9b780ba91cc52954aa741be1bddb0905b492e481aea992bca2a0c6a93  
 
 mounted ISO mainly contains:
 ```
