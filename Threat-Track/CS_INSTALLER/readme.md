@@ -2,7 +2,7 @@
 
 ### Date of first occurrence
 
-01-03-2022
+01-03-2022 (edited from 01-04-2022 after observing an earlier incident)
 
 ### Sample Analysis
 https://app.any.run/tasks/bfb74c9f-89d0-4c3b-8c65-233677cdbfc5
@@ -16,7 +16,7 @@ hxxps[://]brokenna[.]work
 
 ### Malicious ISO
 
-The Naming convention of the ISOs appear to be targeting young adults.
+The Naming convention of the ISOs appear to be targeting young adults.  These names consistenly change each infection it seems.
 
 ```
 Universal Chat Spammer.iso
