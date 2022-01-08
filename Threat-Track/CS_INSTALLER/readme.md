@@ -148,7 +148,13 @@ if($isOpen){
 }
 ```
 
-Malicious Extension
+### Dropped Extension location
+
+```
+C:\users\<Profile>\appdata\local\chrome
+```
+
+### Malicious Extension
 
 ```
 sha256sum archive.zip
@@ -158,7 +164,7 @@ Contents:
 background.js  conf.js  manifest.json  options.png
 ```
 
-Sample Extension Configuration
+### Sample Extension Configuration
 ```
 cat conf.js
 
@@ -169,7 +175,7 @@ let _ExtDom = "https://krestinaful[.]com/";
 let _ExtDomNoSchema = "krestinaful[.]com"
 ```
 
-Sample Obfuscated Javascript
+### Sample Obfuscated Javascript
 ```js
 cat background.js
 
