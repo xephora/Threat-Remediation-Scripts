@@ -227,7 +227,3 @@ T1MM.A1MM = A1MM;
 e7(T1MM.q3);
 [TRUNCATION..]
 ```
-
-#### If you found additional IOCs that is not listed here, feel free to provide the *defanged* domain and ISO name as an issue.
-
-You can defang a URL by using Cyberchef https://gchq.github.io/CyberChef/#recipe=Defang_URL(true,true,true,'Valid%20domains%20and%20full%20URLs')
