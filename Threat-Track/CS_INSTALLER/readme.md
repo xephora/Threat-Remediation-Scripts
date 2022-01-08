@@ -12,6 +12,7 @@ https://app.any.run/tasks/bfb74c9f-89d0-4c3b-8c65-233677cdbfc5
 ```
 hxxps[://]learnataloukt[.]xyz
 hxxps[://]brokenna[.]work
+hxxps[://]yflexibilituky[.]co
 ```
 
 ### Malicious ISO
