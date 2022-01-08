@@ -54,9 +54,14 @@ HKEY_LOCAL_MACHINE\SYSTEM\CONTROLSET001\CONTROL\COMPUTERNAME\ACTIVECOMPUTERNAME
 ### Scheduled Task
 
 ```
-ChromeLoader
+ChromeLoader could be hardcoded into the binary
 
 cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
+
+or standard method:
+
+Registry Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader
+Path: C:\windows\system32\tasks\ChromeLoader
 ```
 
 ### Snippet of base64 decoded powershell script
