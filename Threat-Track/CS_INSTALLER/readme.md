@@ -138,6 +138,96 @@ if($isOpen){
 }
 ```
 
+Malicious Extension
+
+```
+sha256sum archive.zip
+561f219a76e61d113ec002ecc4c42335f072be0f2f23e598f835caba294a3f9b  archive.zip
+
+Contents:
+background.js  conf.js  manifest.json  options.png
+```
+
+Sample Extension Configuration
+```
+cat conf.js
+
+let _ExtnensionName = "Options";
+let _ExtensionVersion = "4.0";
+let _dd = "MzQ1NDYHAQICAwIGDAEAAgEFAgILBwAMSgoABgYDB0gEAgICAgUHAwAASQ==";
+let _ExtDom = "https://krestinaful[.]com/";
+let _ExtDomNoSchema = "krestinaful[.]com"
+```
+
+Sample Obfuscated Javascript
+```js
+cat background.js
+
+T1MM.q3 = (function () {
+    var v = 2;
+    for (; v !== 9;) {
+        switch (v) {
+        case 2:
+            v = typeof globalThis === 'object' ? 1 : 5;
+            break;
+        case 1:
+            return globalThis;
+            break;
+        case 5:
+            var G;
+            try {
+                var s = 2;
+                for (; s !== 6;) {
+                    switch (s) {
+                    case 2:
+                        Object['defineProperty'](Object['prototype'], 'xbHiy', {
+                            'get': function () {
+                                var J = 2;
+                                for (; J !== 1;) {
+                                    switch (J) {
+                                    case 2:
+                                        return this;
+                                        break;
+                                    }
+                                }
+                            },
+                            'configurable': true
+                        });
+                        G = xbHiy;
+                        s = 5;
+                        break;
+                    case 5:
+                        G['QQr8M'] = G;
+                        s = 4;
+                        break;
+                    case 4:
+                        s = typeof QQr8M === 'undefined' ? 3 : 9;
+                        break;
+                    case 9:
+                        delete G['QQr8M'];
+                        var N = Object['prototype'];
+                        delete N['xbHiy'];
+                        s = 6;
+                        break;
+                    case 3:
+                        throw "";
+                        s = 9;
+                        break;
+                    }
+                }
+            } catch (l) {
+                G = window;
+            }
+            return G;
+            break;
+        }
+    }
+})();
+T1MM.A1MM = A1MM;
+e7(T1MM.q3);
+[TRUNCATION..]
+```
+
 #### If you found additional IOCs that is not listed here, feel free to provide the *defanged* domain and ISO name as an issue.
 
 You can defang a URL by using Cyberchef https://gchq.github.io/CyberChef/#recipe=Defang_URL(true,true,true,'Valid%20domains%20and%20full%20URLs')
