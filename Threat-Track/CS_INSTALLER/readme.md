@@ -78,7 +78,11 @@ DNSCompatibility.exe
 
 ### Scheduled Task
 
-ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via tasks for Windows
+ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via standard tasks for Windows
+
+![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
+
+![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/2.PNG)
 
 ### Schedule Task locations
 
