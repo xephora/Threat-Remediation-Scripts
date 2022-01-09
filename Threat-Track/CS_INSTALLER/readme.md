@@ -1,6 +1,6 @@
 # Observed malicious IOCs for the CS_installer aka ChromeLoader Malware
 
-### CrowdStrike Queries to hunt for ScheduledTasks
+### CrowdStrike Queries to hunt for ChromeLoader ScheduledTasks
 
 ```
 ChromeLoader ScriptContent!=null
