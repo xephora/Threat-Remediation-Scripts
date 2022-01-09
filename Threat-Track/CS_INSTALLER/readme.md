@@ -2,7 +2,7 @@
 
 ### Date of first occurrence
 
-01-03-2022 (edited from 01-04-2022 after observing an earlier incident)
+01-03-2022
 
 ### Sample Analysis
 https://app.any.run/tasks/bfb74c9f-89d0-4c3b-8c65-233677cdbfc5
