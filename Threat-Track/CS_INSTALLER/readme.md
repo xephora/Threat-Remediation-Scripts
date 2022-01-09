@@ -11,6 +11,7 @@ ChromeLoader ScriptContent!=null
 
 ```
 CommandLine="*CS_installer.exe*" FilePath="*CdRom*"
+| dedup ComputerName
 | table _time ComputerName CommandLine FilePath SHA256HashData
 ```
 
