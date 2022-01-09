@@ -40,7 +40,7 @@ Roblox Muscle Legends Script _ AutoFarm + More ....iso
 This_Young_Maidenhead_Family_Now_Makes_15800_..._1.iso
 The Sims 4 [w_ ALL DLC] Free Download.iso
 How To Install Shaders For Minecraft 1.18.1_1....iso => reported by reddit user remuchiiee
-Twisted Lies by Shandi Boyes (1).iso
+Twisted Lies by Shandi Boyes.iso
 File_ BONEWORKS.v1.6.zip ....iso
 ```
 
