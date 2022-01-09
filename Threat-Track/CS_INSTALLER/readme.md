@@ -1,12 +1,17 @@
 # Observed malicious IOCs for the CS_installer aka ChromeLoader Malware
 
-### CrowdStrike Queries to hunt for ChromeLoader ScheduledTasks
+### CrowdStrike Query to hunt for ChromeLoader
 
 ```
 ChromeLoader ScriptContent!=null
 | dedup ComputerName
 | rex field=ScriptContent "(?<MaliciousDomain>(\$domain = \"[a-z.]*.))"
 | table _time ComputerName ScriptContent MaliciousDomain
+```
+
+```
+CommandLine="*CS_installer.exe*" FilePath="*CdRom*"
+| table _time ComputerName CommandLine FilePath SHA256HashData
 ```
 
 ### Date of first occurrence
