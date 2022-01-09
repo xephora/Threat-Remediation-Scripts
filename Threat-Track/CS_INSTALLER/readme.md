@@ -5,7 +5,7 @@
 ```
 ChromeLoader ScriptContent!=null
 | dedup ComputerName
-| rex field=ScriptContent "(?<MaliciousDomain>(\$domain = \"[a-z.]*.))"
+| rex field=ScriptContent "(?<MaliciousDomain>(\$domain = \"[a-zA-Z0-9.]*.))"
 | table _time ComputerName ScriptContent MaliciousDomain
 ```
 
