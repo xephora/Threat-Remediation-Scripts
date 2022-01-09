@@ -1,4 +1,4 @@
-# Observed malicious IOCs for the CS_installer Malware
+# Observed malicious IOCs for the CS_installer aka ChromeLoader Malware
 
 ### Date of first occurrence
 
