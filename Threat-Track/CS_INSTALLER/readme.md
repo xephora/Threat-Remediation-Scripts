@@ -172,7 +172,7 @@ Id       String {95F41003-19E5-4FEF-BC34-BD6B24044329}
 Index     DWord 3 
 ```
 
-Location 3:
+Location 3: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{X-X-X-X-X}
 
 (To save you time, you can retrieve the task unique identifier by running the powershell command below)  
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"`
@@ -191,6 +191,23 @@ URI         String \ChromeLoader
 Triggers    Binary (0x)17,00,00,00,00,00,00,00,00,07,01,00,00,00,06,00,80,b8,45,38,2b,03,d8..[TRUNCATION]                                                                        
 Actions     Binary (0x)03,00,0c,00,00,00,41,00,75,00,74,00,68,00,6f,00,72,00,66,66..[TRUNCATION]                                                                              
 DynamicInfo Binary (0x)03,00,00,00,98,86,ad,14,2b,03,d8,01,aa,f5,5b,ad,52,06,d8,01,..[TRUNCATION] 
+```
+
+This was not easy to create, here's a low budget Powershell script to locate and remove ChromeLoader's location 3 persistence mechanism (Thank me later)
+
+- Identified ChromeLoader TaskCache
+- Convert object to string
+- clean up to get the exact task UID
+- append task UID to reg path
+- remove key with sub keys
+- Reboot
+
+```
+$result = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"
+$result = $result.ToString()
+$taskUID = $result.Split(" ")[11].replace("NT\CurrentVersion\Schedule\TaskCache\Tasks\","").replace(";", "")
+$regKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\$taskUID"
+Remove-Item -Path $regKeyPath -Recurse
 ```
 
 ### Command of task
