@@ -195,11 +195,11 @@ DynamicInfo Binary (0x)03,00,00,00,98,86,ad,14,2b,03,d8,01,aa,f5,5b,ad,52,06,d8,
 
 This was not easy to create, here's a low budget Powershell script to locate and remove ChromeLoader's location 3 persistence mechanism (Thank me later)
 
-- Identified ChromeLoader TaskCache
+- Identify ChromeLoader TaskCache
 - Convert object to string
-- clean up to get the exact task UID
-- append task UID to reg path
-- remove key with sub keys
+- Clean up to get the exact task UID
+- Append task UID to reg path
+- Remove regkey with subkeys
 - Reboot
 
 ```
