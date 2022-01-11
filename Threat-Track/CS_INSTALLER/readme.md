@@ -109,7 +109,7 @@ DNSCompatibility.exe
 
 ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via standard tasks
 
-> Please be aware that ChromeLoader is now circulating with a different task name `ChromeTask`
+> Please be aware that ChromeLoader is now circulating with different task names `ChromeTask` and `ChromeConf`
 
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
 
@@ -119,6 +119,7 @@ ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) o
 
 Location 1: C:\windows\system32\tasks\ChromeLoader
 Location 1: C:\windows\system32\tasks\ChromeTask
+Location 1: C:\windows\system32\tasks\ChromeConf
 
 ```
 ﻿<?xml version="1.0" encoding="UTF-16"?>
@@ -167,6 +168,7 @@ Location 1: C:\windows\system32\tasks\ChromeTask
 
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeTask
+Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeConf
 
 ```
 Property   Type Value                                                                                                                                 
@@ -185,6 +187,7 @@ Location 3: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sche
 (To save you time, you can retrieve the task unique identifier by running the powershell command below)  
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"`
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeTask"`
+`Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeConf"`
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{53998BBE-E665-4C14-8F9A-5C7B3A0A9392}
