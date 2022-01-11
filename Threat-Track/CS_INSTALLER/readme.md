@@ -61,7 +61,7 @@ https://www.virustotal.com/gui/file/3fc00a37c13ee987ec577a8fd2c9daae31ec482c5276
 
 mounted ISO mainly contains:
 ```
-\Device\CdRom0\CS_INSTALLER.EXE
+\Device\CdRom0\CS_INSTALLER.EXE (Also seen as setup.exe)
 \Device\CdRom0\CS_installer.exe.config
 \Device\CdRom0\CS_installer.pdb
 \Device\CdRom0\CS_installer.pdb
