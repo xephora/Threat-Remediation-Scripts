@@ -37,7 +37,7 @@ hxxps[://]withyourret[.]xyz           reported by Twitter user @th3_protoCOL htt
 hxxps[://]bosscast[.]net              reported by Twitter user @cbecks_2
 hxxps[://]soap2day[.]ac               reported by Twitter user @cbecks_2
 hxxps[://]wallpaperaccess[.]com       reported by Twitter user @cbecks_2
-hxxps[://]uploadhaven[.]com           reported by Twitter user @cbecks_2 and @ffforward
+hxxps[://]uploadhaven[.]com           reported by Twitter user @cbecks_2 and @ffforward https://twitter.com/ffforward/status/1480914393084878851
 hxxps[://]steamunlocked[.]net         reported by Twitter user @ffforward https://twitter.com/th3_protoCOL/status/1480621526764322817
 ```
 
