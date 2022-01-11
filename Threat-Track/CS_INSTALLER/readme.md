@@ -32,8 +32,13 @@ https://app.any.run/tasks/bfb74c9f-89d0-4c3b-8c65-233677cdbfc5
 hxxps[://]learnataloukt[.]xyz
 hxxps[://]brokenna[.]work
 hxxps[://]yflexibilituky[.]co
-hxxps[://]ktyouexpec[.]xyz     reported by Twitter user @th3_protoCOL https://twitter.com/th3_protoCOL/status/1480621526764322817
-hxxps[://]withyourret[.]xyz    reported by Twitter user @th3_protoCOL https://twitter.com/th3_protoCOL/status/1480621526764322817
+hxxps[://]ktyouexpec[.]xyz            reported by Twitter user @th3_protoCOL https://twitter.com/th3_protoCOL/status/1480621526764322817
+hxxps[://]withyourret[.]xyz           reported by Twitter user @th3_protoCOL https://twitter.com/th3_protoCOL/status/1480621526764322817
+hxxps[://]bosscast[.]net              reported by Twitter user @cbecks_2
+hxxps[://]soap2day[.]ac               reported by Twitter user @cbecks_2
+hxxps[://]wallpaperaccess[.]com       reported by Twitter user @cbecks_2
+hxxps[://]uploadhaven[.]com           reported by Twitter user @cbecks_2
+hxxps[://]steamunlocked[.]net         reported by Twitter user @ffforward https://twitter.com/th3_protoCOL/status/1480621526764322817
 ```
 
 ### Malicious ISO
