@@ -109,6 +109,8 @@ DNSCompatibility.exe
 
 ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via standard tasks
 
+> Please be aware that ChromeLoader is now circulating with a different task name `ChromeTask`
+
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
 
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/2.PNG)
@@ -116,6 +118,7 @@ ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) o
 ### Schedule Task locations
 
 Location 1: C:\windows\system32\tasks\ChromeLoader
+Location 1: C:\windows\system32\tasks\ChromeTask
 
 ```
 ﻿<?xml version="1.0" encoding="UTF-16"?>
@@ -163,6 +166,7 @@ Location 1: C:\windows\system32\tasks\ChromeLoader
 ```
 
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader
+Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeTask
 
 ```
 Property   Type Value                                                                                                                                 
@@ -180,6 +184,7 @@ Location 3: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sche
 
 (To save you time, you can retrieve the task unique identifier by running the powershell command below)  
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"`
+`Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeTask"`
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{53998BBE-E665-4C14-8F9A-5C7B3A0A9392}
@@ -208,6 +213,14 @@ This was not easy to create, here's a low budget Powershell script to locate and
 
 ```
 $result = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"
+$result = $result.ToString()
+$taskUID = $result.Split(" ")[11].replace("NT\CurrentVersion\Schedule\TaskCache\Tasks\","").replace(";", "")
+$regKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\$taskUID"
+Remove-Item -Path $regKeyPath -Recurse
+```
+
+```
+$result = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeTask"
 $result = $result.ToString()
 $taskUID = $result.Split(" ")[11].replace("NT\CurrentVersion\Schedule\TaskCache\Tasks\","").replace(";", "")
 $regKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\$taskUID"
@@ -333,6 +346,13 @@ let _ExtensionVersion = "4.0";
 let _dd = "MzQ1NDYHAQICAwIGDAEAAgEFAgILBwAMSgoABgYDB0gEAgICAgUHAwAASQ==";
 let _ExtDom = "https://krestinaful[.]com/";
 let _ExtDomNoSchema = "krestinaful[.]com"
+
+cat conf.js 
+let _ExtnensionName = "Properties";
+let _ExtensionVersion = "4.4";
+let _dd = "NzI3MjcGAgYEDwAHAgAFAQQGAwAOAgYASwAKAAYEBU4GBAMGCgQKDwAASw==";
+let _ExtDom = "https://tobepartou[.]com/";
+let _ExtDomNoSchema = "tobepartou[.]com";
 ```
 
 ### Sample Obfuscated Javascript
