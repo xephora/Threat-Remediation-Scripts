@@ -202,31 +202,6 @@ Actions     Binary (0x)03,00,0c,00,00,00,41,00,75,00,74,00,68,00,6f,00,72,00,66,
 DynamicInfo Binary (0x)03,00,00,00,98,86,ad,14,2b,03,d8,01,aa,f5,5b,ad,52,06,d8,01,..[TRUNCATION] 
 ```
 
-This was not easy to create, here's a low budget Powershell script to locate and remove ChromeLoader's location 3 persistence mechanism (Thank me later)
-
-- Identify ChromeLoader TaskCache
-- Convert object to string
-- Clean up to get the exact task UID
-- Append task UID to reg path
-- Remove regkey with subkeys
-- Reboot
-
-```
-$result = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"
-$result = $result.ToString()
-$taskUID = $result.Split(" ")[11].replace("NT\CurrentVersion\Schedule\TaskCache\Tasks\","").replace(";", "")
-$regKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\$taskUID"
-Remove-Item -Path $regKeyPath -Recurse
-```
-
-```
-$result = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeTask"
-$result = $result.ToString()
-$taskUID = $result.Split(" ")[11].replace("NT\CurrentVersion\Schedule\TaskCache\Tasks\","").replace(";", "")
-$regKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\$taskUID"
-Remove-Item -Path $regKeyPath -Recurse
-```
-
 ### Command of task
 ```
 cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
