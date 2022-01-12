@@ -15,7 +15,7 @@ CommandLine="*CS_installer.exe*" FilePath="*CdRom*"
 | table _time ComputerName CommandLine FilePath SHA256HashData
 ```
 
-### Sigma Rule available for ChromeLoader (Thanks to Twitter User @Kostastsale)
+### Sigma Rule for ChromeLoader available (Thanks to Twitter User @Kostastsale)
 
 Twitter Reference: https://twitter.com/Kostastsale/status/1480821678145826818  
 Sigma Rule: https://github.com/tsale/Sigma_rules/blob/main/ChromeLoader.yml  
