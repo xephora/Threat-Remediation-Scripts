@@ -45,7 +45,9 @@ hxxps[://]wallpaperaccess[.]com       reported by Twitter user @cbecks_2
 hxxps[://]uploadhaven[.]com           reported by Twitter user @cbecks_2 and @ffforward https://twitter.com/ffforward/status/1480914393084878851
 hxxps[://]steamunlocked[.]net         reported by Twitter user @ffforward https://twitter.com/th3_protoCOL/status/1480621526764322817
 hxxps[://]etterismype[.]co	      reported by Twitter user @cbecks_2 https://twitter.com/cbecks_2/status/1480994197515771914
-hxxps[://]downloadfree101.com         reported by Twitter user @StopMalvertisin https://twitter.com/StopMalvertisin/status/1480972727225761794
+hxxps[://]downloadfree101.com         reported by Twitter user @StopMalvertisin https://twitter.com/StopMalvertisin/status/1480972727225761794  
+hxxps[://]ithconsukultin[.]com        reported by Twitter user @Enadanil https://twitter.com/Enadanil/status/1481454649546788868
+hxxps[://]tobepartou[.]com            reported by Twitter user @Enadanil https://twitter.com/Enadanil/status/1481454649546788868
 ```
 
 ### Malicious ISO
