@@ -1,5 +1,7 @@
 ### Investigating and dissecting some of the source code from CS_installer.exe. It will be available to you if you need it.
 
+### Class `internal class Program`
+
 ### Function Main
 ```cs
 private static void Main(string[] args)
