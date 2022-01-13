@@ -4,7 +4,7 @@
 
 ### Function Main
 
-#### Interesting note: ChromeLoader displays a fake error for the user and has a delayed execution.
+#### Interesting note: ChromeLoader displays a fake error for the user and has a delayed execution.  This encourages the user to click multiple times.
 
 ```cs
 private static void Main(string[] args)
