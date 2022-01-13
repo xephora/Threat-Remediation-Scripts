@@ -2,8 +2,6 @@
 
 Main
 ```cs
-// Application.Program
-// Token: 0x06000007 RID: 7 RVA: 0x00002378 File Offset: 0x00000578
 private static void Main(string[] args)
 {
 	if (Program.MessageBox((IntPtr)0, "Install Error, incompatible system", "Error", 5) == 99)
