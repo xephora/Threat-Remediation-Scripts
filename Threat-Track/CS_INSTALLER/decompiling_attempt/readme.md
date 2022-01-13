@@ -375,10 +375,7 @@ string taskName = "Chrome" + namesDict[nameIndex];
 
 ### Creation of task
 
-```
+```cs
 ts.RootFolder.RegisterTaskDefinition(taskName, td);
 ```
-
-
-
 
