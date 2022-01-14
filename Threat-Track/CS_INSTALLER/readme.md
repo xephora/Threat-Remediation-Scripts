@@ -107,6 +107,7 @@ mounted ISO mainly contains:
 \Device\CdRom0\CS_installer.pdb
 \Device\CdRom0\CS_installer.pdb
 \Device\CdRom0\Microsoft.Win32.TaskScheduler.dll
+\Device\CdRom0\_meta.txt
 ```
 
 ### CS_installers
@@ -178,6 +179,34 @@ ts.RootFolder.RegisterTaskDefinition(taskName, td);
 - ChromeConf
 - ChromeTask
 - ChromeUpdater
+
+The scheduled task contains the following command.  The command executes a base64 payload.
+
+```
+cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
+```
+
+The base64 payload is originally obfuscated by the malware coder.  A descrmable function exists to reconstructs base64 payload.
+
+```cs
+Dictionary<char, char> replaceDict = new Dictionary<char, char>
+{
+    <dictionary of characters>
+}
+
+foreach (char c in File.ReadAllText("_meta.txt"))
+	{
+		if (replaceDict.ContainsKey(c))
+		{
+			res += replaceDict[c].ToString();
+		}
+		else
+		{
+			res += c.ToString();
+		}
+	}
+	return res;
+```
 
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
 
@@ -280,11 +309,6 @@ URI         String \ChromeLoader
 Triggers    Binary (0x)17,00,00,00,00,00,00,00,00,07,01,00,00,00,06,00,80,b8,45,38,2b,03,d8..[TRUNCATION]                                                                        
 Actions     Binary (0x)03,00,0c,00,00,00,41,00,75,00,74,00,68,00,6f,00,72,00,66,66..[TRUNCATION]                                                                              
 DynamicInfo Binary (0x)03,00,00,00,98,86,ad,14,2b,03,d8,01,aa,f5,5b,ad,52,06,d8,01,..[TRUNCATION] 
-```
-
-### Command of task
-```
-cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
 ```
 
 ### Snippet of base64 decoded powershell script
