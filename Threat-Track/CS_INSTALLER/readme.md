@@ -186,7 +186,7 @@ The scheduled task contains the following command which executes a PowerShell co
 cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
 ```
 
-I have observed two scenarios of how the payload payload is executed.
+I have observed two scenarios of how the base64 payload is executed.
 
 1. A descrmable function exists to reconstructs base64 payload.
 
