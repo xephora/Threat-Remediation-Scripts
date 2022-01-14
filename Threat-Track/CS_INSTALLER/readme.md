@@ -152,7 +152,7 @@ DNSCompatibility.exe
 
 ### Scheduled Task
 
-ChromeLoader could be hardcoded into the binary (CS_installer.exe / Setup.exe) or via standard tasks
+ChromeLoader uses a Windows API to create Scheduled tasks
 
 > Please be aware that ChromeLoader is now circulating with different task names `ChromeTask` and `ChromeConf`
 
