@@ -152,9 +152,16 @@ DNSCompatibility.exe
 
 ### Scheduled Task
 
-ChromeLoader uses a Windows API to create Scheduled tasks
+ChromeLoader uses a Windows API `Microsoft.Win32.TaskScheduler` to create a Scheduled task
 
-> Please be aware that ChromeLoader is now circulating with different task names `ChromeTask` and `ChromeConf`
+> ChromeLoader uses a dictionary to name the scheduled task.
+
+- ChromeLoader
+- ChromeMonitor
+- ChromeChecker
+- ChromeConf
+- ChromeTask
+- ChromeUpdater
 
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
 
@@ -165,6 +172,9 @@ ChromeLoader uses a Windows API to create Scheduled tasks
 Location 1: C:\windows\system32\tasks\ChromeLoader  
 Location 1: C:\windows\system32\tasks\ChromeTask  
 Location 1: C:\windows\system32\tasks\ChromeConf  
+Location 1: C:\windows\system32\tasks\ChromeMonitor
+Location 1: C:\windows\system32\tasks\Chromeupdater
+Location 1: C:\windows\system32\tasks\ChromeChecker
 
 ```
 ﻿<?xml version="1.0" encoding="UTF-16"?>
@@ -214,6 +224,9 @@ Location 1: C:\windows\system32\tasks\ChromeConf
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeLoader  
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeTask  
 Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeConf  
+Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeMonitor  
+Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeUpdater  
+Location 2: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ChromeChecker  
 
 ```
 Property   Type Value                                                                                                                                 
@@ -233,6 +246,9 @@ Location 3: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sche
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeLoader"`  
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeTask"`  
 `Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeConf"`  
+`Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeMonitor"`  
+`Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeChecker"`  
+`Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\*" | Select-String "ChromeUpdater"`  
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{53998BBE-E665-4C14-8F9A-5C7B3A0A9392}
