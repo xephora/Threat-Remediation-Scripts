@@ -180,13 +180,15 @@ ts.RootFolder.RegisterTaskDefinition(taskName, td);
 - ChromeTask
 - ChromeUpdater
 
-The scheduled task contains the following command.  The command executes a base64 payload.
+The scheduled task contains the following command which executes a PowerShell command with a base64 payload.
 
 ```
 cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <base64EncodedPayload>
 ```
 
-The base64 payload is originally obfuscated by the malware coder.  A descrmable function exists to reconstructs base64 payload.
+I have observed two scenarios of how the payload payload is executed.
+
+1. A descrmable function exists to reconstructs base64 payload.
 
 ```cs
 Dictionary<char, char> replaceDict = new Dictionary<char, char>
@@ -207,6 +209,8 @@ foreach (char c in File.ReadAllText("_meta.txt"))
 	}
 	return res;
 ```
+
+2. The PowerShell command may be hardcoded into the malware binary `CS_installer.exe`. Shown in the below images.
 
 ![alt text](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Threat-Track/CS_INSTALLER/images/1.PNG)
 
