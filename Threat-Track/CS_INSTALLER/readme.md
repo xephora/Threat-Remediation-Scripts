@@ -156,6 +156,18 @@ ChromeLoader uses a Windows API `Microsoft.Win32.TaskScheduler` to create a Sche
 
 > ChromeLoader uses a dictionary to name the scheduled task.
 
+```cs
+string[] namesDict = new string[]
+	{
+	"Loader",
+	"Monitor",
+	"Checker",
+	"Conf",
+	"Task",
+	"Updater"
+	};
+```
+
 - ChromeLoader
 - ChromeMonitor
 - ChromeChecker
