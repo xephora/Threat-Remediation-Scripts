@@ -221,9 +221,9 @@ foreach (char c in File.ReadAllText("_meta.txt"))
 Location 1: C:\windows\system32\tasks\ChromeLoader  
 Location 1: C:\windows\system32\tasks\ChromeTask  
 Location 1: C:\windows\system32\tasks\ChromeConf  
-Location 1: C:\windows\system32\tasks\ChromeMonitor
-Location 1: C:\windows\system32\tasks\Chromeupdater
-Location 1: C:\windows\system32\tasks\ChromeChecker
+Location 1: C:\windows\system32\tasks\ChromeMonitor  
+Location 1: C:\windows\system32\tasks\Chromeupdater  
+Location 1: C:\windows\system32\tasks\ChromeChecker  
 
 ```
 ﻿<?xml version="1.0" encoding="UTF-16"?>
