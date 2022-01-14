@@ -166,6 +166,10 @@ string[] namesDict = new string[]
 	"Task",
 	"Updater"
 	};
+	
+int nameIndex = new Random().Next(namesDict.Length);
+string taskName = "Chrome" + namesDict[nameIndex];
+ts.RootFolder.RegisterTaskDefinition(taskName, td);
 ```
 
 - ChromeLoader
