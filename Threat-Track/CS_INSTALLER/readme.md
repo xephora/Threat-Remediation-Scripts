@@ -48,6 +48,7 @@ hxxps[://]etterismype[.]co	      reported by Twitter user @cbecks_2 https://twit
 hxxps[://]downloadfree101.com         reported by Twitter user @StopMalvertisin https://twitter.com/StopMalvertisin/status/1480972727225761794  
 hxxps[://]ithconsukultin[.]com        reported by Twitter user @Enadanil https://twitter.com/Enadanil/status/1481454649546788868
 hxxps[://]tobepartou[.]com            reported by Twitter user @Enadanil https://twitter.com/Enadanil/status/1481454649546788868
+hxxps[://]yeconnected[.]com
 ```
 
 ### Malicious ISO
