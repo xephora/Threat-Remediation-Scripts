@@ -190,7 +190,7 @@ cmd /c start /min "" powershell -ExecutionPolicy Bypass -WindowStyle Hidden -E <
 
 I have observed two scenarios of how the base64 payload is executed.
 
-1. A descramable function exists to reconstructs base64 payload.
+1. A descramble function exists to reconstructs base64 payload.
 
 ```cs
 Dictionary<char, char> replaceDict = new Dictionary<char, char>
