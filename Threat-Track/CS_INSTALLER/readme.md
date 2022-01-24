@@ -22,7 +22,7 @@ Sigma Rule: https://github.com/tsale/Sigma_rules/blob/main/ChromeLoader.yml
 
 ### Date of first occurrence
 
-01-03-2022
+01-02-2022
 
 ### Description:
 
