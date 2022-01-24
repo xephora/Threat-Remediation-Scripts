@@ -125,7 +125,7 @@ https://www.virustotal.com/gui/file/2df0cf38c8039745f0341fc679d1dd7a066ec0d2e687
 https://www.virustotal.com/gui/file/aed9351ff414ddf1ecbfeb747b0bc6d650fcf026290cb670cbbaaad02fdf3dcd  Reported by Twitter user @cbecks_2  
 https://www.virustotal.com/gui/file/dca529c6ec9ea1f638567d5b6c34af4f47a80c0519178c4829becc337db5be02  Reported by Twitter user @cbecks_2  
 
-### Additional CS_installer.exe hashes
+### Additional CS_installer.exe hashes added 01-24-2022
 ```
 9eca0cd45c00182736467ae18da21162d0715bd3d53b8df8d92a74a76a89c4a0
 564e913a22cf90ede114c94db8a62457a86bc408bc834fa0e12e85146110c89b
