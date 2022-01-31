@@ -50,6 +50,7 @@ hxxps[://]ithconsukultin[.]com        reported by Twitter user @Enadanil https:/
 hxxps[://]tobepartou[.]com            reported by Twitter user @Enadanil https://twitter.com/Enadanil/status/1481454649546788868
 hxxps[://]yeconnected[.]com
 hxxps[://]idwhitdoe[.]work
+hxxps[://]yeconnected[.]com
 ```
 
 ### Malicious ISO
