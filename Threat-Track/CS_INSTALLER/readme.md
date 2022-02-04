@@ -1,4 +1,4 @@
-# Observed malicious IOCs for the CS_installer aka ChromeLoader Malware
+# Observed malicious IOCs for the ChromeLoader aka Choziosi Loader Malware
 
 ### CrowdStrike Query to hunt for ChromeLoader
 
