@@ -558,6 +558,9 @@ U0MM.i5=(function(){var A=2;for(;A !== 9;){switch(A){case 5:var h;try{var m=2;fo
 
 ### Deobfuscated Javascript `background.js` provided by Twitter user @struppigel https://twitter.com/struppigel
 
+Blog post created by Karsten Hahn @struppigel about the analysis of the Chrome Extension  
+https://www.gdatasoftware.com/blog/2022/01/37236-qr-codes-on-twitter-deliver-malicious-chrome-extension
+
 ```js
 chrome.webRequest.onBeforeSendHeaders.addListener(n4 => {
   n4.requestHeaders.push({name: "dd", value: _dd});
