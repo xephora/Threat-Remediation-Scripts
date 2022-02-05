@@ -564,6 +564,9 @@ https://twitter.com/struppigel/status/1489500184371515396
 
 The purpose of the Chrome Extension is to generate Ad Revenue for the actor.  The Chrome Extension periodically makes web requests every 30 minutes to generate Ads.  Analytics is sent to the attackers domain every 3 hours.  This malware has the capability of spreading through the victim's Google Profile via Synchronization.
 
+Turn on and off Google Chrome Synchronization  
+https://support.google.com/chrome/answer/185277?hl=en&co=GENIE.Platform%3DDesktop
+
 ```js
 chrome.webRequest.onBeforeSendHeaders.addListener(n4 => {
   n4.requestHeaders.push({name: "dd", value: _dd});
