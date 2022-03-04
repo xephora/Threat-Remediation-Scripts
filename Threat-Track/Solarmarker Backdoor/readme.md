@@ -1,6 +1,6 @@
 ### SolarMarker Backdoor Generator of redirectors
 
-Generate a list of `1000` (you can set it to whatever number you please) Solarmarker Backdoor redirectors for the purpose of blocking.  If the compromised site is taken down and if you find a different compromised site you can replace the site below with yours.
+Generate a list of `1000` Solarmarker Backdoor redirectors for the purpose of blocking.  If the compromised site is taken down and if you find a different compromised site you can replace the site below with yours.
 
 ```python
 import requests
@@ -8,7 +8,7 @@ import requests
 def GenerateList(url):
         UList = []
         with open("urllist.txt", "w") as f:
-                for i in range(1000):
+                for i in range(1000): # 1000 requests can be changed to whatever amount you want.
                         resp = requests.get(url, allow_redirects=True)
                         genUrl = resp.text.split(";URL=")[1].split("\">")[0]
                         print(genUrl)
