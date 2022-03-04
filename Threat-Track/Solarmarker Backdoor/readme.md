@@ -1,6 +1,6 @@
 ### SolarMarker Backdoor Generator of redirectors
 
-Generate a list of Solarmarker Backdoor redirectors for the purpose of blocking.  If the compromised site is taken down and if you find a different compromised site you can replace the site below with yours.
+Generate a list of `1000` (you can set it to whatever number you please) Solarmarker Backdoor redirectors for the purpose of blocking.  If the compromised site is taken down and if you find a different compromised site you can replace the site below with yours.
 
 ```python
 import requests
