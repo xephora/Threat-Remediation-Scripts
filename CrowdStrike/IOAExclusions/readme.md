@@ -5,6 +5,9 @@ There has been a high volume of false-positive detections for a Roblox engine.  
 ```
 Regex Pattern for excluding Roblox by IMAGE FILENAME and COMMAND LINE.  This pattern incorporate arguments that may be used.
 
-.*\\Program\s+Files\s+\(x86\)\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
-.*\\Users\\.*\\AppData\\Local\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
+IMAGE FILENAME: .*\\Program\s+Files\s+\(x86\)\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
+COMMAND LINE: .*\\Program\s+Files\s+\(x86\)\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
+
+IMAGE FILENAME: .*\\Users\\.*\\AppData\\Local\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
+COMMAND LINE: .*\\Users\\.*\\AppData\\Local\\Roblox\\Versions\\version-.*\\RobloxPlayerBeta\.exe.*
 ```
