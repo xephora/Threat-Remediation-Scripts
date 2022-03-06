@@ -1,2 +1,3 @@
 # Threat-Remediation-Scripts
-This repository contains a list of new remediation scripts.
+
+This repository contains useful scripts, tools and intelligence that may help you with cyber defense.
