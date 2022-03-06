@@ -1,4 +1,6 @@
-### IOA Exclusions for Roblox false-positive detections
+## IOA Exclusions for Roblox false-positive detections
+
+There has been a high volume of false-positive detections for a Roblox engine.  An exclusion has been created to reduce the noise.
 
 ```
 Regex Pattern for excluding Roblox by IMAGE FILENAME and COMMAND LINE.  This pattern incorporate arguments that may be used.
