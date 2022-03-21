@@ -24,6 +24,7 @@ foreach ($i in $sid_list) {
     }
 }
 
+Remove-Item -Path Registry::HKLM\Software\AskPartnerNetwork -Recurse -ErrorAction SilentlyContinue
 Remove-Item -Path Registry::HKLM\SOFTWARE\WOW6432NODE\AskPartnerNetwork -Recurse -ErrorAction SilentlyContinue
 Remove-Item -Path Registry::HKLM\SYSTEM\CURRENTCONTROLSET\SERVICES\APNMCP -Recurse -ErrorAction SilentlyContinue
 Remove-ItemProperty -Path Registry::HKLM\SOFTWARE\WOW6432NODE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN -Name ApnTBMon -ErrorAction SilentlyContinue
