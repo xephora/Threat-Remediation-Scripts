@@ -4,7 +4,7 @@
 - Terminates processes associated with Walliant
 - Remove Walliant from the file system.
 - Remove Walliant registry keys.
-- Performs checks to lets you know if it the removal wasn't successful.
+- Performs checks to lets you know if the removal wasn't successful.
 
 ### Description
 
