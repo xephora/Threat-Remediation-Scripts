@@ -1,3 +1,5 @@
+# Still in the works, may trigger false positives
+
 #!/bin/bash
 echo -e "Identifying Java Version:\n"
 #java -version
