@@ -3,7 +3,7 @@
 "Spring4shell Scanner"
 
 "`n[+] Detecting Java Version: (Java Versions 9 or greater is vulnerable)"
-java -version
+(Get-Command java | Select-Object -ExpandProperty Version).toString()
 
 "`n[+] Enumerating Spring Framework Jar Files on the system: "
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
