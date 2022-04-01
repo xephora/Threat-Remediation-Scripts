@@ -1,17 +1,16 @@
-# Once again, Experimental, may contain false-positives
+# Experimental Spring4Shell scanner, may continue false-positives (friendly with crowdstrike)
 
-"Spring4shell Scanner"
+"Spring4shell scanner"
 
 "`n[+] Detecting Java Version: (Java Versions 9 or greater is vulnerable)"
-(Get-Command java | Select-Object -ExpandProperty Version).toString() # changed java -version due to issues with CrowdStrike
-
-"`n[+] Enumerating Spring Framework Jar Files on the system: "
-$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
+(Get-Command java | Select-Object -ExpandProperty Version).toString()
 
 $jarlist = @()
 $warlist = @()
 $CachedIntrospection = @()
 
+"`n[+] Enumerating Spring Framework Jar Files on the system: "
+$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 # Search user profiles
 foreach ($i in $user_list) {
     if ($i -notlike "*Public*") {
@@ -171,13 +170,25 @@ foreach ($i in $filtereddirs) {
 }
 
 "`n[+] Discovered Spring Jar Files: "
-$jarlist
+if ($jarlist -ne $null) {
+	$jarlist
+} else {
+	continue
+}
 
 "`n[+] Discovered Spring War Files"
-$warlist
+if ($warlist -ne $null) {
+	$warlist
+} else {
+	continue
+}
 
 "`n[+] Discovered Spring Class Files"
-$CachedIntrospection
+if ($CachedIntrospection -ne $null) {
+	$CachedIntrospection
+} else {
+	continue
+}
 
 $jdkdir = gci "C:\Program Files\Java\jdk*" -ErrorAction SilentlyContinue | % { $_.FullName }
 $isexist = test-path -Path $jdkdir
