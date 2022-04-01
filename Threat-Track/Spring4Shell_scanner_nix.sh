@@ -1,4 +1,5 @@
 # Still in the works, may trigger false positives
+# if statement for the version number is failing to confirm vulnerable or not, will need to trouble-shoot..
 
 #!/bin/bash
 echo -e "Identifying Java Version:\n"
