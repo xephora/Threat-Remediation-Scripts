@@ -1,30 +1,29 @@
-# Investigate the following account below.  Please replace `<username>` with the target username below:
-
+# investigate the following account below.  Please replace username with the target account.
 $username = "<USERNAME>"
 
 # File System - Startups
 "=> Checking Startup Locations"
 "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-gci -force "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+gci "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
-gci -force "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
+gci "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 # File System
 "`n`n => Checking Root Dir"
 "C:\"
-gci -force C:\
+gci C:\ -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 "`n`n => Checking ProgramData"
 "C:\ProgramData"
-gci -force "C:\ProgramData"
+gci "C:\ProgramData" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 # Antivirus Logs
 "`n`n => Checking Symantec Local Antivirus Logs"
 "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
 $result = test-path -Path "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
 if ($result -eq "True") {
-	Get-ChildItem "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av" | select Name,length
+	gci "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av" -force -ErrorAction SilentlyContinue | % { $_.FullName, "Size: $($_.length)"}
 } else {
     "Symantec Endpoint doesn't seem to be on this system.."
 }
@@ -32,49 +31,68 @@ if ($result -eq "True") {
 # User profile
 "`n`n => Checking User Profile"
 "C:\Users\$username\"
-gci -force "C:\Users\$username\"
+gci "C:\Users\$username\" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 "`n`n => downloaded executables, msi packages and zip, rar, 7z compressed folders"
-"C:\Users\$username\downloads\"
-gci -force "C:\Users\$username\downloads\*.exe"
-gci -force "C:\Users\$username\downloads\*.msi"
-gci -force "C:\Users\$username\downloads\*.zip"
-gci -force "C:\Users\$username\downloads\*.rar"
-gci -force "C:\Users\$username\downloads\*.7z"
+"C:\Users\$username\Downloads\"
+gci C:\users\$username\Downloads -r -force -fi "*.exe" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Downloads -r -force -fi "*.msi" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Downloads -r -force -fi "*.rar" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Downloads -r -force -fi "*.7z" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Downloads -r -force -fi "*.zip" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Downloads -r -force -fi "*.iso" -ErrorAction SilentlyContinue | % { $_.FullName }
+
+"C:\Users\$username\Desktop\"
+gci C:\users\$username\Desktop -r -force -fi "*.exe" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Desktop -r -force -fi "*.msi" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Desktop -r -force -fi "*.rar" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Desktop -r -force -fi "*.7z" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Desktop -r -force -fi "*.zip" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Desktop -r -force -fi "*.iso" -ErrorAction SilentlyContinue | % { $_.FullName }
+
+"C:\Users\$username\Documents\"
+gci C:\users\$username\Documents -r -force -fi "*.exe" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Documents -r -force -fi "*.msi" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Documents -r -force -fi "*.rar" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Documents -r -force -fi "*.7z" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Documents -r -force -fi "*.zip" -ErrorAction SilentlyContinue | % { $_.FullName }
+gci C:\users\$username\Documents -r -force -fi "*.iso" -ErrorAction SilentlyContinue | % { $_.FullName }
 
 # User profile application folders
 "`n`n => Checking User's local application data"
 "C:\Users\$username\appdata\local"
-gci -force "C:\Users\$username\appdata\local"
+gci "C:\Users\$username\appdata\local" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 "`n`n => Checking User's roaming application data"
 "C:\Users\$username\appdata\roaming"
-gci -force "C:\Users\$username\appdata\roaming"
+gci "C:\Users\$username\appdata\roaming" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 # FileSystem Scheduled Tasks
 "`n`n => Checking Scheduled Tasks"
 "C:\windows\system32\tasks\"
-gci -force "C:\windows\system32\tasks\"
+gci "C:\windows\system32\tasks\" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
 # System Registry Scheduled tasks
 "`n`n => Checking System Registries - Scheduled Tasks"
-Get-Item -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\*' -ErrorAction SilentlyContinue
+Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\*' -ErrorAction SilentlyContinue | % {$_.PSChildName, $_.PSPath+"`n"}
 
 # Registry - Software List
-$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 
 # System Registries
 "`n`n => Checking System Registries SOFTWARE"
-Get-Item -Path HKLM:\Software\*
+Get-Item -Path HKLM:\Software\* | % { $_.Name }
 
 "`n`n => Checking System Registries Startup"
 Get-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Run -ErrorAction SilentlyContinue
 
+$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+
 foreach ($j in $sid_list) {
     if ($j -notlike "*_Classes*") {
         "`n`n => Checking User Registries SID: $j\Software"
-        Get-Item -Path Registry::$j\Software\* -ErrorAction SilentlyContinue
+        Get-Item -Path Registry::$j\Software\* -ErrorAction SilentlyContinue | % {$_.Name}
         "`n`n => Checking User Startup Registries SID: $j\Software\Microsoft\Windows\CurrentVersion\Run"
+        #Get-ItemProperty -Path Registry::$j\Software\Microsoft\Windows\CurrentVersion\Run -ErrorAction SilentlyContinue
         Get-ItemProperty -Path Registry::$j\Software\Microsoft\Windows\CurrentVersion\Run -ErrorAction SilentlyContinue
     }
 }
@@ -107,10 +125,10 @@ Get-Process | select Name, Id, Path | where {($_.Path -like "*appdata\local*") -
 
 # Detect Browser Activity
 "`n`n => Browsers Detected"
-Get-Process chrome -ErrorAction SilentlyContinue
-Get-Process iexplore -ErrorAction SilentlyContinue
-Get-Process msedge -ErrorAction SilentlyContinue
-Get-Process firefox -ErrorAction SilentlyContinue
+Get-Process chrome -ErrorAction SilentlyContinue | % { $_.ProcessName,"PID: $($_.Id)" }
+Get-Process iexplore -ErrorAction SilentlyContinue | % { $_.ProcessName,"PID: $($_.Id)" }
+Get-Process msedge -ErrorAction SilentlyContinue | % { $_.ProcessName,"PID: $($_.Id)" }
+Get-Process firefox -ErrorAction SilentlyContinue | % { $_.ProcessName,"PID: $($_.Id)" }
 
 # Running Services
 "`n`n Checks for running services"
