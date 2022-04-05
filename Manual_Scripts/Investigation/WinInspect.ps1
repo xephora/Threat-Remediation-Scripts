@@ -18,7 +18,7 @@ gci C:\ -force -ErrorAction SilentlyContinue | % { $_.FullName }
 "C:\ProgramData"
 gci "C:\ProgramData" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
-# Antivirus Logs
+# Antivirus Logs (If you do not use Symantec as an Antivirus Platform, you may want to change/remove line 22-29)
 "`n`n => Checking Symantec Local Antivirus Logs"
 "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
 $result = test-path -Path "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
