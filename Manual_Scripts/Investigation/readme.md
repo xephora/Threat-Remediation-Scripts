@@ -9,7 +9,7 @@ Windows
 $username = "<USERNAME>" => $username = "admin"
 
 MAC
-username="<USERNAME>"
+username="<USERNAME>" => username="admin"
 ```
 
 ### Things to know
