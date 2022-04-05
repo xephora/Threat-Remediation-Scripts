@@ -5,7 +5,11 @@
 Please be sure to replace the username placeholder with the target username you want to investigate.  Example below:
 
 ```
+Windows
 $username = "<USERNAME>" => $username = "admin"
+
+MAC
+username="<USERNAME>"
 ```
 
 ### Things to know
