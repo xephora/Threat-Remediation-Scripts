@@ -9,3 +9,9 @@
 ### Description
 
 I created an automated script to remove ByteFence.
+
+### Things to know
+
+Remediation of ByteFence takes a bit longer to remediate. If you are using CrowdStrike to remediate, consider increasing the timeout by 500.
+
+You can add the timeout flag `-Timeout=500` to the end of the runscript command.
