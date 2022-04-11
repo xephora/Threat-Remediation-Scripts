@@ -45,7 +45,7 @@ Remove-Item -path "Registry::hklm\Software\Microsoft\Windows NT\CurrentVersion\S
 #Check Removal
 
 foreach ($user in $users) {
-    if ($user -ne "public") {
+    if ($user -ne "Public") {
         $check1 = Test-Path "C:\Users\$user\AppData\Local\OneLaunch"
         if ($check1 -eq "True") {
             "This script failed to remove C:\Users\$user\AppData\Local\OneLaunch"
