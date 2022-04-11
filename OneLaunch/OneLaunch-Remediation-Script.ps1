@@ -24,6 +24,7 @@ foreach ($sid in $sids){
     if ($sid -notlike "*_Classes") {
         Remove-ItemProperty -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -name "OneLaunch" -ErrorAction SilentlyContinue
         Remove-ItemProperty -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -name "GoogleChromeAutoLaunch_*" -ErrorAction SilentlyContinue
+        Remove-Item -path "Registry::$sid\Software\OneLaunch" -Recurse -ErrorAction SilentlyContinue
         Remove-Item -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1" -Recurse -ErrorAction SilentlyContinue
         foreach ($i in $test) {
         	$sid = [string]$sid
@@ -39,11 +40,12 @@ foreach ($sid in $sids){
 Remove-Item -path "Registry::hklm\Software\OneLaunch" -recurse -ErrorAction SilentlyContinue
 Remove-Item -path "Registry::hklm\Software\Wow6432Node\Microsoft\Tracing\onelaunch_RASAPI32" -recurse -ErrorAction SilentlyContinue
 Remove-Item -path "Registry::hklm\Software\Wow6432Node\Microsoft\Tracing\onelaunch_RASMANCS" -recurse -ErrorAction SilentlyContinue
+Remove-Item -path "Registry::hklm\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\OneLaunchLaunchTask" -recurse -ErrorAction SilentlyContinue
 
 #Check Removal
 
 foreach ($user in $users) {
-    if ($user -ne "Public") {
+    if ($user -ne "public") {
         $check1 = Test-Path "C:\Users\$user\AppData\Local\OneLaunch"
         if ($check1 -eq "True") {
             "This script failed to remove C:\Users\$user\AppData\Local\OneLaunch"
@@ -88,5 +90,13 @@ if ($check6) {
     "This script failed to remove HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Tracing\onelaunch_RASMANCS"
 }
 else {
+    continue
+}
+
+$check7 = Test-path -path "Registry::hklm\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\OneLaunchLaunchTask" -ErrorAction SilentlyContinue
+if ($check7) {
+    "This script failed to remove HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\OneLaunchLaunchTask"
+}
+else{
     continue
 }
