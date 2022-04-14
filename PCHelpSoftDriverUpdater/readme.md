@@ -1,4 +1,4 @@
-# PCHelpSoftDriverUpdater unwanted software Remediation script
+# PCHelpSoftDriverUpdater unwanted software remediation script
 
 ### Actions
 - Terminates processes associated with PCHelpSoftDriverUpdater
