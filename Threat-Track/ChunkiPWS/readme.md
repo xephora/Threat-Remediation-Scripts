@@ -6,7 +6,7 @@
 
 ### Description:
 
-A victim watches a video and is lured into downloading a malicious installation package from mediafire.com.  When ChunkiPWS is executed, the password stealer collects credentials and gathers operating system and software information.  This information is then uploaded to a remote server using a POST request.  Persistence is as a scheduled task which periodically runs AutoIT scripts.  ChunkiPWS was named after its enormous size of its installation package.
+A victim watches a video and is lured into downloading a malicious installation package from mediafire.com.  When ChunkiPWS is executed, the password stealer collects credentials and gathers operating system and software information.  This information is then uploaded to a remote server using a POST request.  Persistence is set as a scheduled task which periodically runs AutoIT scripts.  ChunkiPWS was named after its enormous size of its installation package.
 
 ### Sample Analysis
 https://app.any.run/tasks/a5d03b82-b444-4849-b9ac-6a68a4a507b1/
