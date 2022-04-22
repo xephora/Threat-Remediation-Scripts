@@ -13,6 +13,9 @@ echo "Checking System Services"
 echo "/Library/LaunchDaemons"
 ls -l /Library/LaunchDaemons
 echo -e "\n\n"
+echo "Checking System Appdata"
+ls -l "/Library/Application Support"
+echo -e "\n\n"
 echo "Checking user downloads folder for suspicious install packages"
 ls -l /Users/$username/downloads/*pkg
 ls -l /Users/$username/downloads/*.dmg
