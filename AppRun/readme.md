@@ -8,4 +8,4 @@
 
 ### Description
 
-I created an automated script to remove AppRun / Zoremov.
+A colleague of mine named Daniel Louie has created an automated script to remove AppRun / Zoremov.
