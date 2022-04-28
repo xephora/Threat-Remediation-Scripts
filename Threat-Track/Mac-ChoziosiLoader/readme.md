@@ -145,9 +145,9 @@ properties.png
 
 ### The malicious extension loads an obfuscated JavaScript `background.js`
 
-FileName: background.js
-Hash: 5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d
-https://www.virustotal.com/gui/file/5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d
+FileName: background.js  
+Hash: 5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d  
+https://www.virustotal.com/gui/file/5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d  
 
 ### Truncated sample of `background.js`
 
