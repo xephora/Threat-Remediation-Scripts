@@ -7,7 +7,7 @@ First observed 04-23
 
 A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post https://twitter.com/th3_protoCOL/status/1519362330244444160.
 
-For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol's article (@th3_protoCOL).
+For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol's blog post (@th3_protoCOL).
 
 https://www.th3protocol.com/2022/Choziosi-Loader
 
