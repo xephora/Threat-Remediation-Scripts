@@ -5,9 +5,13 @@ First observed 04-23
 
 ### Description
 
-A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post https://twitter.com/th3_protoCOL/status/1519362330244444160.  As of now, more information is being gathered and will be added to the repository.
+A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post https://twitter.com/th3_protoCOL/status/1519362330244444160.
 
-### Sample Analysis
+For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol's article (@th3_protoCOL).
+
+https://www.th3protocol.com/2022/Choziosi-Loader
+
+### Observed IOCs
 
 The malicious installer is downloaded via malvertisement.  Once the installer is downloaded to disk `Your File Is Ready To Download.dmg`.
 
