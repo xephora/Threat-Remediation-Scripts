@@ -17,6 +17,12 @@ The installer is then mounted to disk as `Application Installer`.  A bash script
 
 `/Volumes/Application Installer/ChromeInstaller.command`
 
+Reported Hashes for `ChromeInstaller.command`:
+
+```
+ea372007cc140941c76bad138b8088a9b0333d4c3fd31980a141b3026aa69700
+```
+
 Once executed the, the script creates three launchagents within the users LaunchAgents directory.
 
 ```
