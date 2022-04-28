@@ -11,7 +11,13 @@ A new variant of ChoziosiLoader for Mac has been observed.  The new variant was 
 
 The malicious installer is downloaded via malvertisement.  Once the installer is downloaded to disk `Your File Is Ready To Download.dmg`.
 
-Still looking for samples
+Reported Hashes for `Your File Is Ready To Download.dmg` which are assiated with ChoziosiLoader
+
+```
+4e2f29a93c52f523680f90a88d65b6dd2f81cc55f80c456cd411af994d044c3c
+```
+
+https://www.virustotal.com/gui/file/4e2f29a93c52f523680f90a88d65b6dd2f81cc55f80c456cd411af994d044c3c/behavior
 
 The installer is then mounted to disk as `Application Installer`.  A bash script named `ChromeInstaller.command` is then executed.  
 
@@ -21,6 +27,11 @@ Reported Hashes for `ChromeInstaller.command`:
 
 ```
 ea372007cc140941c76bad138b8088a9b0333d4c3fd31980a141b3026aa69700
+```
+
+Domains associated with `ChromeInstaller.command`
+```
+yescoolservmate.com
 ```
 
 Once executed the, the script creates three launchagents within the users LaunchAgents directory.
