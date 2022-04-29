@@ -37,7 +37,7 @@ Contents of a sample of `ChromeInstaller.command`.  Sample provided by @th3_prot
 
 https://bazaar.abuse.ch/sample/5daa07b6c9d3836a864ad9df5773823aa8b3be1470bea93aad0be09c6023cd67/
 
-```
+```bash
 #!/bin/bash
 
 osascript -e 'tell application "Terminal" to set visible of front window to false'
