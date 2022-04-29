@@ -18,7 +18,7 @@ CommandLine="*CS_installer.exe*" FilePath="*CdRom*"
 ### Sigma Rule for ChromeLoader available (Thanks to Twitter User @Kostastsale)
 
 Twitter Reference: https://twitter.com/Kostastsale/status/1480821678145826818  
-Sigma Rule: https://github.com/tsale/Sigma_rules/blob/main/sigma_rules/malware/ChromeLoader.yml
+Sigma Rule: https://github.com/tsale/Sigma_rules/blob/main/malware/ChromeLoader.yml
 
 ### Date of first occurrence
 
