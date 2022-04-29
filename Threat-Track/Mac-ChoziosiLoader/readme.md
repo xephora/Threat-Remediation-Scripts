@@ -15,27 +15,162 @@ https://www.th3protocol.com/2022/Choziosi-Loader
 
 ## Observed IOCs
 
-The victim is enticed into downloading a malicious disk image file to disk `Your File Is Ready To Download.dmg`.
+The victim is enticed into downloading a malicious disk image file to disk through malvertisement.
 
-File Hashes for `Your File Is Ready To Download.dmg`
+A list of known ChoziosiLoader distribution urls (thanks to @th3_protoCOL)
 
 ```
-4e2f29a93c52f523680f90a88d65b6dd2f81cc55f80c456cd411af994d044c3c
+pontymonti[.]com/?tid=952736
+iminatedm[.]com/?tid=952736
+tookimookin[.]com/?tid=952736
+hemicalcov[.]com/?tid=952736
+ernedassiu[.]com/?tid=952736
+lamagamabanma[.]com/?tid=952736
+ainoutweil[.]com/?tid=952736
+amajorinrye[.]com/?tid=952736
+announcem[.]com/?tid=952736
+ationwindon[.]com/?tid=952736
+bamagamalama[.]com/?tid=952736
+bamagamalama[.]com/?tid=952736//
+bambluagamgona[.]com/?tid=952736
+bookhogookhi[.]com/?tid=952736
+bookljlihooli[.]com/?tid=952736
+briolenpro[.]com/?tid=952736
+cangomamblu[.]com/?tid=952736
+cessfultrai[.]com/?tid=952736
+chookamookla[.]com/?tid=952736
+choonamoona[.]com/?tid=952736
+ddenknowl[.]com/?tid=952736
+dingcounc[.]com/?tid=952736
+eavailand[.]com/?tid=952736
+edconside[.]com/?tid=952736
+edstever[.]com/?tid=952736
+emblyjustin[.]com/?tid=952736
+eningspon[.]com/?tid=952736
+erdecisesgeorg[.]info/?tid=952736
+ernedassiu[.]com/?tid=952736
+erokimooki[.]com/?tid=952736
+fooogimooogin[.]com/?tid=952736
+galmoonaloona[.]com/?tid=952736
+gexcellerno[.]com/?tid=952736
+ghtdecipie[.]com/?tid=952736
+hemicalcov[.]com/?tid=952736
+hoolibadullli[.]com/?tid=952736
+horiticaldist[.]fun/?tid=952736
+iminatedm[.]com/?tid=952736
+kookichoopi[.]com/?tid=952736
+lamagamabanma[.]com/?tid=952736
+lidibidiredi[.]com/?tid=952736
+likomokiowoki[.]com/?tid=952736
+lookofookomooki[.]com/?tid=952736
+loopychoopi[.]com/?tid=952736
+luublimaluulo[.]com/?tid=952736
+luulibaluli[.]com/?tid=952736
+luulibaluli[.]com/?tid=952736=3
+mambkooocango[.]com/?tid=952736
+mamblubamblua[.]com/?tid=952736
+mesucces[.]top/?tid=952736
+miookiloogif[.]com/?tid=952736
+moekyepkd[.]com/?tid=952736
+mokklachookla[.]com/?tid=952736
+montikolti[.]com/?tid=952736
+moooginnumit[.]com/?tid=952736
+motoriesm[.]com/?tid=952736
+mworkhovd[.]com/?tid=952736
+nkingwithea[.]com/?tid=952736
+ntconcert[.]com/?tid=952736
+nuumitgoobli[.]com/?tid=952736
+olivedinflats[.]space/?tid=952736
+opositeass[.]com/?tid=952736
+redibidilidi[.]com/?tid=952736
+rokitokijoki[.]com/?tid=952736
+sopertyvalua[.]com/?tid=952736
+tokijokoloki[.]com/?tid=952736
+tookimookin[.]com/?tid=952736
+undencesc[.]com/?tid=952736
+undencesc[.]com/?tid=952736/
+vehavings[.]biz/?tid=952736
+vementalc[.]xyz/?tid=952736
+yabloomambloo[.]com/?tid=952736
+ystemgthr[.]com/?tid=952736
+```
+
+File Hashes for the downloaded malicious disk images`Your File Is Ready To Download.dmg` (thanks to @th3_protoCOL)
+
+```
+db5dc933158fc078c4383f8b4aca40ed
+b5299e2413104b4b034ea8eeca0c9c74
+d6c317db29bb1ae07393e907d85d6fc5
+e3419bc93be8f385714d0970f0175d17
+430c83f15bb5a769dd99c094bb89460e
+c219e8b59c8c98e962d28942799902e5
+91ad76c368bc3c6c0d8c65a2a5234ac1
+0a2a70d618d85067359813849dcec49d
+02e0745a7c6a2a71d9698b67565ab2c9
+0a80192cb1f31ef0a9d48932510f6956
+f0d2f196641475d32fc693408276bbaf
+0a18fedce42f4f3199a53351dbb516d9
+121300cd7050da8a1debf684f03ba05a
+aa87459333436eb4743e9d04ab4596b8
+e0de995d9d4c395c741f9a5e00f9517f
+6d92ff0d3d8b71c4ab874357691f2d97
+5ed2d89e9d05054beeebcf4a7928c4a3
+6b21699f37ff383fb76a6112f2cdd400
+504dc8de41fa942ed7c174b6111c0a0d
+97f1f83a0b89078815c537bcce41988d
+fd1aced8d4abc14f8b7db3d2f27260ff
+f129ba4a71ae3900bcf423ef7ed36629
+f90a4f01c6a411849e8a6f8ba095a79e
+01d2c774ff0e62fdc48e72d0e643bfa5
+231a5f0b8cb2c9d00cc9f0bd2abb52be
 ```
 
 The disk image is then mounted to disk as `Application Installer`.  A bash script `ChromeInstaller.command` is then executed.  
 
-`/Volumes/Application Installer/ChromeInstaller.command`
+`/Volumes/Application Installer/ChromeInstaller.command`  
+https://bazaar.abuse.ch/sample/5daa07b6c9d3836a864ad9df5773823aa8b3be1470bea93aad0be09c6023cd67/  
 
-File Hashes for `ChromeInstaller.command`
+File Hashes for `ChromeInstaller.command` (thanks to @th3_protoCOL)
 
 ```
-ea372007cc140941c76bad138b8088a9b0333d4c3fd31980a141b3026aa69700
+409fa7b1056bef4b3c6dc096d583c784
+3826683a0bef0db1d05c513f75fd8f91
+0f561838f84712622af0fc75267fc4ed
+d0b0b87b68f6a93b8d1ca79afdc72e9d
+9c385255dcff360d39ca1992381634b8
+09176b26b7e5683079d87c2ef1de757a
+91e5f9a599ab8078545988ecf7a93a51
+9efee5f3f1bf4422ae1f74cc98f4fa34
+a2e3dd6316556f51be5dddd01fac8d58
+b67845f90fac96fe1339f890682ec572
+5f8e41b663cc77f0a364f4c57bafc7f9
+f0229ff91258a5a370b9e9ae5ac92f69
+0a59769bf69481db464c43a3ce65d039
+98e0e2863f411c6d2b7a5acabc9f234f
+be81b596d84350d0d55fb5f28514a243
+3c8226b24f3197cbdca5b811e9627a0e
+90195a912807bd27e413001755210998
+8724955c260a3b6aa61ca52a2e9a1fc4
+3b6c81eac226274ca6fdd98b688a9d15
+239d5148370fb74a2e6afb276e2438b6
+89867c4e2243faddb8e4004dcb8aee2d
+746cf2d6f71aa8ed5405abf2ba8b82bf
+979381a3df54ea9db90308cde4ba4aca
+859b78f3b7c1a6888eed6e63f3d081e4
+ce163bd544fc7bbf1ccaf9ff80c0a21f
+5b46680db17ff396e7250307964c9969
+8c3e85a06704767fc7f47b1f9efe41c7
+2129c5e739575951c33c8f69a3418815
+c6b952b2410ab86c126216d302bc3e5a
+aa1a0458653a0fd5621267109bcc5d6e
+c105df325566c8b374649c74d35908d4
+6986f8348b7fab32560198704510f8a6
+1305ee449cc0230c98e4e1301da81698
+f0229ff91258a5a370b9e9ae5ac92f69
+08dc5ad1b6cc00e129526b9054a06e4e
+31d6365366646a4674225700422920a3
+421b03d5b3f8136c7b959c560c074767
 ```
-
-A sample bash script provided by twitter user @th3_protoCOL `ChromeInstaller.command`.
-
-https://bazaar.abuse.ch/sample/5daa07b6c9d3836a864ad9df5773823aa8b3be1470bea93aad0be09c6023cd67/
 
 Contents of `ChromeInstaller.command`
 
@@ -288,7 +423,30 @@ https://www.virustotal.com/gui/url/817ab2dac167459bc72571197a3cedea089e6aa1209f0
 
 ### The malicious Chrome Extension
 
-Similar to the other CS_installer analysis, the Chrome Extension is dropped to disk and hooked into Chrome.
+The Chrome Extension is initially downloaded as an archive and decompressed.
+
+Observed File hashes for chrome extension archive `D7B4EA5F-2D23-4E00-812F-D02A5F1EC377.zip` (thanks to @th3_protoCOL)
+
+```
+18b8ab327177cbde47867694d3d7acb93c83237d2418271f1020fe943760c026
+23f30fa4e9fe3580898be54f8762f85d5098fd526a51183c457b44822446c25a
+276f4008ce6dcf867f3325c6b002950cbd0fdb5bf12dc3d3afb1374622820a4e
+309c87b34966daecd05c48b787c3094eeed85b5f23ec93b20fc9cdbf8ff9b586
+47c65ef4d6b0ffe7109c588e04575dcf05fdf3afe5796078b4f335cb94c438b7
+502a8d1e95c21b5dc283ef4877ca2fe2ba41570bd813c47527fca2fb224d5380
+5e6b5a9c0849db8ca0696a16c882d6945a62e419bd646f23d4d00533bbe9bca5
+6e0cb7518874437bac717ba1888991cee48dfaca4c80a4cbbbe013a5fe7b01a6
+83cf9d2244fa1fa2a35aee07093419ecc4c484bb398482eec061bcbfbf1f7fea
+87f0416410ac5da6fd865c3398c3d9012e5488583b39edacd37f89bc9469d6a9
+c6a68fac895c0b15d5cbbba63f208e5b0a6f3c1d2382b9465375d1794f447ac5
+c7aedc8895e0b306c3a287995e071d7ff2aa09b6dac42b1f8e23a8f93eee8c7a
+d374ef30aa17f8bad0fb88d0da47f4038669c340d4c7fc2ff6505b07c17fdf65
+dfc90f64139b050cf3c72d833e1a7915af1bd689ece7222b9ac2c8426a0bfd0a
+9a5be852afef127b5cbe3af23ef49055677b07bcaca1735cf4ad0ff1e8295ccb
+```
+
+Directory of the malicious Chrome Extension
+
 ```
 /private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F
 
