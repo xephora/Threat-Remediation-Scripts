@@ -5,7 +5,7 @@ First observed 04-23
 
 ## Description
 
-A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post
+A new variant of ChoziosiLoader for Mac has been observed.  The new variant was initially reported by twitter user @th3_protoCOL via Twitter post.  The victim is enticed into clicking into malvertisement, which leads to the victim downloading a MAC disk image (dmg file).  Once the victim opens the malicious disk image, it mounts to disk, a malicious script is then executed which drops 3 LaunchAgents which loads ChoziosiLoader on login.  The malicious script also downloads a malicious extension to the `tmp` directory of the system, this is malicious extension is then decompressed and ran with either Chrome or Safari.  The LaunchAgent sets persistence to the Chrome or Safari extension so that if the Browser process killed, it will load the extension back onto the browser.  The LaunchAgent also periodically downloads new extensions.  The extension contains obfuscated Javascript code which forces the victim to periodically connect to a C2 server.  The purpose of this malware campaign is to generate Ad Revenue money for the attacker.
 
 https://twitter.com/th3_protoCOL/status/1519362330244444160.
 
