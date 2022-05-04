@@ -1,6 +1,26 @@
 # ASync RAT Observed IOCs
 
 ```
+Occurence: 05-04-2022
+
+File: Statement-3759829.iso
+Hash: 6FEFFDB025ED03361DB778FCF9C45707935AC681A1916F685EAD178ECB0965E2
+
+File: AMPJFRG99920.vbs
+Hash: 584c965fa4a4bedd2923fd5c9e8ccf87ad690aa649b4f6f64b75e4aad63b22f6
+
+Dropper Domain: https://bridgepractice.com
+
+File: RunPe.dll
+Hash: 588c9c589c341d01997e40c295dc709f9259c42cf162879e3699a4bc231154f8
+
+File: Stub.exe
+Hash: b4a9322a15a084fe9b8347b2c7bceac6f82d838a808dadcdd82b48bd1763ae2c
+
+C2 Server: bigflossy.ddns.net
+```
+
+```
 Occurrence: 04-21-2022
 
 File: Statement-9842782221.iso
