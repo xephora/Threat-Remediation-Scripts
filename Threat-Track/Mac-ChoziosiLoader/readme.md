@@ -13,7 +13,7 @@ For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol'
 
 https://www.th3protocol.com/2022/Choziosi-Loader
 
-### CrowdStrike query
+### CrowdStrike Query to hunt for MAC-ChoziosiLoader
 
 ```
 ComputerName="*" AND "open \-na Google Chrome" AND "/\?tid="
