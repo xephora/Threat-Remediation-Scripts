@@ -16,9 +16,9 @@ https://www.th3protocol.com/2022/Choziosi-Loader
 ### CrowdStrike Query to hunt for MAC-ChoziosiLoader
 
 ```
-ComputerName="*" AND "open \-na Google Chrome" AND "/\?tid="
+ComputerName="*" AND "ationwindon.com"
 | dedup ComputerName
-| table _time ComputerName CommandLine FileName UserPrincipal
+| table _time ComputerName CommandLine FileName UserPrincipal 
 ```
 
 ## Observed IOCs
