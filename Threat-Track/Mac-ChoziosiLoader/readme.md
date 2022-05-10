@@ -13,6 +13,14 @@ For a full breakdown analysis of Mac-ChoziosiLoader please refer to th3protocol'
 
 https://www.th3protocol.com/2022/Choziosi-Loader
 
+### CrowdStrike query
+
+```
+ComputerName="*" AND "open \-na Google Chrome" AND "/\?tid="
+| dedup ComputerName
+| table _time ComputerName CommandLine FileName UserPrincipal
+```
+
 ## Observed IOCs
 
 The victim is enticed into downloading a malicious disk image file to disk through malvertisement.
