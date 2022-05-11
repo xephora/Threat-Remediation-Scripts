@@ -9,6 +9,7 @@ cat "/users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/de
 rm "/Volumes/Application Installer/ChromeInstaller.command" 2>/dev/null
 umount -f "/Volumes/Application Installer" 2>/dev/null
 MalExt=$(cat /Users/$username/Library/LaunchAgents/com.chrome.extensions.plist 2>/dev/null | grep "echo" | awk '{print $2}' | base64 -d | awk '{print $14}' | sed "s/--load-extension='//g" | sed "s/'//g")
+echo "Malicious Extension: $MalExt"
 shasum -a 256 "/Users/$username/Library/LaunchAgents/com.chrome.extension.plist" 2>/dev/null
 shasum -a 256 "/Users/$username/Library/LaunchAgents/com.chrome.extensions.plist" 2>/dev/null
 shasum -a 256 "/Users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/dev/null
