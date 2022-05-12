@@ -2,7 +2,6 @@
 # TODO:
 #  - Experiencing issues with if statements within CrowdStrike environment so manual remediation script was created in the mean-while.
 #  - This is a CrowdStrike script which CrowdStrike successfully blocks the activity of persistence.  The LaunchAgents are failing to execute which means the malicious extensions are failing to load.
-# NOTES: This script is at early stages and will continue to improve.
 ###
 username="USERNAME"
 cat "/users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/dev/null | grep "echo" | awk '{print $2}' | base64 -d | awk '{print $8}' | sed 's/:\/\///g' | sed 's/;//g' | sed 's/https//g' 
