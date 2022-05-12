@@ -5,7 +5,7 @@
 # NOTES: This script is at early stages and will continue to improve.
 ###
 username="USERNAME"
-cat "/users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/dev/null | grep "echo" | awk '{print $2}' | base64 -d | awk '{print $8}' | sed 's/:\/\///g' | sed 's/;//g' 
+cat "/users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/dev/null | grep "echo" | awk '{print $2}' | base64 -d | awk '{print $8}' | sed 's/:\/\///g' | sed 's/;//g' | sed 's/https//g' 
 rm "/Volumes/Application Installer/ChromeInstaller.command" 2>/dev/null
 umount -f "/Volumes/Application Installer" 2>/dev/null
 MalExt=$(cat /Users/$username/Library/LaunchAgents/com.chrome.extensions.plist 2>/dev/null | grep "echo" | awk '{print $2}' | base64 -d | awk '{print $14}' | sed "s/--load-extension='//g" | sed "s/'//g")
