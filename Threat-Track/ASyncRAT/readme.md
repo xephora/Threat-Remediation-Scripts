@@ -1,6 +1,23 @@
 # ASync RAT Observed IOCs
 
 ```
+Occurence: 05-13-2022
+
+File: UKVHHQM36615.vbs
+Hash: 6c53e66888f9ea39e6742852b010583ba15026c20e175cfbf889681f72407b31
+
+Dropper Domain: hxxps[://]smartnetitstore[.]com/wp-content/[.]Fainl[.]txt
+
+File: RunPe.dll
+Hash: 588c9c589c341d01997e40c295dc709f9259c42cf162879e3699a4bc231154f8
+
+File: Stub.exe
+Hash: f12589613148fd8c49340d2a052055a904eebcb6be0139e88c195199e017ee7c  
+
+C2 Server: zipcode96[.]ddns[.]net
+```
+
+```
 Occurence: 05-04-2022
 
 File: Statement-3759829.iso
