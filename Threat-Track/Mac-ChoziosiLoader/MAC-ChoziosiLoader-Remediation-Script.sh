@@ -31,3 +31,5 @@ rm "/Users/$username/Library/LaunchAgents/com.chrome.extensionsPop.plist" 2>/dev
 rm "/Users/$username/downloads/*.dmg" 2>/dev/null
 # Removes malicious extension from system.
 rm -r -d $MalExt 2>/dev/null
+# Option to disable Sync on Google Chrome if needed (Uncomment to execute)
+# defaults write com.google.Chrome SyncDisabled -bool true
