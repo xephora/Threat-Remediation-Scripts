@@ -67,3 +67,26 @@ foreach ($i in $sid_list) {
         } else { "Remediation Script Successfully Removed WaveBrowser registry HKUSER $i" }
     }
 }
+
+# Removal of uninstall key
+$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+foreach($j in $sid_list) {
+	if ($j -notlike "*_Classes*") {
+		$exists = Test-Path -Path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -ErrorAction SilentlyContinue
+		$exists2 = Test-Path -Path "Registry::$j\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -ErrorAction SilentlyContinue
+		if ($exists -eq $True) {
+            Remove-Item -Path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -Recurse -ErrorAction SilentlyContinue
+            $exists = Test-Path -Path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -ErrorAction SilentlyContinue
+            if ($exists -eq $True) {
+            	"WaveBrowser Removal Unsuccessful => Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser"
+            }
+        }
+        if ($exists2 -eq $True) {
+            Remove-Item -Path "Registry::$j\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -Recurse -ErrorAction SilentlyContinue
+            $exists2 = Test-Path -Path "Registry::$j\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser" -ErrorAction SilentlyContinue
+            if ($exists2 -eq $True) {
+                "WaveBrowser Removal Unsuccessful => Registry::$j\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WaveBrowser"
+            }
+        }
+    }
+}
