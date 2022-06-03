@@ -1,3 +1,4 @@
+# This scanner has been archived.  This scanner was used as a test tool.
 #!/bin/bash
 
 echo -e "Identifying Java Version:\n"
