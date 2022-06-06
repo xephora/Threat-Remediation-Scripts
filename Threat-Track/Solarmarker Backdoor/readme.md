@@ -3,7 +3,7 @@
 ### deobf methods for c2 server
 
 Solarmarker Decryption method (06-06-2022)
-```
+```powershell
 $AC=New-Object System.Security.Cryptography.AesCryptoServiceProvider;
 $AC.Key=[Convert]::FromBase64String('SjQDQJXpF0XycaMaRqevDN2rb/N/xhU/qpHAQAoW3lk=');
 $EB=[Convert]::FromBase64String([IO.File]::ReadAllText("<PathToFile>"));
