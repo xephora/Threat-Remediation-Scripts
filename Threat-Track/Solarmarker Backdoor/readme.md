@@ -2,6 +2,17 @@
 
 ### deobf methods for c2 server
 
+Solarmarker Decryption method (06-06-2022)
+```
+$AC=New-Object System.Security.Cryptography.AesCryptoServiceProvider;
+$AC.Key=[Convert]::FromBase64String('SjQDQJXpF0XycaMaRqevDN2rb/N/xhU/qpHAQAoW3lk=');
+$EB=[Convert]::FromBase64String([IO.File]::ReadAllText("<PathToFile>"));
+$AC.IV = $EB[0..15];
+$Decryptor=$AC.CreateDecryptor();
+$UB=$Decryptor.TransformFinalBlock($EB, 16, $EB.Length-16);
+$AC.Dispose(); [system.io.file]::writeallbytes("output.dll", $UB);
+```
+
 string char array
 
 ```python
