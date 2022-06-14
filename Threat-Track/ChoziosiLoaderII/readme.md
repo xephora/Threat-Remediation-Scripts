@@ -1,4 +1,4 @@
-### Observed IOCs for Bookskram Malware
+### Observed IOCs for ChoziosiLoaderII
 
 ```
 first occurrence: 06-04-2022
