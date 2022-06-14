@@ -214,14 +214,10 @@ while($true) {
 }
 ```
 
-Two similar powershells were reported earlier. Here are the VT scans.
+Two PowerShell scripts were uploaded to Virus total by other users earlier this month. Thank you to Twitter user @cbecks_2 for providing the VT links below.
 
 https://www.virustotal.com/gui/file/f316ea9158ba6704346ccd40b75b7c8d936c757282e1b476f0d42bc2f745dbdd/relations  
 https://www.virustotal.com/gui/file/f3dca53c94c49283bf2a116482b6fdcda777c7c07c53d67833da03b93289fdbb/relations  
-
-### The wget
-
-The PowerShell script then creates an algorithm (base64 decode, bxor and resizing technique) to craft the malicious url using the following domain.
 
 Dropper domain: rockslootni[.]com
 
