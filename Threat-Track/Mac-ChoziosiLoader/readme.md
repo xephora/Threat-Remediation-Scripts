@@ -477,13 +477,15 @@ https://www.virustotal.com/gui/file/5c950892a285508c87fa1998bd49a85b62fc9fd9362e
 
 ### Experimental** (still testing phase) Disabling Google Sync during removal
 
-https://techdows.com/2018/09/stop-chrome-from-signing-into-browser-when-you-sign-into-google-service.html
+reference: https://techdows.com/2018/09/stop-chrome-from-signing-into-browser-when-you-sign-into-google-service.html
 
 ```
 defaults write com.google.Chrome SyncDisabled -bool true
 ```
 
 ### Experimental** Unloading the malicious Chrome Extension
+
+reference: https://github.com/steven-michaud/HookCase/blob/master/examples-xpcproxy.md
 
 `launchd` uses a security feature called `xpcproxy` which is used as a "trampoline" to spawn the malicious extension.  It is recommended to unload the malicious extension before proceeding with manual removal.  If the malicious Chrome Extension is not unloaded before removal, the service may continue to execute the non-existent Chrome Extension and may continue to generate alerts.
 
