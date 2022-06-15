@@ -1,5 +1,13 @@
 # Observed SOCGolish IOCs (FakeBrowserUpdate Campaign)
 
+```
+Occurrence: 06-14-2022
+
+FileName: Edge.js
+FileHash: 98b5d669c5dcb46fd243551dc0d5e14efd1e1123433e0c181a2f96c4a4961834
+
+C2: https[://]fb41b931[.]official[.]stradlings[.]com
+```
 
 ```
 occurrence: 06-08-2022
