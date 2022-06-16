@@ -1,6 +1,15 @@
 # Observed SOCGolish IOCs (FakeBrowserUpdate Campaign)
 
 ```
+Occurrence: 06-16-2022
+
+FileName: Chrome.Quick.Update.ver.103.84.10724.js
+FileHash: 281063d52ec94f46c92aaf3966da87622d56e4d2e8292b6c71c814293a2e9342
+
+C2: https[://]2adf2bf5[.]anchor[.]northphxchiro[.]com/pixel.png
+```
+
+```
 Occurrence: 06-14-2022
 
 FileName: Edge.js
