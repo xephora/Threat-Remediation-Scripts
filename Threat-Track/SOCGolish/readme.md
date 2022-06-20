@@ -1,4 +1,4 @@
-# Observed SOCGolish IOCs (FakeBrowserUpdate Campaign)
+# Observed SOCGolish IOCs (FakeUpdate Campaign)
 
 ```
 Occurrence: 06-16-2022
