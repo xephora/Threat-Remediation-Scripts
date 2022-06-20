@@ -1,5 +1,3 @@
-### SolarMarker Backdoor Generator of redirectors
-
 ### deobf methods for c2 server
 
 Modified* Solarmarker Decryption method (06-06-2022)
