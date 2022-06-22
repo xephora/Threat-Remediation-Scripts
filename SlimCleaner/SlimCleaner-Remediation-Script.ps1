@@ -1,5 +1,6 @@
 Get-Process SlimServiceFactory -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 Get-Process SlimService -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+sleep 2
 
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 foreach ($i in $user_list) {
