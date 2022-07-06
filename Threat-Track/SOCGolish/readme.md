@@ -1,6 +1,15 @@
 # Observed SOCGolish IOCs (FakeUpdate Campaign)
 
 ```
+occurrence: 07-06-2022
+
+FileName: Edge.js
+FileHash: c878f1458a1ee1137d9409c4735e7b6dbe5e7956cd2357e4b97418414f2fabeb
+
+C2: https://bb0c4f00.schedule.newhomessection.com/pixel.png
+```
+
+```
 Occurrence: 07-1-2022
 
 FileName: Edge.js
