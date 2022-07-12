@@ -1,4 +1,4 @@
-# My.com B.V GameCenter Unwanted Software remediation script
+# My.com B.V GameCenter remediation script
 
 ### Actions
 - Terminates processes associated with GameCenter
