@@ -28,11 +28,12 @@ foreach($proc in $procs) {
             continue   
         }
         $x = Get-Process $proc.ProcessName | select ProcessName -expand Modules -ea 0 | where { $_.FileName -like "*$($dllkeyword)"}
+        $procId = Get-Process $proc.ProcessName | select Id
         $FileName = [string]$x.FileName
         $isEmpty = [string]::IsNullOrEmpty($FileName)
         $ProcName = [string]$proc.ProcessName
         if (!$isEmpty) {
-            "[+] Discovered Dependency: $FileName on Process: $ProcName"
+            "[+] Discovered Dependency: $FileName on Process: $ProcName on Process ID: $($procId.Id)"
         }
     } else { "Incorrect Input"; exit }
 }
