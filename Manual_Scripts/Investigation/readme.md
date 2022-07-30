@@ -1,7 +1,7 @@
 # Useful investigation scripts to enumerate the system
 
-### Investigation Scripts for Windows, Mac and Linux
-- Designed for CrowdStrike and can be used locally.
+# Investigation Script
+- Designed for CrowdStrike, but can run locally.
 - Please be sure to replace the username placeholder with the target username you want to investigate.  Example below:
 
 ```
@@ -17,12 +17,12 @@ username="<USERNAME>" => username="admin"
 - This script does not thoroughly investigate through the system, the script is a light weight tool to quickly enumerate a host to identify suspicious activity.  You can use these scripts as a starting point to assist you with your investigation.
 - The script will continue to be improved over-time and additional features will be added.
 
-### ScanDll Script
+# ScanDll Script
 
 Description:  
 Scans all processes for a particular module.
 
-- Designed for CrowdStrike and can be used locally.
+- Designed for CrowdStrike, but can run locally.
 - Please be sure to replace the $dllkeyword value to the module name you are looking for.
 - To perform a deep scan, the script should be ran as adminstrator.  The script also lets you know if you are not running as administrator as a friendly reminder.
 
