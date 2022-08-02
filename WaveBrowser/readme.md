@@ -19,5 +19,9 @@
 
 - A big thank you to GitHub user @jendahl12 for the report.  A removal and check was added for the WaveBrowser uninstall registry key.  This was done so that System Center Configuration Manager can verify and confirm the remediation.
 
+*Update 08-02-2022 *
+
+- Optimizations were made to all WaveBrowser scripts.  I Nested the checks and remediation instead of separating them.  Organized the code a bit better 👌.
+
 ### Known Issues
 - For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
