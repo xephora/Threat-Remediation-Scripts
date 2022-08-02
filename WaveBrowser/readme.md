@@ -9,6 +9,8 @@
 - Removes WaveBrowser Registry Keys
 - Removes WaveBrowser Uninstall Key
 
+### Tested on Windows 7/10/11
+
 ### Why multiple scripts?
 
 - The scripts are decided by operating systems and have a BrowserKill feature if needed.  It is not always required as CrowdStrike blocks the activity.
@@ -27,5 +29,3 @@
 
 ### Known Issues
 - For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
-
-### Testing on Win7/10/11
