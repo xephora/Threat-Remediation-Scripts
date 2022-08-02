@@ -2,10 +2,12 @@
 
 ## Steps to remediate
 
-- Stops browser sessions
-- Removes WaveBrowser from the filesystem.
-- Removes WaveBrowser scheduled tasks.
-- Removes WaveBrowser registry keys
+- Temporarily Stops Browser sessions during remediation. (Optional)
+- Removes WaveBrowser from the Filesystem.
+- Removes WaveBrowser Services
+- Removes WaveBrowser Scheduled tasks.
+- Removes WaveBrowser Registry Keys
+- Removes WaveBrowser Uninstall Key
 
 ### Why multiple scripts?
 
