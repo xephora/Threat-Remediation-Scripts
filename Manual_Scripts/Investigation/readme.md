@@ -45,3 +45,15 @@ Running the script without administrator:
 [+] Scanning Dlls..
 [+] Discovered Dependency: C:\WINDOWS\SYSTEM32\FLTLIB.DLL on Process: explorer
 ```
+
+# Win-PortScanner
+
+- A PowerShell Port scanner that is designed to quickly scan a neighboring device.  It only scans the very basic ports, DNS, SMB, HTTP, HTTPS, WinRM, RDP.
+- Please be sure to replace the $ip value to the ip address you are attempting to port scan.
+
+
+```
+$ip = "ENTERIPHERE"
+
+Example: $ip = "192.168.1.125"
+```
