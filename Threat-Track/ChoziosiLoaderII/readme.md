@@ -6,7 +6,7 @@ first occurrence: 06-04-2022
 
 ### Description
 
-I did not see any available breakdown regarding this malware, so I am documenting the observed IOCs to better understand the threat.  This will be shared to you in hopes that it will be helpful to you.  I am not the first to discover this threat, two IOCs that were similar to mine were already submitted earlier.  I will continue to gather more information over time.
+The new ChoziosiLoader variant has been observed.  Here are the available IOCs for this threat.
 
 ### Delivery Method
 
