@@ -13,7 +13,7 @@ https://app.any.run/tasks/a5d03b82-b444-4849-b9ac-6a68a4a507b1/
 
 ### Malicious Installation Package
 
-Sample download link to ChunkiPWS
+Sample of ChunkiPWS available:
 
 ```
 https[:]//www.mediafire[.]com/file/xqj110ce9lm2vyu/Open__The__File__Setup.zip/fileapplication/zipapplication/
@@ -41,11 +41,11 @@ Sha256Hash: 88b1fb836125454ac4c3553b3414a5a67096a105f5fd573a2822b84ee553bca5
 
 ### Obstacles
 
-The file size of the ChunkiPWS is around 670-700 mb, making analysis quite difficult to perform.  Most sandbox platform can upload a maximum of 50-100mb in size.  Also, downloading the samples through EDRs was near impossible at times.
+The file size of ChunkiPWS ranges around 670-700mb in size.  This makes dynamic analysis challenging.  This is due to the maximum size limitation of 50-100mb.  EDR such as CrowdStrike had experienced issues downloading the file.
 
 ### Observed activity of `File__Setup.exe`
 
-When executed, a single folder is created in the victim's temp directory.  The name of the folder is four random numbers.  For Example:
+A 4-digit random generated directory is created. For example: 
 
 ```
 Directory names:
@@ -58,7 +58,7 @@ C:\users\<profile>\appdata\local\temp\7090
 C:\users\<profile>\appdata\local\temp\8727
 ```
 
-When a folder is created, a folder structure is created which is intended to collect and organize the collected information.
+Within the randomly generated folder, a directory structure is created. Directory names were named afters its targeted Software / Browser.
 
 ```
 Directory Name 
@@ -77,7 +77,7 @@ _Screen_Desktop.jpeg
 
 ### Data Collection:
 
-The following commands were executed to collect credentials, OS and Software information.
+The following commands were used to extract Browser data such as stored credentials and information gathering.
 
 ```
 _Chrome 
@@ -127,7 +127,7 @@ Screenshot of the desktop of the time of infection
 
 ### Persistence
 
-A scheduled task is created to run AutoITv3 scripts. This portion of the analysis did not complete successfully, so I will need to do more research. 
+Persistence is set via a scheduled task which is designed to execute AutoITv3 scripts.
 
 ```
 schtasks /create /tn \Service\Diagnostic /tr """"C:\Users\<profile>\AppData\Roaming\ServiceGet\Tasuges.exe""" """C:\Users\<profile>\AppData\Roaming\ServiceGet\Tasuges.dat"""" /st 00:01 /du 
@@ -137,7 +137,7 @@ https://www.virustotal.com/gui/file/237d1bca6e056df5bb16a1216a434634109478f882d3
 
 ### Exfiltration
 
-Data is then zipped and uploaded to a C2 server via A POST request.
+The extracted data is then compressed using zip and then uploaded onto the attackers server via a POST request.
 
 ```
 http[:]//sables23[.]top/index.php
