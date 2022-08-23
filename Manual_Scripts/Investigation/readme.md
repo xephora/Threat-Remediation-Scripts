@@ -49,7 +49,7 @@ Running the script without administrator:
 # Win-PortScanner
 
 - A PowerShell Port scanner that is designed to quickly scan a neighboring device.  It only scans the very basic ports, DNS, SMB, HTTP, HTTPS, WinRM, RDP.
-- Please be sure to replace the $ip value to the ip address you are attempting to port scan.
+- Please be sure to replace the IP Placeholder with the IP address you are port scanning.
 
 
 ```
