@@ -20,7 +20,7 @@ https://tria.ge/220831-blxemagdc5/behavioral1
 
 ### Why are they being distributed?
 
-Ad revenue at a large scale.
+It appears that the threat actor is doing this for Ad revenue.
 
 ### What have I learned from this adware?
 
