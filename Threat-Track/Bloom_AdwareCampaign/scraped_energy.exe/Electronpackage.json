@@ -1,0 +1,42 @@
+{
+  "name": "FACTZ",
+  "version": "0.0.2",
+  "description": "Simple app for your purpose",
+  "main": "main.js",
+  "single-instance": true,
+  "nodejs": true,
+  "private": true,
+  "kan_is_watcher": false,
+  "dependencies": {
+    "axios": "^0.20.0",
+    "moment": "^2.29.0",
+    "universal-analytics": "^0.4.23"
+  },
+  "window": {
+    "icon": "./imgs/appIcon.png",
+    "title": "APPTITLE",
+    "show": false,
+    "frame": false,
+    "toolbar": false,
+    "width": 100,
+    "height": 100,
+    "min_height": 0,
+    "min_width": 0,
+    "position": "center"
+  },
+  "webview": {
+    "partitions": [
+      {
+        "name": "trusted",
+        "accessible_resources": [
+          "<all_urls>"
+        ]
+      }
+    ]
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "chromium-args": "--ppapi-flash-path=pepflashplayer.dll --ppapi-flash-version=32.0.0.223 --enable-widevine-cdm --register-pepper-plugins=widevinecdmadapter.dll;application/x-ppapi-widevine-cdm --widevine-cdm-path=widevinecdmadapter.dll --widevine-cdm-version=1.4.9.1088",
+  "js-flags": "--expose-gc"
+}
