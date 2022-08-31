@@ -1,0 +1,73 @@
+Add callbacks to requests in flight to avoid async duplication
+A deep deletion module for node (like `rm -rf`)
+Advanced, lightweight system and OS information library
+a glob matcher in javascript
+A library for finding and using SSH public keys
+A library for parsing IPv4 and IPv6 IP addresses in node and the browser.
+A library to create readable \"multipart/form-data\" streams. Can be used to submit forms and file uploads to other web applications.
+A light weight native JavaScript implementation of GeoIP API from MaxMind
+a little globber
+A module for obtaining weather information
+An evented streaming XML parser in JavaScript
+A node module for Google's Universal Analytics tracking
+an operating-system utility library
+Another JSON Schema Validator
+An RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript.
+ANSI escape codes for styling strings in the terminal
+An XML builder for node.js
+A pure javascript CRC32 algorithm that plays nice with binary data
+A querystring parser that supports nesting and arrays, with a depth limit
+A robust Punycode converter that fully complies to RFC 3492 and RFC 5891, and works on nearly all JavaScript platforms.
+AWS signing. Originally pulled from LearnBoost/knox, maintained as vendor in request, now a standalone module.
+Brace expansion as known from sh/bash
+Browser-friendly inheritance fully compatible with standard node.js inherits()
+Callback wrapping utility
+Caseless object set/get/has, very useful when working with HTTP headers.
+Check if argv has a specific flag
+Contains parsers and serializers for ASN.1 (currently BER only)
+Convert character encodings in pure javascript.
+dead-simple optimistic async helper
+Detect whether a terminal supports color
+Detect whether or not an object is a Typed Array
+Determine if an object is a Stream
+Domain name parser based on the Public Suffix List
+Extra assertions on top of node's assert module
+Extremely fast HTTP Archive (HAR) validator using JSON Schema
+getpass for node.js
+Higher-order functions and common patterns for asynchronous code
+HTTP and HTTPS modules that follow redirects.
+HTTP proxy tunneling agent. Formerly part of mikeal/request, now a standalone module.
+Implements performance.now (based on process.hrtime).
+JavaScript sprintf implementation
+JSON Schema for HTTP Archive (HAR)
+JSON Schema validation and specifications
+Lazy lists for node
+Like JSON.stringify, but doesn't blow up on circular refs.
+Lodash modular utilities.
+Match balanced character pairs, like \"{\" and \"}\"
+Media Type Database
+Minimal async jobs utility library, with streams support
+Modern Buffer API polyfill without footguns
+Node.js 0.12 path.isAbsolute() ponyfill
+OAuth 1 signing. Formerly a vendor lib in mikeal/request, now a standalone module.
+Parse, validate, manipulate, and display dates
+Port of the OpenBSD bcrypt_pbkdf function to pure JS
+Port of TweetNaCl cryptographic library to JavaScript
+Promise based HTTP client for the browser and node.js
+Reference implementation of Joyent's HTTP Signature scheme.
+RFC4122 (v1, v4, and v5) UUIDs
+RFC6265 Cookies and Cookie Jar for node.js
+richer JavaScript errors
+Run a function exactly one time
+Safer Node.js Buffer API
+Signs and prepares requests using AWS Signature Version 4
+Simple XML to JavaScript object converter.
+Simplified HTTP request client.
+Terminal string styling done right
+The jsbn library is a fast, portable implementation of large-number math in pure JavaScript, enabling public-key crypto and other applications on desktop and mobile browsers.
+The ultimate javascript content-type utility.
+Tiny millisecond conversion utility
+Traverse JSON Schema passing each schema object to callback
+Use node's fs.realpath, but fall back to the JS implementation if the native one fails
+utilities for primitive JavaScript types
+yet another unzip library for node
