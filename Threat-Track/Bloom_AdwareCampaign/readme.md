@@ -131,9 +131,25 @@ package.json{"name":"Energy","version":"0.0.2","description":"Simple app for you
 
 ### Ads injected into Chromium
 
-A few of the suspicious sites referenced in "Energy.exe"
+A few of the sites referenced in "Energy.exe"
 ```
 https://sed.am
 https://mkrtchyan.ga
 https://didiserver.herokuapp.com/pappk
+http://blog.izs.me
+http://bluesmoon.info
+http://compton.nu
+http://cr.yp.to
+http://ed25519.cr.yp.to
+http://eev.ee
+http://jes.st
+http://mathiasbynens.be
+http://new.gramota.ru
+http://nacl.cr.yp.to
+http://r.va.gg
+http://www8.plala.or.jp
+http://www.bitstorm.it
+http://versionbadg.es
+http://rocha.la
+http://bit.ly/900913 => http://www.alideas.com/
 ```
