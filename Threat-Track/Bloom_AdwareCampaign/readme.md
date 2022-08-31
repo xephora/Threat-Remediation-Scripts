@@ -4,7 +4,7 @@
 
 ### Description
 
-Yes, this post is quite late! I did not see much information regarding this adware campaign and I decided to share my findings.  My findings were specifically for Energy adware.  However, if you notice, most instances of these iterations of adware behave similar in nature, the only difference ^really is the name of the adware and sometimes delivery mechanism (explained below).
+Yes, this post is quite late! I did not see much information regarding this adware campaign so I decided to share my findings.  My findings were specifically for adware 'Energy'.  If you notice, these adware behave similar in nature, the only difference is the name of the adware and the delivery mechanism.
 
 ### First observed?
 
@@ -12,7 +12,7 @@ I began noticing events as early as May 1st, 2022.
 
 ###  What are these pesky adware and how do they work?
 
-The adware appears to be distributed similarly to ChoziosiLoader, where a victim visits a website serving malvertisement.  The victim is then lured into downloading an iso file to disk.  When the iso file executes, the iso mounts like a CD/DVD.  The contents of the disk image is read-only and cannot be removed by a local antivirus unless the iso is dismounted which makes the delivery mechanism effective.  The payload delivery has evolved overtime, initially started as a simple setup installation file, but now the adware takes advantage of Windows shortcut file (lnk) to execute a batch script.  Once the batch script executes, the adware is decompressed and implanted on the victim's computer serving Ads.  Persistence is set via a registry key.
+The adware appears to be distribute similarly to ChoziosiLoader, where a victim visits a website serving malvertisement.  The victim is lured into downloading the malicious iso.  When the victim loads the iso, the iso mounts a read-only filesystem similarly to a CD/DVD.  The contents of the disk image is cannot be removed by a local antivirus unless the iso is dismounted, which makes this delivery mechanism effective.  The payload delivery has evolved overtime, initially started as a simple setup installation executable. Now, the adware takes advantage of the Windows shortcut file (lnk) to execute a batch script.  Once the batch script executes, the adware is decompressed and implanted on the victim's computer serving Ads.  Persistence is set via a registry key.
 
 ### Dynamic Analysis
 
@@ -20,11 +20,11 @@ https://tria.ge/220831-blxemagdc5/behavioral1
 
 ### Why are they being distributed?
 
-Simply put, similar to ChoziosiLoader, it appears that the intentions of the Adware campaign is to gain Ad revenue by forcing victims to run Ads without their consent.
+Ad revenue at a large scale.
 
 ### What have I learned from this adware?
 
-The user initially visits a website that serves malvertisement, which entices the user into downloading an iso file named "Your File Is Ready To Download.iso".
+The user initially visits a website that serves malvertisement, which entices the victim into downloading a malicious iso.
 
 `C:\Users\Admin\Downloads\Your File Is Ready To Download.iso`
 
