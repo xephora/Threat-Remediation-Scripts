@@ -26,7 +26,7 @@ Simply put, similar to ChoziosiLoader, it appears that the intentions of the Adw
 
 The user initially visits a website that serves malvertisement, which entices the user into downloading an iso file named "Your File Is Ready To Download.iso".
 
-`C:\Users\profilename\Downloads\Your File Is Ready To Download.iso`
+`C:\Users\Admin\Downloads\Your File Is Ready To Download.iso`
 
 Decompressing the iso file, you can see a zipped archive containing the adware named `app.zip` along with the delivery mechanism (the shortcut).
 
