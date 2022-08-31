@@ -308,3 +308,7 @@ a435384f966ba6f3c19b437dc31926908325be7c64ad98d83ceb7a55856c3369
 c54436c7c11e8eaf4c47e94830ff4d8ba057a86840ac7591a1d8e00d7eb1b2a5
 909d3083d4787949d280077324c58adc008d045ef470527b3ce97fbaea103b9a
 ```
+
+### I scraped some of the content of the extension out of the binary using a tool called binwalk.
+
+https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Threat-Track/Bloom_AdwareCampaign/scraped_energy.exe
