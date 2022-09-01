@@ -8,7 +8,7 @@ Yes, this post is quite late! I did not see much information regarding this adwa
 
 ### First observed?
 
-I began noticing events as early as May 1st, 2022.
+I began noticing events as early as March 17, 2022.
 
 ###  What are these pesky adware and how do they work?
 
