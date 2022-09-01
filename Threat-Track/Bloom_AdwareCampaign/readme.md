@@ -1,6 +1,6 @@
 **long inhale of breath.......**
 # Observed IOCs of Adware campaign Bloom aka Tone aka Prime aka Energy aka Strength aka Healthy...
-**Exhales.......**
+**Inhale...**
 
 ### Description
 
