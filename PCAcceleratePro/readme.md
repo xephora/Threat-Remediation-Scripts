@@ -8,4 +8,4 @@
 
 ### Description
 
-I created an automated script to remove PCAcceleratePro Adware.  This script does not require CrowdStrike to run, however, I did create this script for CrowdStrike.
+A colleague of mine named Daniel Louie has created an automated script to remove PCAcceleratePro.
