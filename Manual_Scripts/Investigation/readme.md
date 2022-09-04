@@ -4,6 +4,9 @@
 - Designed for CrowdStrike, but can run locally.
 - Please be sure to replace the username placeholder with the target username you want to investigate.  Example below:
 
+### TODO
+- Curently working on Chrome Extension enumeration for the WinInspect script. 
+
 ```
 Windows
 $username = "<USERNAME>" => $username = "admin"
