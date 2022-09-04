@@ -8,4 +8,4 @@
 
 ### Description
 
-I created an automated script to remove Strength Adware.  This script does not require CrowdStrike to run, however, I did create this script for CrowdStrike.
+I created an automated script to remove Strength Adware.
