@@ -5,7 +5,11 @@
 - Please be sure to replace the username placeholder with the target username you want to investigate.  Example below:
 
 ### TODO
-- Curently working on Chrome Extension enumeration for the WinInspect script. 
+- Curently working on Chrome Extension enumeration for the WinInspect script.  With a built-in identifier that associates the extension id with the extension name. (Concept for now)
+
+### Future Project
+- Need to create a Chrome Extension enumeration for MAC/Linux
+- 
 
 ```
 Windows
