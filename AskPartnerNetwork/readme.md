@@ -8,5 +8,4 @@
 
 ### Description
 
-I created an automated script to remove AskPartnerNetwork.  This script does not require CrowdStrike to run, however, I did create this script for CrowdStrike.  The script was 
-made because Crowdstrike does not know how to interpret environmental variables properly.  If you experience any issues running the script, feel free to drop in an issue.
+I created an automated script to remove AskPartnerNetwork.
