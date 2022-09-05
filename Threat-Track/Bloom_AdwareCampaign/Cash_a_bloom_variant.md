@@ -1,4 +1,4 @@
-### Observed activity for Cash Adware (variant of Energy adware)
+### Observed activity for Cash Adware (variant of bloom adware)
 
 ### Hash of iso `Teardown.v1.1.0.zip...iso`
 
