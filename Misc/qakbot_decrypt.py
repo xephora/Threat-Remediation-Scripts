@@ -30,7 +30,6 @@ if __name__ == "__main__":
         for i in range(0,26):
                 letter = chr(0x61 + i)
                 key = filename + letter
-                #print(f"{data=} \n{key=}")
                 decrypted = Decryption(data, key.encode())
                 if decrypted[0:20] in SHA.new(decrypted[20:]).digest():
                         print(decrypted.decode("latin1"))
