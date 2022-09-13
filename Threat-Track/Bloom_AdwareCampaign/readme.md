@@ -12,7 +12,7 @@ I began noticing events as early as March 17, 2022.
 
 ###  What are these pesky adware and how do they work?
 
-The adware appears to be distribute similarly to ChoziosiLoader, where a victim visits a website serving malvertisement.  The victim is lured into downloading the malicious iso.  When the victim loads the iso, the iso mounts a read-only filesystem similarly to a CD/DVD.  The contents of the disk image is cannot be removed by a local antivirus unless the iso is dismounted, which makes this delivery mechanism effective.  The payload delivery has evolved overtime, initially started as a simple setup installation executable. Now, the adware takes advantage of the Windows shortcut file (lnk) to execute a batch script.  Once the batch script executes, the adware is decompressed and implanted on the victim's computer serving Ads.  Persistence is set via a registry key.
+The adware appears to be distributed similarly to ChoziosiLoader, where a victim visits a website serving malvertisement.  The victim is lured into downloading the malicious iso.  When the victim loads the iso, the iso mounts a read-only filesystem similarly to a CD/DVD.  The contents of the disk image cannot be removed by a local antivirus unless the iso is dismounted, which makes this delivery mechanism effective.  The payload delivery has evolved overtime, initially started as a simple setup installation executable. Now, the adware takes advantage of the Windows shortcut file (lnk) to execute a batch script.  Once the batch script executes, the adware is decompressed and implanted on the victim's computer serving Ads.  Persistence is set via a registry key.
 
 ### Dynamic Analysis
 
