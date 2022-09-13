@@ -3,7 +3,7 @@ After reading Cisco Talos's analysis on the 2016 Qakbot analysis, I realize thei
 
 Resouce: https://blog.talosintelligence.com/2016/04/qbot-on-the-rise.html
 
-Results:
+Usage:
 
 python3 decrypt.py oprl.dll
 ¿!?OËK0îáåqþÞÞ]«&ÝLit=3
