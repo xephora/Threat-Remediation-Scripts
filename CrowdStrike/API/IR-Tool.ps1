@@ -26,7 +26,7 @@ Function help {
     You can type 'install' to install the PSFalcon module for powershell
     
     Note: For this script to work fully, you will need to run this script as administrator.
-	  NoteII: You may also need to modify your execution policy to use the script.
+    NoteII: You may also need to modify your execution policy to use the script.
     "
 }
 
