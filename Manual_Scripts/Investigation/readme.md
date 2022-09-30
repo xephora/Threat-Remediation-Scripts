@@ -9,7 +9,6 @@
 
 ### Future Project
 - Need to create a Chrome Extension enumeration for MAC/Linux
-- 
 
 ```
 Windows
