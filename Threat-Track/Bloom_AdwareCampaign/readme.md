@@ -309,6 +309,16 @@ c54436c7c11e8eaf4c47e94830ff4d8ba057a86840ac7591a1d8e00d7eb1b2a5
 909d3083d4787949d280077324c58adc008d045ef470527b3ce97fbaea103b9a
 ```
 
+### Observed hashes for Wellness
+```
+a4b7529261d0afb2b660153241e950efdc3b5210db6d86b3bec67f4efba3e2e9
+```
+
+### Observed hashes for flbmusic
+```
+c0e25b1f9b22de445298c1e96ddfcead265ca030fa6626f61a4a4786cc4a3b7d
+```
+
 ### I scraped some of the content of the extension out of the binary using a tool called binwalk.
 
 https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Threat-Track/Bloom_AdwareCampaign/scraped_energy.exe
