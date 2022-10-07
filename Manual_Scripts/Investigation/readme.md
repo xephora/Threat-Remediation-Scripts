@@ -17,7 +17,7 @@ username="<USERNAME>" => username="admin"
 - This script does not thoroughly investigate through the system, the script is a light weight tool to quickly enumerate a host to identify suspicious activity.  You can use these scripts as a starting point to assist you with your investigation.
 - The script will continue to be improved over-time and additional features will be added.
 
-### ScanDLL
+## ScanDLL
 
 Description:  
 Scans all processes for a particular module.
