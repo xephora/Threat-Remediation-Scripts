@@ -1,5 +1,7 @@
 # Browser Assistant Adware Remediation script
 
+### News: A new update to the Browser Assistant remediation script expected shortly (10-21-2022)
+
 ### Actions
 - Terminates processes associated with Browser Assistant Adware
 - Remove Browser Assistant Adware from the file system.
