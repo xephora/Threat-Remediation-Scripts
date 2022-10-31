@@ -37,7 +37,8 @@ foreach ($i in $user_list) {
                 "WaveBrowser Removal Unsuccessful => C:\users\$i\appdata\local\WebNavigatorBrowser"
             }
         }
-        rm "C:\users\$i\downloads\Wave Browser*.exe" -Force -Recurse -ErrorAction SilentlyContinue
+        rm "C:\users\$i\downloads\Wave Browser*.exe" -Force -ErrorAction SilentlyContinue
+        rm "C:\users\$i\appdata\roaming\microsoft\windows\start menu\programs\WaveBrowser.lnk" -Force -ErrorAction SilentlyContinue
     }
 }
 
