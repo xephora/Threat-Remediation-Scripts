@@ -10,6 +10,8 @@
 
 ### CSSession
 
+CSSession is a tool that allows you to quickly start a interactive shell via Real-Time-Response API.  Modify the clientid and secret with your credentials in order for the script to work.
+
 ```
 Usage: CSSession.ps1 hostname01
 Type Command:>  :  ps
