@@ -938,8 +938,6 @@ temp\randomnumbers.exe
 ```
 
 ```cs
-Function oGPERk9Z80rCHWqPgNvepxjdQg4kODJ08kWlHXn performs a decryption of the c2 configuration
-
 Aes.Create();
 typeof(Aes).GetProperty(KpjYnCQWCXnSKtS5ewxSHinLoN9XO5ZCr827ziok7rdK90TiEEKXw7EyqvsVnq.u_kVZn7gNBqbEhk9Lv_MyfRhzGbJ_O5hH7vq()).SetValue(aes, 128, null);
 typeof(Aes).GetProperty(KpjYnCQWCXnSKtS5ewxSHinLoN9XO5ZCr827ziok7rdK90TiEEKXw7EyqvsVnq.F31ZOBKC7rsRqPc5bkSBvhwMKv0n3WvFhENsrQygVudf3_PybBEj8()).SetValue(aes, PNkUtmTtM4OQU6, null);
