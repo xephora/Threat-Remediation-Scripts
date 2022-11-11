@@ -2,7 +2,7 @@
 
 ```powershell
 $A=New-Object System.Security.Cryptography.AesCryptoServiceProvider;
-$A.Key=@([byte]136,73,144,47,247,21,226,78,180,232,213,236,64,96,75,124,93,169,166,96,59,183,0,9,92>
+$A.Key=@([byte]136,73,144,47,247,21,226,78,180,232,213,236,64,96,75,124,93,169,166,96,59,183,0,9,92,111,215,57,42,135,120,223);
 $A.IV=@([byte]146,129,15,39,90,248,116,78,170,149,152,187,185,81,42,108);
 $F=[Convert]::FromBase64String([IO.File]::ReadAllText('<b64encodeddata>'));
 $decrypted = $A.CreateDecryptor().TransformFinalBlock($F,0,$F.Length)
