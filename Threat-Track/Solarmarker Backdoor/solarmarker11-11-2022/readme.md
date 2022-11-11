@@ -928,7 +928,16 @@ C2: http://85.17.9.32
 RSA Key: <RSAKeyValue><Modulus>sdtM4ImmZJY/nurGz/ztykEJbsWysFqNT5KFlBqcDa6AHfa8SeiYEJDJ+G2xsieFrD1a62JmwzqQKWz/O3EhjuOxVHBwYK3Qsy2lljGseSQjRKUthWx0x4MhajPQvO72pWoUF1g3MTNQc2sR6pOzUHLl8jAh+kOmmLz2umVtBBFkxlAlpXhlwtks56ezw5JOalIVPMYAUaTsTV2eo711D+DJtDih7I+TON64M07h8qJI4CG+ziSGIzju5+4w5WbRI7P0+QNlfhRHv6DR4N/mZohyedCKkq9PGeSERfzTAI+6M5QEVAGyM4muWQs8DYAkNrchGVofRa+KUtyAnUNubw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>
 ```
 
-### Found a method that performs an AES 256 decryption
+### Addition information scraped from dotnet payload
+```
+powershell -command "$f=<powershellpayload>';'$p=[IO.File]::ReadAllText($f);iex $p;[IO.File]::Delete($f)";
+temp\randomnumbers.exe
+{"action":"ping","hwid":"","version":"","workgroup":"? | ?","dns":0,"protocol_version":2}
+{"action":"get_file","hwid":"","task_id":","protocol_version":2}
+{"action":"change_status","hwid":"","arch":"","pc_name":"","rights":"","os_name":"Win","is_success","protocol_version":2}
+```
+
+```
 
 ```cs
 Function oGPERk9Z80rCHWqPgNvepxjdQg4kODJ08kWlHXn performs a decryption of the c2 configuration
@@ -957,12 +966,4 @@ Buffer.BlockCopy(array, 0, array2, aes.IV.Length, array.Length);
 return array2;
 Encoding.UTF8.GetBytes(JlXgz8bZ7F3KyBRu)
 ```
-
-### Addition information scraped from dotnet payload
-```
-powershell -command "$f=<powershellpayload>';'$p=[IO.File]::ReadAllText($f);iex $p;[IO.File]::Delete($f)";
-temp\randomnumbers.exe
-{"action":"ping","hwid":"","version":"","workgroup":"? | ?","dns":0,"protocol_version":2}
-{"action":"get_file","hwid":"","task_id":","protocol_version":2}
-{"action":"change_status","hwid":"","arch":"","pc_name":"","rights":"","os_name":"Win","is_success","protocol_version":2}
 ```
