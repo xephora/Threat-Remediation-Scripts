@@ -960,5 +960,4 @@ byte[] array2 = new byte[aes.IV.Length + array.Length];
 Buffer.BlockCopy(aes.IV, 0, array2, 0, aes.IV.Length);
 Buffer.BlockCopy(array, 0, array2, aes.IV.Length, array.Length);
 return array2;
-Encoding.UTF8.GetBytes(JlXgz8bZ7F3KyBRu)
 ```
