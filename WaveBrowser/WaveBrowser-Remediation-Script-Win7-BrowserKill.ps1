@@ -43,6 +43,8 @@ foreach ($i in $user_list) {
         }
         rm "C:\users\$i\downloads\Wave Browser*.exe" -Force -ErrorAction SilentlyContinue
         rm "C:\users\$i\appdata\roaming\microsoft\windows\start menu\programs\WaveBrowser.lnk" -Force -ErrorAction SilentlyContinue
+        rm "C:\USERS\$i\APPDATA\ROAMING\MICROSOFT\INTERNET EXPLORER\QUICK LAUNCH\WAVEBROWSER.LNK" -ErrorAction SilentlyContinue
+        rm "C:\USERS\$i\DESKTOP\WAVEBROWSER.LNK" -ErrorAction SilentlyContinue
     }
 }
 
