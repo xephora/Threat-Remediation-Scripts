@@ -99,3 +99,20 @@ foreach ($i in $sid_list) {
         }
     }
 }
+
+$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+foreach ($i in $sid_list) {
+    if ($i -like "*_Classes*") {
+        remove-item "Registry::$i\WaveBrwsHTM*" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.CredentialDialogUser" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.CredentialDialogUser.1.0" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.OnDemandCOMClassUser" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.OnDemandCOMClassUser.1.0" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.PolicyStatusUser" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.PolicyStatusUser.1.0" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.Update3COMClassUser" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.Update3COMClassUser.1.0" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.Update3WebUser" -Recurse -ErrorAction SilentlyContinue
+        remove-item "Registry::$i\WavesorSWUpdater.Update3WebUser.1.0" -Recurse -ErrorAction SilentlyContinue
+    }
+}
