@@ -27,5 +27,30 @@
 
 - Optimizations were made to all WaveBrowser scripts.  I Nested the checks and remediation instead of separating them.  Organized the code a bit better 👌.
 
+*Update 11-29-2022 *
+
+- Additional registry key paths have been added to the remediation script.
+
+```
+HKU\{SID}\WavesorSWUpdater.CredentialDialogUser
+HKU\{SID}\WavesorSWUpdater.CredentialDialogUser.1.0
+HKU\{SID}\WavesorSWUpdater.OnDemandCOMClassUser
+HKU\{SID}\WavesorSWUpdater.OnDemandCOMClassUser.1.0
+HKU\{SID}\WavesorSWUpdater.PolicyStatusUser
+HKU\{SID}\WavesorSWUpdater.PolicyStatusUser.1.0
+HKU\{SID}\WavesorSWUpdater.Update3COMClassUser
+HKU\{SID}\WavesorSWUpdater.Update3COMClassUser.1.0
+HKU\{SID}\WavesorSWUpdater.Update3WebUser
+HKU\{SID}\WavesorSWUpdater.Update3WebUser.1.0
+```
+
+- Additional shortcut paths have been added to the remediation script.
+
+```
+C:\USERS\{PROFILE}\APPDATA\ROAMING\MICROSOFT\INTERNET EXPLORER\QUICK LAUNCH\WAVEBROWSER.LNK
+C:\USERS\{PROFILE}\APPDATA\ROAMING\MICROSOFT\WINDOWS\START MENU\PROGRAMS\WAVEBROWSER.LNK
+C:\USERS\{PROFILE}\DESKTOP\WAVEBROWSER.LNK
+```
+
 ### Known Issues
 - For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
