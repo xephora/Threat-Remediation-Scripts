@@ -8,7 +8,7 @@
 - You must also configure your API Key + ClientID. Reference: `Request-FalconToken -ClientId <CID> -ClientSecret <SECRET>`
 - Lastly, ensure you have the correct API permissions in order for this script to run.
 
-### CSSession
+# CSSession
 
 CSSession is a tool that allows you to quickly start a interactive shell via Real-Time-Response API.  In order for CSSession to work, you must modify the clientid and secret.
 
