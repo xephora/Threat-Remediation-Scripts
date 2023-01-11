@@ -20,7 +20,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Enumerate of virtual disk image.
 - Enumerate Chrome Extensions. (Testing Phase) If you experience any issues with this feature, feel free to report as an issue.
 - Optimized existing code.
-- Added check for Windows Defender logs with size.
+- Enumerate Windows Defender logs.
 
 ## ScanDLL
 
