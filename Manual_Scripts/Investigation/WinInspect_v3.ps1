@@ -26,16 +26,6 @@ gci "C:\program files\Common Files" -force -ErrorAction SilentlyContinue | % { $
 "C:\program files\Common Files (x86)"
 gci "C:\program files (x86)\Common Files" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
-# Antivirus Logs
-"`n`n [+]  Checking Symantec Local Antivirus Logs"
-"C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
-$result = test-path -Path "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av"
-if ($result -eq "True") {
-	gci "C:\ProgramData\symantec\Symantec Endpoint Protection\currentversion\Data\Logs\av" -fi "*.log" -force -ErrorAction SilentlyContinue | % { $_.FullName, "Size: $($_.length)"}
-} else {
-    "Symantec Endpoint doesn't seem to be on this system.."
-}
-
 "`n`n [+]  Checking Defender Antivirus Logs"
 "C:\ProgramData\Microsoft\Windows Defender\Support"
 $result = test-path -Path "C:\ProgramData\Microsoft\Windows Defender\Support"
