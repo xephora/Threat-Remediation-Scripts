@@ -166,29 +166,3 @@ get-service | select ServiceName,DisplayName,Status,CanStop | where { $_.Status 
 # Enumerate Virtual Disk Images
 "`n`n [+] Checking for Virtual Disk Images`n"
 Get-WmiObject -Class Win32_logicaldisk -ErrorAction SilentlyContinue
-
-# Enumerate Chrome Extensions
-"`n`n [+] Checking Chrome Extensions"
-$defaultprofileExists = test-path -path "C:\Users\$username\appdata\local\Google\chrome\User Data\default\extensions"
-if ($defaultprofileExists) {
-    "`n [+] extensions on default profile $username"
-    $defaultExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\default\extensions" -r -fi "manifest.json" | % { $_.FullName})
-    foreach ($dprofile in $defaultExtensions) {
-        "`nPath: $dprofile"
-        $extcjson = cat "$dprofile"
-        $extcjson | ForEach-Object {"$PSItem"}
-    }
-}
-$profiles = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*").Name
-foreach ($profile in $profiles) {
-    $profileExists = test-path -path "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile"
-    if ($profileExists) {
-        "`n [+] chrome profiles on profile $username"
-        $ProfilesExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile\extensions" -r -fi "manifest.json" | % { $_.FullName})
-        foreach ($cprofile in $ProfilesExtensions) {
-            "`nPath: $cprofile"
-            $extcjson = cat "$cprofile"
-            $extcjson | ForEach-Object {"$PSItem"}
-        }
-    }
-} 
