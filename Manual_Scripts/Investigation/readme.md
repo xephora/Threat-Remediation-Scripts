@@ -18,9 +18,9 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Added checks for vhd files stored in downloads, documents and desktop
 - Added additional inspection paths "C:\program files\common files", "C:\program files (x86)\common files", "C:\users\profile\Appdata\Local\Programs", "C:\users\public", "C:\users\public\desktop".
 - Enumerate of virtual disk image.
-- Enumerate Chrome Extensions. (Testing Phase) If you experience any issues with this feature, feel free to report as an issue.
 - Optimized existing code.
-- Enumerate Windows Defender logs.
+- Enumerate Windows Defender logs.  
+x Enumerate Chrome Extensions. (Testing Phase) If you experience any issues with this feature, feel free to report as an issue. (Removed 01-20-2023 (Noisy feature)
 
 ## ScanDLL
 
