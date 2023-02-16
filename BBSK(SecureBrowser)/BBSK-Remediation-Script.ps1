@@ -27,7 +27,7 @@ foreach ($user in $users) {
             $exists2 = test-path "C:\users\$user\appdata\local\BlazeMedia"
             if ($exists2 -eq $True) {
                 $exists20 = test-path "C:\Users\$user\AppData\Local\BlazeMedia\SecureBrowser\Application\chrome.exe"
-                if (exists20 -eq $True){
+                if ($exists20 -eq $True){
                     Get-Process Chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
                     rm "C:\Users\$user\AppData\Local\BlazeMedia"
                     $exists20 = test-path "C:\Users\$user\AppData\Local\BlazeMedia\"    
