@@ -1,7 +1,8 @@
-Get-Process SecureBrowserCrashHandler -ErrorAction SilentlyContinue | Stop-Process -Force
-Get-Process SecureBrowserCrashHandler64 -ErrorAction SilentlyContinue | Stop-Process -Force
+Get-Process SecureBrowserCrashHandler -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+Get-Process SecureBrowserCrashHandler64 -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 sleep 2
 
+#Check and removal for BBSK and SecureBrowser directories
 $users = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 foreach ($user in $users) {
     if ($user -notlike "*Public*") {
@@ -18,7 +19,7 @@ foreach ($user in $users) {
             rm "C:\Users\$user\AppData\Roaming\Blaze Media Inc" -Force -Recurse -ErrorAction SilentlyContinue 
             $exists19 = test-path "C:\Users\$user\AppData\Roaming\Blaze Media Inc"
             if ($exists19 -eq $True) {
-                "BBSK Removal Unsuccessful => C:\Users\$user\AppData\Roaming\Blaze Media Inc" 
+                "Blaze Media Inc Removal Unsuccessful => C:\Users\$user\AppData\Roaming\Blaze Media Inc" 
             }
         }
         $exists2 = test-path "C:\users\$user\appdata\local\BlazeMedia"
@@ -29,10 +30,26 @@ foreach ($user in $users) {
                 $exists20 = test-path "C:\Users\$user\AppData\Local\BlazeMedia\SecureBrowser\Application\chrome.exe"
                 if ($exists20 -eq $True){
                     Get-Process Chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-                    rm "C:\Users\$user\AppData\Local\BlazeMedia"
+                    rm "C:\Users\$user\AppData\Local\BlazeMedia" -Force -Recurse -ErrorAction SilentlyContinue
                     $exists20 = test-path "C:\Users\$user\AppData\Local\BlazeMedia\"    
                     if ($exists20 -eq $True) {
-                        "BBSK Removal Unsuccessful => C:\users\$user\appdata\local\BlazeMedia"
+                        "BlazeMedia Removal Unsuccessful => C:\users\$user\appdata\local\BlazeMedia"
+                    }
+                }
+            }
+        }
+        $exists2 = test-path "C:\users\$user\appdata\roaming\BlazeMedia"
+        if ($exists2 -eq $True) {
+            rm "C:\users\$user\appdata\roaming\BlazeMedia" -Force -Recurse -ErrorAction SilentlyContinue 
+            $exists2 = test-path "C:\users\$user\appdata\roaming\BlazeMedia"
+            if ($exists2 -eq $True) {
+                $exists20 = test-path "C:\Users\$user\AppData\roaming\BlazeMedia\SecureBrowser\Application\chrome.exe"
+                if ($exists20 -eq $True){
+                    Get-Process Chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+                    rm "C:\Users\$user\AppData\roaming\BlazeMedia" -Force -Recurse -ErrorAction SilentlyContinue
+                    $exists20 = test-path "C:\Users\$user\AppData\roaming\BlazeMedia\"    
+                    if ($exists20 -eq $True) {
+                        "BlazeMedia Removal Unsuccessful => C:\users\$user\appdata\roaming\BlazeMedia"
                     }
                 }
             }
@@ -42,18 +59,19 @@ foreach ($user in $users) {
             rm "C:\Users\$user\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Secure Browser.lnk" -Force -Recurse -ErrorAction SilentlyContinue 
             $exists3 = test-path "C:\Users\$user\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Secure Browser.lnk"
             if ($exists3 -eq $True) {
-                "BBSK Removal Unsuccessful => C:\Users\$user\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Secure Browser.lnk"
+                "Secure Browser.lnk Removal Unsuccessful => C:\Users\$user\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Secure Browser.lnk"
             }
          }
     }
 }
 
+#Check and removal for BBSK scheduled tasks
 $exists4 = test-path "C:\windows\system32\tasks\BB Updater Scheduler"
 if ($exists4 -eq $True) {
     rm "C:\windows\system32\tasks\BB Updater Scheduler" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists4 = test-path "C:\windows\system32\tasks\BB Updater Scheduler"
     if ($exists4 -eq $True) {
-        "BBSK Removal Unsuccessful => C:\windows\system32\tasks\BB Updater Scheduler"
+        "BB Updater Scheduler Removal Unsuccessful => C:\windows\system32\tasks\BB Updater Scheduler"
     }
 }
 
@@ -62,16 +80,17 @@ if ($exists5 -eq $True) {
     rm "C:\windows\system32\tasks\BBSK Startup Scheduler" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists5 = test-path "C:\windows\system32\tasks\BBSK Startup Scheduler"
     if ($exists5 -eq $True) {
-        "BBSK Removal Unsuccessful => C:\windows\system32\tasks\BBSK Startup Scheduler"
+        "BBSK Startup Scheduler Removal Unsuccessful => C:\windows\system32\tasks\BBSK Startup Scheduler"
     }
 }
 
+#Check and removal for SecureBrowser scheduled tasks
 $exists6 = test-path "C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
 if ($exists6 -eq $True) {
     rm "C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists6 = test-path "C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
     if ($exists6 -eq $True) {
-        "BBSK Removal Unsuccessful => C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
+        "BlazeMediaUpdateTask*Core Removal Unsuccessful => C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
     }
 }
 
@@ -80,10 +99,11 @@ if ($exists7 -eq $True) {
     rm "C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists7 = test-path "C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*ua"
     if ($exists7 -eq $True) {
-        "BBSK Removal Unsuccessful => C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
+        "BlazeMediaUpdateTask*Core Removal Unsuccessful => C:\windows\system32\tasks\BlazeMediaUpdateTaskUser*Core"
     }
 }
 
+#Check and removal for BBSK and SecureBrowser registry keys
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 foreach($sid in $sid_list) {
     if ($sid -notlike "*_Classes*") {
@@ -94,7 +114,7 @@ foreach($sid in $sid_list) {
             $regkey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
     	    $exists8 = (Get-Item $regkey).Property -contains "BBUpdaterStartup"
             if ($exists8 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.BBUpdaterStartup"
+                "BBUpdaterStartup Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.BBUpdaterStartup"
             }
         }
         $exists9 = (Get-Item $regkey).Property -contains "SKStartup"
@@ -103,7 +123,7 @@ foreach($sid in $sid_list) {
             $regkey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
     	    $exists9 = (Get-Item $regkey).Property -contains "SKStartup"
             if ($exists9 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.SKStartup"
+                "SKStartup Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.SKStartup"
             }
         }
         $exists10 = (Get-Item $regkey).Property -contains "SKUpdater"
@@ -112,7 +132,7 @@ foreach($sid in $sid_list) {
             $regkey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
     	    $exists10 = (Get-Item $regkey).Property -contains "SKUpdater"
             if ($exists10 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.SKUpdater"
+                "SKUpdater Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.SKUpdater"
             }
         }
         $exists21 = (Get-Item $regkey).Property -contains "BlazeMedia Update"
@@ -121,7 +141,7 @@ foreach($sid in $sid_list) {
             $regkey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
     	    $exists21 = (Get-Item $regkey).Property -contains "BlazeMedia Update"
             if ($exists21 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.BlazeMedia Update"
+                "BlazeMedia Update Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.BlazeMedia Update"
             }
         }
         $exists11 = test-path -path "Registry::$sid\Software\BlazeMedia"
@@ -129,7 +149,7 @@ foreach($sid in $sid_list) {
             Remove-Item -Path "Registry::$sid\Software\BlazeMedia" -Recurse -ErrorAction SilentlyContinue
             $exists11 = test-path -path "Registry::$sid\Software\BlazeMedia"
             if ($exists11 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\BlazeMedia"
+                "BlazeMedia Removal Unsuccessful => Registry::$sid\Software\BlazeMedia"
             }
         }
         $exists12 = test-path -path "Registry::$sid\Software\Blaze Media Inc"
@@ -137,7 +157,7 @@ foreach($sid in $sid_list) {
             Remove-Item -Path "Registry::$sid\Software\Blaze Media Inc" -Recurse -ErrorAction SilentlyContinue
             $exists12 = test-path -path "Registry::$sid\Software\Blaze Media Inc"
             if ($exists12 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Blaze Media Inc"
+                "Blaze Media Inc Removal Unsuccessful => Registry::$sid\Software\Blaze Media Inc"
             }
         }
         $exists13 = test-path -path "Registry::$sid\Software\Drake Media Inc."
@@ -145,7 +165,7 @@ foreach($sid in $sid_list) {
             Remove-Item -Path "Registry::$sid\Software\Drake Media Inc." -Recurse -ErrorAction SilentlyContinue
             $exists13 = test-path -path "Registry::$sid\Software\Drake Media Inc."
             if ($exists13 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Drake Media Inc."
+                "Secure Browser Removal Unsuccessful => Registry::$sid\Software\Drake Media Inc."
             }
         }
         $exists14 = test-path -path "Registry::$sid\Software\Clients\StartMenuInternet\Secure Browser*"
@@ -153,7 +173,7 @@ foreach($sid in $sid_list) {
             Remove-Item -Path "Registry::$sid\Software\Clients\StartMenuInternet\Secure Browser*" -Recurse -ErrorAction SilentlyContinue
             $exists14 = test-path -path "Registry::$sid\Software\Clients\StartMenuInternet\Secure Browser*"
             if ($exists14 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Clients\StartMenuInternet\Secure Browser*"
+                "Secure Browser Removal Unsuccessful => Registry::$sid\Software\Clients\StartMenuInternet\Secure Browser*"
             }
         }
         $exists15 = test-path -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\BlazeMedia SecureBrowser"
@@ -161,7 +181,7 @@ foreach($sid in $sid_list) {
             Remove-Item -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\BlazeMedia SecureBrowser" -Recurse -ErrorAction SilentlyContinue
             $exists15 = test-path -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\BlazeMedia SecureBrowser"
             if ($exists15 -eq $True) {
-                "BBSK Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\BlazeMedia SecureBrowser"
+                "Secure Browser Removal Unsuccessful => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\BlazeMedia SecureBrowser"
             }
         }
     }
@@ -172,7 +192,7 @@ if ($exists16 -eq $True) {
     rm "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BB Updater Scheduler" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists16 = test-path "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BB Updater Scheduler"
     if ($exists16 -eq $True) {
-        "BBSK Removal Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BB Updater Scheduler"
+        "BB Updater Scheduler Removal Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BB Updater Scheduler"
     }
 }
 
@@ -181,7 +201,7 @@ if ($exists17 -eq $True) {
     rm "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BBSK Startup Scheduler" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists17 = test-path "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BBSK Startup Scheduler"
     if ($exists17 -eq $True) {
-        "BBSK Removal Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BBSK Startup Scheduler"
+        "BB Updater Scheduler Removal Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BBSK Startup Scheduler"
     }
 }
 
@@ -190,6 +210,6 @@ if ($exists18 -eq $True) {
     rm "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BlazeMediaUpdateTaskUser*" -Force -Recurse -ErrorAction SilentlyContinue 
     $exists18 = test-path "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BlazeMediaUpdateTaskUser*"
     if ($exists18 -eq $True) {
-        "BBSK Removal Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BlazeMediaUpdateTaskUser*"
+        "BlazeMediaUpdateTaskUser Unsuccessful => Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\BlazeMediaUpdateTaskUser*"
     }
 }
