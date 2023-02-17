@@ -1,5 +1,3 @@
-# Uncomment extcjson to show manifest details for all extensions for target user
-
 $user = "<username>"
 $extensionlist = @{
     "nmmhkkegccagdldgiimedpiccmgmieda" = "Google Wallet"
