@@ -22,6 +22,9 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Enumerate Windows Defender logs.  
 x Enumerate Chrome Extensions. (Testing Phase) If you experience any issues with this feature, feel free to report as an issue. (Removed 01-20-2023 (Noisy feature)
 
+### Recent Updates to WinInspect (02-16-2023)
+- Added enumeration of Chrome Extension back onto the script.  The script will attempt to lookup the extension and name it appropriately.
+
 ## ScanDLL
 
 Description:  
