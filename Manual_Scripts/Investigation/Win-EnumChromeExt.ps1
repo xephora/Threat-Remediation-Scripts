@@ -1,4 +1,4 @@
-$user = "<username>"
+$username = "<username>"
 $extensionlist = @{
     "nmmhkkegccagdldgiimedpiccmgmieda" = "Google Wallet"
     "efaidnbmnnnibpcajpcglclefindmkaj" = "Adobe Acrobat: PDF edit, convert, sign tools"
@@ -138,6 +138,7 @@ $extensionlist = @{
     "lkhfeoafdgbaecajkdbioenncjopbpmk" = "IPP / CUPS printing for Chrome & Chromebooks"
     "pmaionhboofajejhmkheilkoifkmigfe" = "IPP/CUPS printing for G Suite admins"
     "lbeamcaffnnnmepjmpggnegdbammbfgc" = "skedula"
+    "oocalimimngaihdkbihfgmpkcpnmlaoa" = "Netflix Party is now Teleparty"
 }
 
 if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default") {
@@ -155,19 +156,21 @@ if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default"
             }
         }
     }
-} 
+}
 
-$profiles = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*").Name
-foreach ($profile in $profiles) {
-    if(test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile") {
-        "`n[+] chrome profile $profile on profile $username"
-        $ProfilesExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile\extensions" -r -fi "manifest.json" | % { $_.FullName})
-        foreach ($cprofile in $ProfilesExtensions) {
-            "`nPath: $cprofile"
-            foreach ($key in $extensionlist.Keys) {
-                $val = $extensionlist[$key]
-                if ($cprofile -like "*$key*") {
-                    "Extension: $key -> $val"
+if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*") {
+    $profiles = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*").Name
+    foreach ($profile in $profiles) {
+        if(test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile") {
+            "`n[+] chrome profile $profile on profile $username"
+            $ProfilesExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile\extensions" -r -fi "manifest.json" | % { $_.FullName})
+            foreach ($cprofile in $ProfilesExtensions) {
+                "`nPath: $cprofile"
+                foreach ($key in $extensionlist.Keys) {
+                    $val = $extensionlist[$key]
+                    if ($cprofile -like "*$key*") {
+                        "Extension: $key -> $val"
+                    }
                 }
             }
         }
