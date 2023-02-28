@@ -10,3 +10,8 @@
 ### Description
 
 I created a script to remediate OneLaunch.
+
+### Updates
+
+- An update to OneLaunch seem to have broke the existing script.  I've updated and optimized the script.
+- Thank you to @mcrommert for reporting the issue. 
