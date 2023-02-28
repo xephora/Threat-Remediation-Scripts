@@ -11,7 +11,7 @@
 
 I created a script to remediate OneLaunch.
 
-### Updates
+### Updates 02-28-2023
 
 - An update to OneLaunch seem to have broke the existing script.  I've updated and optimized the script.
 - Thank you to @mcrommert for reporting the issue https://github.com/xephora/Threat-Remediation-Scripts/issues/3. 
