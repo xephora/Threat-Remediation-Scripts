@@ -1,4 +1,5 @@
 # TODO: Need to replace existing Chrome Ext Enumeration with the new version
+# EnumChromeExtv2 now queries extensions directly from Google's Chrome Store
 $username = "USERNAME"
 
 if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default") {
