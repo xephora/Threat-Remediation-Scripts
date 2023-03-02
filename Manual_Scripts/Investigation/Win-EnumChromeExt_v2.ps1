@@ -1,4 +1,4 @@
-# TODO: Need to replace existing Chrome Ext Enumeration with the new version
+# TODO: Need to integrate into WinInspect script.
 # EnumChromeExtv2 now queries extensions directly from Google's Chrome Store
 $username = "USERNAME"
 
