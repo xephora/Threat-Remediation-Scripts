@@ -1,3 +1,4 @@
+# TODO: Need to replace existing Chrome Ext Enumeration with the new version
 $username = "USERNAME"
 
 if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default") {
