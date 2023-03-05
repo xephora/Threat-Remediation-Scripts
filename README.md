@@ -32,6 +32,7 @@ The following library contains a list of common unwanted software/adware that ar
 
 - [123Movies](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/123Movies)
 - [39bar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/39bar)
+- [AppMaster](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AppMaster)
 - [AppRun](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AppRun)
 - [AskPartnerNetwork](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AskPartnerNetwork)
 - [BBSK(SecureBrowser)](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BBSK(SecureBrowser))
