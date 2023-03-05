@@ -1,61 +1,38 @@
-$users = Get-ChildItem c:\users | select-object name -expandproperty name
-$sids = get-item -path "registry::hku\*" -ErrorAction SilentlyContinue | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+Get-Process AppRun -ErrorAction SilentlyContinue | Stop-Process -Force
+sleep 2
 
-foreach ($user in $users) {
-    if ($user -ne "Public") {
-        rm "C:\Users\$user\appdata\roaming\apprun" -force -recurse -ErrorAction SilentlyContinue
-        rm "C:\Users\$user\Desktop\Filecoach.lnk" -ErrorAction SilentlyContinue
-    }
-}
-
-rm "C:\windows\system32\tasks\Update_Zoremov" -force -recurse -ErrorAction SilentlyContinue
-
-foreach ($sid in $sids) {
-    if ($sid -notlike "*_Classes") {
-        remove-ItemProperty -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -name "AppRun" -ErrorAction SilentlyContinue
-        remove-item -path "Registry::$sid\Software\AppRun" -recurse -ErrorAction SilentlyContinue
-        remove-item -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Zoremov" -recurse -ErrorAction SilentlyContinue
-    }
-}
-
-remove-item -path "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Zoremov" -recurse -ErrorAction SilentlyContinue
-
-#Check Removal
-
-foreach ($user in $users) {
-    if ($user -ne "Public") {
-        $check1 = test-path "C:\Users\$user\appdata\roaming\AppRun"
-        if ($check1 -eq "True") {
-            "This script failed to remove C:\Users\$user\appdata\roaming\AppRun"
-        }
-        $check2 = test-path "C:\Users\$user\Desktop\Filecoach.lnk"
-        if ($check2 -eq "True") {
-            "This script failed to remove C:\Users\$user\Desktop\Filecoach.lnk"
+$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
+foreach ($i in $user_list) {
+    if (test-path -Path "C:\Users\$i\appdata\roaming\AppRun") {
+        rm "C:\Users\$i\appdata\roaming\AppRun" -Force -Recurse -ErrorAction SilentlyContinue
+        if (test-path -Path "C:\Users\$i\appdata\roaming\AppRun") {
+            "Failed to remove AppRun -> C:\Users\$i\appdata\roaming\AppRun"
         }
     }
 }
 
-$check3 = test-path "C:\windows\system32\tasks\Update_Zoremov"
-if ($check3 -eq "True") {
-    "This script failed to remove C:\windows\system32\tasks\Update_Zoremov"
-}
+Remove-Item -Path "C:\windows\system32\tasks\Update_Zoremov" -ErrorAction SilentlyContinue
+Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Zoremov' -Recurse -ErrorAction SilentlyContinue
 
-foreach ($sid in $sids) {
-    if ($sid -notlike "*_Classes") {
-        $check4 = test-path -path "Registry::$sid\Software\AppRun" -ErrorAction SilentlyContinue
-        if ($check4) {
-            "This script failed to remove Registry::$sid\Software\AppRun"
-        } else {
-            continue
+$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+foreach ($i in $sid_list) {
+    if ($i -notlike "*_Classes*") {
+        $keyexists = test-path -path "Registry::$i\Software\Apprun"
+        if ($keyexists -eq $True) {
+            Remove-Item -Path "Registry::$i\Software\Apprun" -Recurse -ErrorAction SilentlyContinue
+            $keyexists = test-path -path "Registry::$i\Software\Apprun"
+            if ($keyexists -eq $True) {
+                "Failed to remove AppRun => Registry::$i\Software\Apprun"
+            }
         }
-        $check5 = test-path -path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Zoremov"
-        if ($check5) {
-            "This script failed to remove Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Zoremov"
+        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
+        $keyexists = (Get-Item $keypath).Property -contains "AppRun"
+        if ($keyexists -eq $True) {
+            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "AppRun" -ErrorAction SilentlyContinue
+            $keyexists = (Get-Item $keypath).Property -contains "AppRun"
+            if ($keyexists -eq $True) {
+                "Failed to remove AppRun => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.AppRun"
+            }
         }
     }
-}
-
-$check6 = test-path -path "Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Zoremov"
-if ($check6) {
-    "This script failed to remove Registry::hklm\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Zoremov"
 }
