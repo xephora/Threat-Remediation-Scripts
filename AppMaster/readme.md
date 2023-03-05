@@ -1,4 +1,4 @@
-# AppMaster Remediation script
+# AppMaster/AppSync Remediation script
 
 ### Actions
 - Terminates processes associated with AppMaster
