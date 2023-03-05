@@ -91,7 +91,7 @@ foreach ($i in $sid_list) {
             Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "ClearBar" -ErrorAction SilentlyContinue
             $keyexists = (Get-Item $keypath).Property -contains "ClearBar"
             if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.com.squirrel.123movies.123movies"
+                "Failed to remove Clearbar => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.ClearBar"
             }
         }
     }
