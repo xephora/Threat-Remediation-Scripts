@@ -47,7 +47,7 @@ foreach ($i in $sid_list) {
             Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "com.squirrel.123movies.123movies" -ErrorAction SilentlyContinue
             $keyexists = (Get-Item $keypath).Property -contains "com.squirrel.123movies.123movies"
             if ($keyexists -eq $True) {
-                "Failed to remove OneLaunch => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.com.squirrel.123movies.123movies"
+                "Failed to remove 123Movies => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.com.squirrel.123movies.123movies"
             }
         }
     }
