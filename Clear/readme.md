@@ -8,4 +8,4 @@
 
 ### Description
 
-A colleague of mine named Daniel Louie has created an automated script to remove Clear and has contributed by providing me with his work.
+I have created a script to remediate Clearbar adware.
