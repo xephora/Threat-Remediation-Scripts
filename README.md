@@ -41,6 +41,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [ByteFence](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ByteFence)
 - [Cash](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Cash)
 - [Clear](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clear)
+- [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
 - [ElevenClock](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ElevenClock)
