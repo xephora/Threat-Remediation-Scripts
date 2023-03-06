@@ -80,7 +80,6 @@ $exists16 = test-path "C:\windows\system32\tasks\ClearUpdateChecker"
     }
 }
 
-#Check and removal for Clear and Clearbar registry keys
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 foreach($sid in $sid_list) {
     if ($sid -notlike "*_Classes*") {
