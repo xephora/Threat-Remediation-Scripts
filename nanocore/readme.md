@@ -90,9 +90,9 @@ foreach ($i in $batchscript_data) {
 	}
 }
 
-$data_substr_split=[string[]]$data_substr.Split('\'); # Takes Data, substrings, splits
-$array1=Decompress (Decrypt ([convert]::FromBase64String($data_substr_split[0]))); # Decrypts data array, Decompresses it via GZip
-$array2=Decompress (Decrypt ([convert]::FromBase64String($data_substr_split[1]))); # Decrypts data array, Decompresses it via GZip
+$data_substr_split=[string[]]$data_substr.Split('\');
+$array1=Decompress (Decrypt ([convert]::FromBase64String($data_substr_split[0])));
+$array2=Decompress (Decrypt ([convert]::FromBase64String($data_substr_split[1])));
 
 [system.io.file]::writeallbytes("payload1.dll", $array1);
 [system.io.file]::writeallbytes("payload2.dll", $array2);
