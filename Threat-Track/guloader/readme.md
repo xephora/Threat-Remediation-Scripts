@@ -17,7 +17,7 @@ C:\Users\Public\info1.pdf
 
 `194.180.48.211`
 
-### Vejlensisk90.vbs executes the following Deobfuscated PS Script which downloads and loads another ps script
+### Vejlensisk90.vbs executes the following PS Script (deobfuscated) which downloads and loads another ps script
 
 ```ps
 Function StringReplace ([String]$Eddikeb){
@@ -56,7 +56,7 @@ if ($Model) {
 }
 ```
 
-### best attempt at deobfuscating the 2nd powershell script
+### An attempt at deobfuscating the second PowerShell script
 
 ```ps
 Function Overgla02([String]$Ally) {
