@@ -1,6 +1,6 @@
 ### Observed activity 03-22-2023
 
-Currently gathering additional information about this threat
+Currently gathering additional information..
 
 ```ps
 function ClgCG($dqbZnx){
