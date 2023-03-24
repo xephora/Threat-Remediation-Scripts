@@ -131,26 +131,33 @@ foreach ($j in $sid_list) {
     }
 }
 
-# Chrome History File
-"`n`n [+]  Checking for Chrome History Files"
+# Chrome History
+"`n`n[+] Chrome History files"
 $historyFilePaths=@(gci "C:\users\$username\AppData\Local\google\Chrome\User Data" -r -fi "history" | % { $_.FullName }); 
 foreach ($filePath in $historyFilePaths) {
 	if (test-path $filepath) {
-      $fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
-      $fileSizeMB = $fileInfo.Length / 1MB
-      Write-Output "File path: $($fileInfo.FullName)"
-      Write-Output "File size: $fileSizeMB MB"
-      Write-Output "Creation date: $($fileInfo.CreationTime)"
-      Write-Output "Modification date: $($fileInfo.LastWriteTime)"
-      Write-Output "------------------------"
+	$fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
+	$fileSizeMB = $fileInfo.Length / 1MB
+	Write-Output "File path: $($fileInfo.FullName)"
+	Write-Output "File size: $fileSizeMB MB"
+	Write-Output "Creation date: $($fileInfo.CreationTime)"
+	Write-Output "Modification date: $($fileInfo.LastWriteTime)"
+	Write-Output "------------------------"
     }
 }
 
 # Edge and IE History File
-"`n`n [+]  Checking for Internet Explorer / Edge History File"
-$result = test-path -Path "C:\Users\$username\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat"
-if ($result -eq "True") {
-    "Internet Explorer/Microsoft Edge History file in C:\Users\$username\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat"
+"`n`n[+]  Checking for Internet Explorer / Edge History File"
+$IEHistoryfile = "C:\Users\$username\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat"
+if (test-path $IEHistoryfile) {
+	"Internet Explorer/Microsoft Edge History file in C:\Users\$username\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat"
+	$fileInfo = Get-Item $IEHistoryfile | Select-Object FullName, Length, CreationTime, LastWriteTime
+	$fileSizeMB = $IEHistoryfile.Length / 1MB
+	Write-Output "File path: $($fileInfo.FullName)"
+	Write-Output "File size: $fileSizeMB MB"
+	Write-Output "Creation date: $($fileInfo.CreationTime)"
+	Write-Output "Modification date: $($fileInfo.LastWriteTime)"
+	Write-Output "------------------------"
 }
 
 # Check for profile processes
