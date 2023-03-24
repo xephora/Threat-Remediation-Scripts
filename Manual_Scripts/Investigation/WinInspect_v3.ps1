@@ -133,12 +133,17 @@ foreach ($j in $sid_list) {
 
 # Chrome History File
 "`n`n [+]  Checking for Chrome History Files"
-$historylist = @(gci "C:\users\$username\AppData\Local\google\Chrome\User Data" -r -fi "history" | % { $_.FullName }); 
-foreach ($hfile in $historylist) {
-    $exists = test-path $hfile
-    if ($exists) { 
-        $hfile 
-    } 
+$historyFilePaths=@(gci "C:\users\$username\AppData\Local\google\Chrome\User Data" -r -fi "history" | % { $_.FullName }); 
+foreach ($filePath in $historyFilePaths) {
+	if (test-path $filepath) {
+      $fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
+      $fileSizeMB = $fileInfo.Length / 1MB
+      Write-Output "File path: $($fileInfo.FullName)"
+      Write-Output "File size: $fileSizeMB MB"
+      Write-Output "Creation date: $($fileInfo.CreationTime)"
+      Write-Output "Modification date: $($fileInfo.LastWriteTime)"
+      Write-Output "------------------------"
+    }
 }
 
 # Edge and IE History File
@@ -169,159 +174,23 @@ Get-WmiObject -Class Win32_logicaldisk -ErrorAction SilentlyContinue
 
 # Enumerating Chrome Extensions
 "`n`n [+] Checking for Chrome Extensions"
-$extensionlist = @{
-    "nmmhkkegccagdldgiimedpiccmgmieda" = "Google Wallet"
-    "efaidnbmnnnibpcajpcglclefindmkaj" = "Adobe Acrobat: PDF edit, convert, sign tools"
-    "ghbmnnjooekpmoecnnnilnnbdlolhkhi" = "Google Docs Offline"
-    "aapbdbdomjkkjkaonfhkkikfgjllcleb" = "Google Translate"
-    "jfbnmfgkohlfclfnplnlenbalpppohkm" = "Roblox+"
-    "bmnlcjabgnpnenekpadlanbbkooimhnj" = "Honey"
-    "cfhdojbkjhnklbpkdaibdccddilifddb" = "Adblock Plus - free ad blocker"
-    "lpcaedmchfhocbbapmcbpinfpgnhiddi" = "Google Keep"
-    "hdokiejnpimakedhajhdlcegeplioahd" = "LastPass: Free Password Manager"
-    "ifbmcpbgkhlpfcodhjhdbllhiaomkdej" = "Office - Enable Copy and Paste"
-    "mkaakpdehdafacodkgkpghoibnmamcme" = "Google Drawings"
-    "ecnphlgnajanjnkcmbpancdjoidceilk" = "Kami for Google Chrome"
-    "ndjpnladcallmjemlbaebfadecfhkepb" = "Microsoft 365"
-    "gpaiobkfhnonedkhhfjpmhdalgeoebfa" = "Microsoft Editor: Spelling & Grammar Checker"
-    "pbjikboenpfhbbejgkoklgkhjpfogcam" = "Amazon Assistant for Chrome"
-    "jkompbllimaoekaogchhkmkdogpkhojg" = "DS Amazon Quick View"
-    "lkpbokpjdbhikkdfjopoaiekpigepfjl" = "Minecraft Skins Search"
-    "nbkbaafmiooegfmjglgknmjipoijejmb" = "Minecraft New Tab"
-    "adbacgifemdbhdkfppmeilbgppmhaobf" = "RoPro - Enhance Your Roblox Experience"
-    "hbkpclpemjeibhioopcebchdmohaieln" = "BTRoblox - Making Roblox Better"
-    "lajchlhgfdaopdpingpkefbggcegkgla" = "Roblox Pro"
-    "kbfnbcaeplbcioakkpcpgfkobkghlhen" = "Grammarly: Grammar Checker and Writing App"
-    "jlhmfgmfgeifomenelglieieghnjghma" = "Cisco Webex"
-    "ifbdadgbpalmagalacllfaflfakmfkac" = "Cisco Webex Content Sharing"
-    "llllflgakifpdcmoanonghipldcpaggn" = "Webex Calling for Chrome"
-    "inomeogfingihgjfjlpeplalcfajhgai" = "Chrome Remote Desktop"
-    "dilkdnaihnkfembidikggnigimnbjcjn" = "NetSupport Manager Client"
-    "ahmpjcflkgiildlgicmcieglgoilbfdp" = "Free Download Manager"
-    "klmiibolojjndggdnjnjggmgimlcalch" = "Image Downloader - Bulk download images"
-    "gddbgllpilhpnjpkdbopahnpealaklle" = "video downloader - CocoCut"
-    "jmfikkaogpplgnfjmbjdpalkhclendgd" = "Save to Facebook"
-    "fdgfkebogiimcoedlicjlajpkdmockpc" = "Meta Pixel Helper"
-    "elicpjhcidhpjomhibiffojpinpmmpil" = "Video Downloader Professional"
-    "ohfgljdgelakfkefopgklcohadegdpjf" = "Smallpdf - Edit, Compress and Convert PDF"
-    "cifnddnffldieaamihfkhkdgnbhfmaci" = "Foxit PDF Creator"
-    "cmedhionkhpnakcndndgjdbohmhepckk" = "Adblock for Youtube"
-    "gebbhagfogifgggkldgodflihgfeippi" = "Return YouTube Dislike"
-    "lgjdgmdbfhobkdbcjnpnlmhnplnidkkp" = "Autoskip for Youtube"
-    "annfbnbieaamhaimclajlajpijgkdblo" = "Dark Theme for Google Chrome"
-    "bpconcjcammlapcogcnnelfmaeghhagj" = "Nimbus Screenshot & Screen Video Recorder"
-    "ejfmffkmeigkphomnpabpdabfddeadcb" = "Vimeo Record - Screen & Webcam Recorder"
-    "flmihfcdcgigpfcfjpdcniidbfnffdcf" = "Screence screen recorder"
-    "edlifbnjlicfpckhgjhflgkeeibhhcii" = "Screenshot Tool - capture & editor"
-    "gkojfkhlekighikafcpjkiklfbnlmeio" = "Hola VPN - The Website Unblocker"
-    "fcfhplploccackoneaefokcmbjfbkenj" = "Free VPN for Chrome by 1clickVPN"
-    "bihmplhobchoageeokmgbdihknkjbknd" = "Touch VPN - Secure and unlimited VPN proxy"
-    "hkampnclnabbnaeoeiipmmnimgfagpop" = "Speed VPN for PC"
-    "aefkjchbonkicckpiebkmalmccogopoc" = "Global VPN Theme"
-    "kgjfgplpablkjnlkjmjdecgdpfankdle" = "Zoom Scheduler"
-    "ajneghihjbebmnljfhlpdmjjpifeaokc" = "Zoom Plus"
-    "lajondecmobodlejlcjllhojikagldgd" = "Zoom for Google Chrome"
-    "bkdgflcldnnnapblkhphbgpggdiikppg" = "DuckDuckGo Privacy Essentials"
-    "keodbianoliadkoelloecbhllnpiocoi" = "Hide My IP VPN"
-    "bgnkhhnnamicmpeenaelnjfhikgbkllg" = "AdGuard AdBlocker"
-    "lklmhefoneonjalpjcnhaidnodopinib" = "Crystal Ad block"
-    "bkkbcggnhapdmkeljlodobbkopceiche" = "Pop up blocker for Chrome"
-    "jfhbealifiddpdbakoaogajmffjdonie" = "Ultimate Ad Blocker"
-    "nngceckbapebfimnlniiiahkandclblb" = "Bitwarden - Free Password Manager"
-    "caljgklbbfbcjjanaijlacgncafpegll" = "Avira Password Manager"
-    "fdpohaocaechififmbbbbbknoalclacl" = "GoFullPage - Full Page Screen Capture"
-    "liecbddmkiiihnedobmlmillhodjkdmb" = "Loom – Screen Recorder & Screen Capture"
-    "nlipoenfbbikpbjkfpfillcgkoblgpmj" = "Awesome Screenshot and Screen Recorder"
-    "cmfijaapnnkcglahdngmjnhkfnkihkbg" = "Affirm: Buy Now, Pay Later"
-    "liindccgkpdcafeceonflfdmkjhijapj" = "Zip buy now, pay later"
-    "mfidniedemcgceagapgdekdbmanojomk" = "Coupert - Automatic Coupon Finder & Cashback"
-    "eofcbnmajmjmplflapaojjnihcjkigck" = "Avast SafePrice | Comparison, deals, coupons"
-    "pnedebpjhiaidlbbhmogocmffpdolnek" = "CouponBirds - SmartCoupon Coupon Finder"
-    "npknlajilknlnfgeihkpdaaeonbdcnia" = "VK video saver - загрузчик видео из вконтакте"
-    "cnojnbdhbhnkbcieeekonklommdnndci" = "Search by Image"
-    "eekbbmglbfldjpgbmajenafphnfjonnc" = "TinySketch"
-    "jghecgabfgfdldnmbfkhmffcabddioke" = "Volume Master"
-    "gcoekeoenehjmndhkdnoomdjeaclkhbe" = "Nearpod for Classroom"
-    "oaobmlmjmhedmlphfdmdjpppjmcljnkp" = "Add to Google Classroom"
-    "ifkgpacemihiplnocjocpgmoiefcojik" = "Alice Keeler Classroom Split"
-    "mclkkofklkfljcocdinagocijmpgbhab" = "Google Input Tools"
-    "ipikiaejjblmdopojhpejjmbedhlibno" = "SwiftRead - read faster, learn more"
-    "mgijmajocgfcbeboacabfgobmjgjcoja" = "Google Dictionary (by Google)"
-    "pfinjbgedbminlmlocobhemokhjobhbi" = "FivData - Freelancer Assistant"
-    "njmehopjdpcckochcggncklnlmikcbnb" = "Helium 10"
-    "bcjindcccaagfpapjjmafapmmgkkhgoa" = "JSON Formatter"
-    "lmhkpmbekcpmknklioeibfkpmmfibljd" = "Redux DevTools"
-    "blipmdconlkpinefehnmjammfjpmpbjk" = "Lighthouse"
-    "ogdlpmhglpejoiomcodnpjnfgcpmgale" = "Custom Cursor for Chrome"
-    "iginnfkhmmfhlkagcmpgofnjhanpmklb" = "Boxel Rebound"
-    "fadndhdgpmmaapbmfcknlfgcflmmmieb" = "FrankerFaceZ"
-    "mefhakmgclhhfbdadeojlkbllmecialg" = "Tabby Cat"
-    "anflghppebdhjipndogapfagemgnlblh" = "Cute Cursors - Custom Cursor for Chrome"
-    "akimgimeeoiognljlfchpbkpfbmeapkh" = "Google Arts & Culture"
-    "ejgnolahdlcimijhloboakpjogbfdkkp" = "Meow, The Cat Pet"
-    "pjafcgbpdclmdeiipolenjgkikeldljl" = "Chrome Piano"
-    "laookkfknpbbblfpciffpaejjkokdgca" = "Momentum"
-    "pnjaodmkngahhkoihejjehlcdlnohgmp" = "RSS Feed Reader"
-    "ngeokhpbgoadbpdpnplcminbjhdecjeb" = "UV Weather"
-    "kfimphpokifbjgmjflanmfeppcjimgah" = "RSS Reader Extension (by Inoreader)"
-    "ippnbhhbamibfpljlfmgogaondodicgi" = "Current Moon Phase"
-    "kpkpmhddkhdnajjlkbkilakdobnfgopl" = "Techgenyz - Technology News, Daily Updates"
-    "ndhinffkekpekljifjkkkkkhopnjodja" = "Feedly Mini"
-    "oihdhfbfoagfkpcncinlbhfdgpegcigf" = "Image Size Info"
-    "hliiefogghiapfajokakaehafbdpokgh" = "Unsplash For Chrome"
-    "gefiaaeadjbmhjndnhedfccdjjlgjhho" = "Enhanced Image Viewer"
-    "lcpkicdemehhmkjolekhlglljnkggfcf" = "imgur Uploader"
-    "bhloflhklmhfpedakmangadcdofhnnoh" = "Earth View from Google Earth"
-    "nnjjahlikiabnchcpehcpkdeckfgnohf" = "Fatkun Batch Download Image"
-    "figkalbjanhcadgaeehekgbpecbchlek" = "PhotoPad Photo Editor Cloud Edition"
-    "hgmhmanijnjhaffoampdlllchpolkdnj" = "Hunter - Email Finder Extension"
-    "haebnnbpedcbhciplfhjjkbafijpncjl" = "TinEye Reverse Image Search"
-    "hkligngkgcpcolhcnkgccglchdafcnao" = "Web Archives"
-    "giihipjfimkajhlcilipnjeohabimjhi" = "SEO Minion"
-    "hhnjkanigjoiglnlopahbbjdbfhkndjk" = "Power Thesaurus"
-    "fpnmgdkabkmnadcjpehmlllkndpkmiak" = "Wayback Machine"
-    "cpodebcggidjigndghagpkepglfbhali" = "AliExpress Search By Image"
-    "chhjbpecpncaggjpdakmflnfcopglcmi" = "Rakuten: Get Cash Back For Shopping"
-    "hfapbcheiepjppjbnkphkmegjlipojba" = "Klarna | Shop now. Pay later."
-    "ghnomdcacenbmilgjigehppbamfndblo" = "The Camelizer"
-    "edjkecefjhobekadlkdkopkggdefpgfp" = "Smarty"
-    "gngocbkfmikdgphklgmmehbjjlfgdemm" = "SwagButton"
-    "jpdapbcmfllbpojmkefcikllfeoahglb" = "Slickdeals: Automatic Coupons and Deals"
-    "gpdjojdkbbmdfjfahjcgigfpmkopogic" = "Pinterest Save Button"
-    "lifbcibllhkdhoafpjfnlhfpfgnpldfl" = "Skype"
-    "bfgdeiadkckfbkeigkoncpdieiiefpig" = "Bitmoji"
-    "ipdjnhgkpapgippgcgkfcbpdpcgifncb" = "Emoji Keyboard by JoyPixels"
-    "cfidkbgamfhdgmedldkagjopnbobdmdn" = "Social Blade"
-    "andgibkjiikabclfdkecpmdkfanpdapf" = "GIPHY for Gmail"
-    "ndnaehgpjlnokgebbaldlmgkapkpjkkb" = "Email Tracker for Gmail, Mail Merge-Mailtrack"
-    "mfmkedeaebcckihpinmhkadoagdbifaa" = "Basketball Box Scores"
-    "pkejgpgaflkeonkliblcplomemekogop" = "GeoPrinter"
-    "adicaaffkmhgnfheifkjhopmambgfihl" = "FUTBIN"
-    "ijhlikjoigjegofbedmfmlcfkmhabldh" = "ESPNCricinfo"
-    "pfneigogocifpmjngcpbhfmjhbckjcao" = "Are You Watching This?!"
-    "dcdhimjnicocbcjhmfcjlooncidccanl" = "Replay It"
-    "mkindbniefmmhpmcelmkhcpaaieeddml" = "Click and Roll"
-    "oledoejmoabfeenmmacihejabhmbhdan" = "r/soccer goals"
-    "gojbdfnpnhogfdgjbigejoaolejmgdhk" = "OneNote Web Clipper"
-    "jdlkkmamiaikhfampledjnhhkbeifokk" = "PDF Viewer"
-    "cbcfbhjolgdaepkoaoepejclfggmdand" = "Word Bank"
-    "lkhfeoafdgbaecajkdbioenncjopbpmk" = "IPP / CUPS printing for Chrome & Chromebooks"
-    "pmaionhboofajejhmkheilkoifkmigfe" = "IPP/CUPS printing for G Suite admins"
-    "lbeamcaffnnnmepjmpggnegdbammbfgc" = "skedula"
-    "oocalimimngaihdkbihfgmpkcpnmlaoa" = "Netflix Party is now Teleparty"
-}
-
 if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default") {
     $defaultExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\default\extensions" -r -fi "manifest.json" | % { $_.FullName})
     foreach ($extension in $defaultExtensions) {
         if (test-path $extension) {
             foreach ($dprofile in $extension) {
-                "`nPath: $dprofile"
-                foreach ($key in $extensionlist.Keys) {
-                    $val = $extensionlist[$key]
-                    if ($dprofile -like "*$key*") {
-                        "Extension: $key -> $val"
-                    }
+                $extid =  (($dprofile -split '\\extensions')[1] -split '\\')[1]
+                $url = "https://chrome.google.com/webstore/detail/docs/"
+                $eurl = "$($url)$($extid)"
+                try {
+                    $res = Invoke-WebRequest $eurl -ErrorAction Ignore
+                    $content = $res.Content
+                    $srange = $content.IndexOf("<title>")+"<title>".Length
+                    $erange = $content.IndexOf("</title>")
+                    $title = $content.Substring($srange,$erange - $srange)
+                    "`nPath: $dprofile -> $title"
+                } catch {
+                    "`nPath: $dprofile ! Failed to detect!"
                 }
             }
         }
@@ -335,12 +204,18 @@ if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*
             "`n[+] chrome profile $profile on profile $username"
             $ProfilesExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\$profile\extensions" -r -fi "manifest.json" | % { $_.FullName})
             foreach ($cprofile in $ProfilesExtensions) {
-                "`nPath: $cprofile"
-                foreach ($key in $extensionlist.Keys) {
-                    $val = $extensionlist[$key]
-                    if ($cprofile -like "*$key*") {
-                        "Extension: $key -> $val"
-                    }
+                $extid =  (($cprofile -split '\\extensions')[1] -split '\\')[1]
+                $url = "https://chrome.google.com/webstore/detail/docs/"
+                $eurl = "$($url)$($extid)"
+                try {
+                    $res = Invoke-WebRequest $eurl -ErrorAction Ignore
+                    $content = $res.Content
+                    $srange = $content.IndexOf("<title>")+"<title>".Length
+                    $erange = $content.IndexOf("</title>")
+                    $title = $content.Substring($srange,$erange - $srange)
+                    "`nPath: $cprofile -> $title"
+                } catch {
+                    "`nPath: $cprofile ! Failed to detect!"
                 }
             }
         }
