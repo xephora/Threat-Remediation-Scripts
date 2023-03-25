@@ -1,7 +1,7 @@
 # investigate the following account below.  Please replace username with the target account.
 $username = "USERNAME"
 
-# File System - Startups X
+# File System - Startups
 "[+]  Checking Startup Locations"
 $folders = @(
     "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup",
@@ -110,7 +110,7 @@ if ($exists) {
     gci "C:\users\$username\AppData\Local\programs" -force -ErrorAction SilentlyContinue | % { $_.FullName}
 }
 
-# FileSystem Scheduled Tasks X
+# FileSystem Scheduled Tasks
 "`n`n [+]  Checking Scheduled Tasks"
 "C:\windows\system32\tasks\"
 gci "C:\windows\system32\tasks\" -force -ErrorAction SilentlyContinue | % { $_.FullName }
@@ -190,7 +190,7 @@ if (test-path $IEHistoryfile) {
 	Write-Output "------------------------"
 }
 
-# Check for profile processes X
+# Check for profile processes
 "`n`n [+] Checking Profile-based processes"
 Get-Process |
     Select-Object -Property Name, Id, Path |
@@ -200,7 +200,7 @@ Get-Process |
         ($_.Path -ilike "ProgramData*")
 }
 
-# Detect Browser Activity X
+# Detect Browser Activity
 "`n`n [+]  Browsers Detected"
 $browserNames = @("chrome", "iexplore", "msedge", "firefox")
 
@@ -214,7 +214,7 @@ foreach ($browser in $browserNames) {
     }
 }
 
-# Running Services X
+# Running Services
 "`n`n[+] Checking for running services"
 Get-Service | Where-Object { $_.Status -eq "Running" } | ForEach-Object {
     $serviceInfo = Get-WmiObject -Class Win32_Service -Filter "Name='$($_.Name)'"
@@ -227,7 +227,7 @@ Get-Service | Where-Object { $_.Status -eq "Running" } | ForEach-Object {
     }
 } | ConvertTo-Json
 
-# Enumerate Disk  X
+# Enumerate Disk
 "`n`n[+] Checking Disks"
 $logicalDisks = Get-WmiObject -Class Win32_LogicalDisk
 $cdromDrives = Get-WmiObject -Class Win32_CDROMDrive
