@@ -14,16 +14,17 @@ username="<USERNAME>" => username="admin"
 
 The Inspect script does not thoroughly investigate through the system.  The script is a light weight tool to quickly enumerate a host to identify suspicious activity.  You can use these as a starting point to assist you with your investigation.
 
-### Recent updates to WinInspect (01-11-2023)
-- Added checks for vhd files stored in downloads, documents and desktop
-- Added additional inspection paths "C:\program files\common files", "C:\program files (x86)\common files", "C:\users\profile\Appdata\Local\Programs", "C:\users\public", "C:\users\public\desktop".
-- Enumerate of virtual disk image.
-- Optimized existing code.
-- Enumerate Windows Defender logs.  
-x Enumerate Chrome Extensions. (Testing Phase) If you experience any issues with this feature, feel free to report as an issue. (Removed 01-20-2023 (Noisy feature)
-
 ### Recent Updates to WinInspect (02-16-2023)
 - Added enumeration of Chrome Extensions back into the script.  The script will also attempt to lookup the extension and name it appropriately.
+
+### Recent Major Updates to WinInspect_v4 (03-25-2023)
+- Shortcut enumeration now displays relative paths for enhanced navigation and comprehension.
+- Optimization of Documents, Desktop, and Downloads enumeration: empty folders are no longer displayed.
+- Scheduled task enumeration now extracts TaskName, Author (Username), UserId (SID), Commandline, and Arguments from deserialized XML objects.
+- Efficiency improvements in profile-based process enumeration.
+- Enhanced optimization of Browser processes
+- Significant optimization of service enumeration, with full binary paths provided
+- Disk enumeration now includes both logical disks and image disks (mounted ISOs), offering complete paths when available.
 
 ## ScanDLL
 
