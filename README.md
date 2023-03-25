@@ -14,7 +14,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 
 ### Manual Cloud Scripts
 
-- [WinInspect](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/WinInspect_v3.ps1) - WinInspect is a light-weight tool to assist an analyst with providing more visibility into a Windows system based on a target username.
+- [WinInspect](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/WinInspect_v4.ps1) - WinInspect is a light-weight tool to assist an analyst with providing more visibility into a Windows system based on a target username.
 - [MACInspect](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/MACInspect.sh) - MACInspect is a light-weight tool to assist an analyst with providing more visibility into a MAC system based on a target username.
 - [LinInspect](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/LinInspect.sh) - LinInspect is a light-weight tool to assist an analyst with providing more visibility into a Linux system based on a target username.
 - [EnumChromeExt](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/Win-EnumChromeExt_v2.ps1) - EnumChromeExt retrieves Chrome Extensions and automatically attempts to detect the name.
