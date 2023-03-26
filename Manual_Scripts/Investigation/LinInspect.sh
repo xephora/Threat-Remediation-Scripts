@@ -46,7 +46,7 @@ ls -la /etc/cron.monthly/ 2>/dev/null
 echo "/var/spool/cron/crontabs/"
 ls -la /var/spool/cron/crontabs/ 2>/dev/null
 
-echo "[+] Removable media
+echo "[+] Removable media"
 
 echo "/media/ -> removable media"
 ls -la /media/ 2>/dev/null
@@ -74,6 +74,7 @@ for username in $user_dirs; do
     echo "---------------------------------------------"
 done
 
+
 echo "[+] Checking mounts"
 mount
 
@@ -94,5 +95,3 @@ systemctl list-units --type=service --state=active
 
 echo "[+] Checking for users on system"
 cat /etc/passwd
-echo -e "\n${RED}[+] Enumerating passwd file: ${NC}\n"
-cat /etc/passwd 2>/dev/null | grep "/bin/bash\|/bin/sh"
