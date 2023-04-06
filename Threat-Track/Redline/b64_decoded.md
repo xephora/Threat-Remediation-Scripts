@@ -1,4 +1,4 @@
-### Observed redline 04-04
+### Observed redline 04-04-2023
 
 Obfuscated PowerShell command
 
