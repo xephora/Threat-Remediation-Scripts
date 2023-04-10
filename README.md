@@ -57,6 +57,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [PCAppStore](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCAppStore)
 - [PCHelpSoftDriverUpdater](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCHelpSoftDriverUpdater)
 - [PC_Cleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PC_Cleaner)
+- [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
 - [SlimCleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/SlimCleaner)
 - [Strength](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Strength)
