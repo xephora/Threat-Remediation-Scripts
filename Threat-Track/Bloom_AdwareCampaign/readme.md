@@ -319,6 +319,17 @@ a4b7529261d0afb2b660153241e950efdc3b5210db6d86b3bec67f4efba3e2e9
 c0e25b1f9b22de445298c1e96ddfcead265ca030fa6626f61a4a4786cc4a3b7d
 ```
 
-### I scraped some of the content of the extension out of the binary using a tool called binwalk.
+### Observed activities from March throuh April of 2023
+```
+________.exe
+3c03fed6b2e374d6d4d3d8a0606a390fc010974d6d3b75be52a84663e4ba9a35
 
-https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Threat-Track/Bloom_AdwareCampaign/scraped_energy.exe
+Editor.exe
+b79f3f48bd97b1a4b957642a78af1d4515689825fd6ed9b57dc49040d72c0431
+
+player.exe
+4906524473eb3f7b530d4993906f4418141aba025dced23a4f541ddd110769ec
+
+music.exe
+c1f125a51973d0fd9f8257da722e17cd82723523ce3157931e52d8dfcec12bb9
+```
