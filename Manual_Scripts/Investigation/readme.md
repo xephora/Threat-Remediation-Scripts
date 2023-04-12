@@ -65,3 +65,7 @@ $ip = "ENTERIPHERE"
 
 Example: $ip = "192.168.1.125"
 ```
+
+# ScreenConnect-C2Extractor
+
+Quick tool to locate and extract C2 from a ScreenConnect `user.config` configuration file.  Ensure to change the value of `$username` to the target username.
