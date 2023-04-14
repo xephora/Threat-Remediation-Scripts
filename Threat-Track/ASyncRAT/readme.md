@@ -7,10 +7,24 @@ Archive: Report_4060485.zip
 
 vbs script: Report_4060485.vbs
 Hash: 76cafbbe9b09b4e92e1f075a4268e50453e1e0ea32e1156be47283f8cba7fe0e
+https://www.virustotal.com/gui/file/76cafbbe9b09b4e92e1f075a4268e50453e1e0ea32e1156be47283f8cba7fe0e
 
 dropper url: https[:]//makkahmart[.]org/.Final.txt
 powershell script: .Final.txt
 Hash: 054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a
+https://www.virustotal.com/gui/file/054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a
+
+File:.D1
+Hash:102dd336f8be1d68a34a389851cd0454d6bdf4d93911ba330e48029dd5c520e8
+https://www.virustotal.com/gui/file/102dd336f8be1d68a34a389851cd0454d6bdf4d93911ba330e48029dd5c520e8
+
+File:.N1
+Hash:26a1abd33730daf8a2ff101f5304c373d0717aa965f8b423b5edc17246f036e8
+https://www.virustotal.com/gui/file/26a1abd33730daf8a2ff101f5304c373d0717aa965f8b423b5edc17246f036e8
+
+File:.M1
+Hash:658155512b489b14bcbf4fbb97fa27d9868f01ae04d3e48f13d641c7fae39b2d
+https://www.virustotal.com/gui/file/658155512b489b14bcbf4fbb97fa27d9868f01ae04d3e48f13d641c7fae39b2d
 
 payload1.dll
 Hash: 92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e
