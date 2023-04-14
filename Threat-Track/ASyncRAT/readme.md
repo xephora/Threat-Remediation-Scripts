@@ -1,6 +1,30 @@
 # ASync RAT Observed IOCs
 
 ```
+Occurence: 04-13-2023
+
+Archive: Report_4060485.zip
+
+vbs script: Report_4060485.vbs
+Hash: 76cafbbe9b09b4e92e1f075a4268e50453e1e0ea32e1156be47283f8cba7fe0e
+
+dropper url: https[:]//makkahmart[.]org/.Final.txt
+powershell script: .Final.txt
+Hash: 054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a
+
+payload1.dll
+92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e
+https://www.virustotal.com/gui/file/92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e?nocache=1
+
+payload2.dll
+e22683de5510cbc523e79448c8695ae6c07e03b6548acbd8960ce243282594c0
+https://www.virustotal.com/gui/file/e22683de5510cbc523e79448c8695ae6c07e03b6548acbd8960ce243282594c0?nocache=1
+https://www.unpac.me/results/b7395555-f6c1-4bb8-9f67-096a7c8a2ea8
+
+C2: wbem.ddns.net:6666 
+```
+
+```
 Occurence: 05-19-2022
 
 iso: PSHFUUZ10101.iso
