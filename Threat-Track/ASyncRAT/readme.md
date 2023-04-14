@@ -13,11 +13,11 @@ powershell script: .Final.txt
 Hash: 054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a
 
 payload1.dll
-92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e
+Hash: 92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e
 https://www.virustotal.com/gui/file/92c19d73d55bfd852d39a81ed471f48f6fb0fb4619022ab2e6853ebaecd85b8e?nocache=1
 
 payload2.dll
-e22683de5510cbc523e79448c8695ae6c07e03b6548acbd8960ce243282594c0
+Hash: e22683de5510cbc523e79448c8695ae6c07e03b6548acbd8960ce243282594c0
 https://www.virustotal.com/gui/file/e22683de5510cbc523e79448c8695ae6c07e03b6548acbd8960ce243282594c0?nocache=1
 https://www.unpac.me/results/b7395555-f6c1-4bb8-9f67-096a7c8a2ea8
 
