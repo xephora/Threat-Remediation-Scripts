@@ -1,6 +1,46 @@
 # ASync RAT Observed IOCs
 
 ```
+Occurence: 05-04-2023
+
+Archive: Confirmation_188843.zip
+Hash: 5deb8c21c15aa3ef2d65c0f10115264b2239d41ff654d35858c4da7ad03488db
+https://www.virustotal.com/gui/file/5deb8c21c15aa3ef2d65c0f10115264b2239d41ff654d35858c4da7ad03488db
+
+vbs script: Confirmation_188843.vbs
+Hash: 4cc3dc04d2546a3b18d3e9447fb27bde8d4b469e171bb98723b4572c3ddb077f
+https://www.virustotal.com/gui/file/4cc3dc04d2546a3b18d3e9447fb27bde8d4b469e171bb98723b4572c3ddb077f
+
+dropper url: https[:]//invitadoscarlsjr[.]mx/.Final.txt
+ps script: .Final.txt
+Hash: 25602fcedc578641e99eb96b67920bab6221be5e943fab2b55be16ae9e38e9f5
+https://www.virustotal.com/gui/file/25602fcedc578641e99eb96b67920bab6221be5e943fab2b55be16ae9e38e9f5
+
+dropped2: https[:]//invitadoscarlsjr[.]mx/.POP/.A.jpg
+ps script: .A.jpg
+Hash: ad2d9acbedafbab48db73b94a4274784df7c51fb015beefbf34a64504f791dc3
+https://www.virustotal.com/gui/file/ad2d9acbedafbab48db73b94a4274784df7c51fb015beefbf34a64504f791dc3
+
+dropped 3: https[:]//invitadoscarlsjr[.]mx/.POP/.B.jpg
+ps script: .B.jpg
+https://www.virustotal.com/gui/file/df3d882332ccedd588c8bd095b4693cffb9d1a3b8359e6f005e16a9ebdce16aa
+
+dropped 4: https[:]//invitadoscarlsjr[.]mx/.POP/.C.jpg
+ps script: .C.jpg
+https://www.virustotal.com/gui/file/296389b0339e15e62f5790d00ed58c9da8dd7ed8d8ac817667295e5306db30da
+
+payload1: stub.exe
+817c463f2b2d6ad916bd11bdc8e81e232b443d333cb02a3943d28f11d206ccc3
+https://www.virustotal.com/gui/file/817c463f2b2d6ad916bd11bdc8e81e232b443d333cb02a3943d28f11d206ccc3
+
+payload2: NewPE2.dll
+eabff018c3ebb3ac47878699565cf1efcbd66db0788914c5a5f7e4b8d0b3251b
+https://www.virustotal.com/gui/file/eabff018c3ebb3ac47878699565cf1efcbd66db0788914c5a5f7e4b8d0b3251b
+
+C2: 1dog.ddns[.]net:6606 
+```
+
+```
 Occurence: 04-13-2023
 
 Archive: Report_4060485.zip
