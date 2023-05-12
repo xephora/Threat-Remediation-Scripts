@@ -333,3 +333,13 @@ player.exe
 music.exe
 c1f125a51973d0fd9f8257da722e17cd82723523ce3157931e52d8dfcec12bb9
 ```
+
+### Observed hashes for framework
+
+```
+Your File Is Ready To Download.exe
+37eb3b07e44ea70dcfb7c7bd274691bd0366c04815f12d267d7f210adf48a1e7
+
+Written: Framework.exe
+1becc3d19333e9d8d212477bba8b6680906b1758ac52e98159c72895b480805a
+```
