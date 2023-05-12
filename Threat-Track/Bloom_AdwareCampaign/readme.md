@@ -319,7 +319,7 @@ a4b7529261d0afb2b660153241e950efdc3b5210db6d86b3bec67f4efba3e2e9
 c0e25b1f9b22de445298c1e96ddfcead265ca030fa6626f61a4a4786cc4a3b7d
 ```
 
-### Observed activities from March throuh April of 2023
+### Observed hashes from March throuh April of 2023
 ```
 ________.exe
 3c03fed6b2e374d6d4d3d8a0606a390fc010974d6d3b75be52a84663e4ba9a35
@@ -334,7 +334,7 @@ music.exe
 c1f125a51973d0fd9f8257da722e17cd82723523ce3157931e52d8dfcec12bb9
 ```
 
-### Observed hashes for framework
+### Observed hashes for framework April through May of 2023
 
 ```
 Your File Is Ready To Download.exe
