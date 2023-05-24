@@ -49,6 +49,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Editor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Editor)
 - [ElevenClock](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ElevenClock)
 - [Energy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Energy)
+- [Framework](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Framework)
 - [Gallery](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Gallery)
 - [GameCenter](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/GameCenter)
 - [Healthy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Healthy)
