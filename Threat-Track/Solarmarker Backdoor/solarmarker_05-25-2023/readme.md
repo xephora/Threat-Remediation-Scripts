@@ -1,11 +1,11 @@
 ### Occurrence
 
-05-23-2023
+05-23-2023  
 
 ### File Information
-File: Nyc-Sanitation-Study-Guide.exe
-Hash: af1f2b516ede83cf2699ba54113ce7a7d81d17040588746a19a1fa2ea41175d6
-Dynamic Analysis: https://tria.ge/230522-q6gbgagg86/behavioral2
+File: Nyc-Sanitation-Study-Guide.exe  
+Hash: af1f2b516ede83cf2699ba54113ce7a7d81d17040588746a19a1fa2ea41175d6  
+Dynamic Analysis: https://tria.ge/230522-q6gbgagg86/behavioral2  
 
 ### Registry containing decryption method
 
@@ -37,6 +37,6 @@ $aes.Dispose();
 ```
 
 ### C2 Payload
-Hash: ad88175040eec9c218961930a7a1fd7b5fcb831adbd6dbedde9c741dcdba8398
-C2: `http://23.29.115.186/`
-VT: https://www.virustotal.com/gui/file/ad88175040eec9c218961930a7a1fd7b5fcb831adbd6dbedde9c741dcdba8398/detection
+Hash: ad88175040eec9c218961930a7a1fd7b5fcb831adbd6dbedde9c741dcdba8398  
+C2: `http://23.29.115.186/`  
+VT: https://www.virustotal.com/gui/file/ad88175040eec9c218961930a7a1fd7b5fcb831adbd6dbedde9c741dcdba8398/detection  
