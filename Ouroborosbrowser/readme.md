@@ -4,6 +4,7 @@
 - Terminates processes associated with Ouroborosbrowser Unwanted Software
 - Remove Ouroborosbrowser Unwanted Software from the file system.
 - Remove Ouroborosbrowser Unwanted Software registry keys.
+- Remove Ouroborosbrowser Installation packages
 - Performs checks to ensure removal was completed and lets you know if it wasn't successful.
 
 ### Description
