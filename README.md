@@ -57,6 +57,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [LiteBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/LiteBrowser)
 - [Music](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Music)
 - [OneLaunch](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/OneLaunch)
+- [Ouroborosbrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Ouroborosbrowser)
 - [PCAcceleratePro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCAcceleratePro)
 - [PCAppStore](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCAppStore)
 - [PCHelpSoftDriverUpdater](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCHelpSoftDriverUpdater)
