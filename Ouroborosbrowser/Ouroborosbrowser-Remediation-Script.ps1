@@ -1,7 +1,7 @@
 Get-Process Ouroborosbrowser -ErrorAction SilentlyContinue | Stop-Process -Force
 sleep 2
 
-$files=gci C:\users\Egermosen -r -fi "*Ouroborosbrowser*exe" | % { $_.FullName }
+$files=gci C:\users\$i -r -fi "*Ouroborosbrowser*exe" | % { $_.FullName }
 foreach ($file in $files) {
 	$check=test-path $file
 	if ($check) {
