@@ -9,3 +9,7 @@
 ### Description
 
 I have created a script to remediate Ouroborosbrowser Unwanted Software.
+
+### Dynamic Analysis
+
+https://app.any.run/tasks/95437979-5b27-4b52-9c00-afd985462ec0/
