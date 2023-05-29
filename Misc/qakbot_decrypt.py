@@ -1,5 +1,5 @@
 """
-After reading Cisco Talos's analysis on the 2016 Qakbot analysis, I realize their link to download the Qakbot script was no longer accessible and tailored for Python 2.  They provided a screenshot of the code, so I re-coded the script made it Python 3 friendly.
+After reading Cisco Talos's analysis on the 2016 Qakbot analysis, I realize their link to download the Qakbot script was no longer accessible and tailored for Python 2.  They provided a screenshot of the code, so I re-coded the script made it Python 3 friendly. 
 
 Resouce: https://blog.talosintelligence.com/2016/04/qbot-on-the-rise.html
 
