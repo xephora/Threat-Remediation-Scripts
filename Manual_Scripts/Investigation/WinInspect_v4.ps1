@@ -163,16 +163,19 @@ foreach ($j in $sid_list) {
 }
 
 "`n`n[+] Chrome History files"
-$historyFilePaths=@(gci "C:\users\$username\AppData\Local\google\Chrome\User Data" -r -fi "history" | % { $_.FullName }); 
-foreach ($filePath in $historyFilePaths) {
-	if (test-path $filepath) {
-      $fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
-      $fileSizeMB = $fileInfo.Length / 1MB
-      Write-Output "File path: $($fileInfo.FullName)"
-      Write-Output "File size: $fileSizeMB MB"
-      Write-Output "Creation date: $($fileInfo.CreationTime)"
-      Write-Output "Modification date: $($fileInfo.LastWriteTime)"
-      Write-Output "------------------------"
+$exists=test-path "C:\users\$username\AppData\Local\google\Chrome\User Data"
+if ($exists) {
+    $historyFilePaths=@(gci "C:\users\$username\AppData\Local\google\Chrome\User Data" -r -fi "history" | % { $_.FullName }); 
+    foreach ($filePath in $historyFilePaths) {
+        if (test-path $filepath) {
+        $fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
+        $fileSizeMB = $fileInfo.Length / 1MB
+        Write-Output "File path: $($fileInfo.FullName)"
+        Write-Output "File size: $fileSizeMB MB"
+        Write-Output "Creation date: $($fileInfo.CreationTime)"
+        Write-Output "Modification date: $($fileInfo.LastWriteTime)"
+        Write-Output "------------------------"
+        }
     }
 }
 
