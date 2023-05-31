@@ -14,9 +14,6 @@ username="<USERNAME>" => username="admin"
 
 The Inspect script does not thoroughly investigate through the system.  The script is a light weight tool to quickly enumerate a host to identify suspicious activity.  You can use these as a starting point to assist you with your investigation.
 
-### Recent Updates to WinInspect (02-16-2023)
-- Added enumeration of Chrome Extensions back into the script.  The script will also attempt to lookup the extension and name it appropriately.
-
 ### Recent Major Updates to WinInspect_v4 (03-25-2023)
 - Shortcut enumeration now displays relative paths for enhanced navigation and comprehension.
 - Optimization of Documents, Desktop, and Downloads enumeration: empty folders are no longer displayed.
@@ -25,6 +22,10 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Enhanced optimization of Browser processes
 - Significant optimization of service enumeration, with full binary paths provided
 - Disk enumeration now includes both logical disks and image disks (mounted ISOs), offering complete paths when available.
+
+### Update to WinInspect_v4 (05-31-2023)
+- For computers that do not have chrome installed, the WinInspect was breaking when enumerating history files.  I added a check if the chrome directory exists.  Small QoL imporvement.
+- WinInspect_v3 will be decommissioned.
 
 ## ScanDLL
 
