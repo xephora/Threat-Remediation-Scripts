@@ -46,6 +46,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
+- [DriverTonic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverTonic)
 - [Editor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Editor)
 - [ElevenClock](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ElevenClock)
 - [Energy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Energy)
