@@ -4,7 +4,7 @@ First Observed: June 09, 2023
 
 ### Description
 
-A victim, visits a domain that serves malvertisements. These advertisements redirect the user to the distribution domain `trk.version2trk[.]xyz`. Once on this domain, the user is either lured into clicking a "Free Download" button or compelled to download an installation package called "Version2.exe". Initially, this package appears to be a benign version of Thunderbird. The installation of Thunderbird results in the NetSupportRAT being embedded into the host, which then connects back to the command and control server at `168.100.11[.]196:443`.
+A victim, visits a domain that serves malvertisements. These advertisements redirect the user to the distribution domain `trk.version2trk[.]xyz`. Once on this domain, the user is either lured into clicking a "Free Download" button or compelled to download an installation package called "Version2.exe". Initially, this package appears to be a benign version of Thunderbird. The installation of Thunderbird results in the impanting of NetSupportRAT, which then connects back to the command and control server at `168.100.11[.]196:443`.
 
 ### Dynamic Analysis
 
