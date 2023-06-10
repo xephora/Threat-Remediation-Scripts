@@ -16,6 +16,15 @@ https://tria.ge/230609-t7arvscf67/behavioral2
 ```
 http://trk.version2trk[.]xyz/usaweb33
 http://trk.version2trk[.]xyz/usamav2/
+http://trk.canadiantrk[.]site/usaweb33/
+http://trk.canadiantrk[.]site/usamav2
+```
+
+### Impersonated software
+
+```
+Thunderbird
+transmission-qt (bittorrent client)
 ```
 
 ### Observed version2.exe hashes observed
@@ -37,6 +46,7 @@ http://trk.version2trk[.]xyz/usamav2/
 d2605f477748bbadeb7e598d7220d693f02282937a48e3d451a4430c6a33ea83
 e175cbc09f8d753ea75d912f3aa2b6777387c1b6bafa06a72b98ed45b8b43987
 f7ab7804a864cba3f8c16150053b4aad2174690095ab3796a99e5a498b7da64b
+dfd2d087d21a050665dee54a81a24a334852781de7dfadee885b7c7958193a7c
 ```
 
 ### Observed signers used
@@ -96,5 +106,6 @@ Serial Number	00 F9 9A B9 FC DF 58 E1 77 18 27 FC 26 FD B6 2B 62
 ### Net Support C2
 
 ```
-http://168.100.11[.]196:443/
+168.100.11.196
+206.166.251.123
 ```
