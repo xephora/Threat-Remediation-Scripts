@@ -11,6 +11,11 @@ A victim, visits a domain that serves malvertisements. These advertisements redi
 https://app.any.run/tasks/8d094aed-c8ea-4e76-81ff-3d6cde178ffc  
 https://tria.ge/230609-t7arvscf67/behavioral2  
 
+### Observed sites with malvertisement related to this threat
+```
+https[:]//ww8.0123movie[.]net
+```
+
 ### Distribution Domains observed
 
 ```
@@ -18,6 +23,9 @@ http://trk.version2trk[.]xyz/usaweb33
 http://trk.version2trk[.]xyz/usamav2/
 http://trk.canadiantrk[.]site/usaweb33/
 http://trk.canadiantrk[.]site/usamav2
+http://trk.thegreatversion.com/2us/
+http://trk.thegreatversion.com/3us/
+https://cdn.discordapp.com/attachments/1118268794960347249/1118280979526733845/Ver2.exe
 ```
 
 ### Impersonated software
