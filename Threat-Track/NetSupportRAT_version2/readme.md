@@ -13,7 +13,7 @@ https://tria.ge/230609-t7arvscf67/behavioral2
 
 ### Observed sites with malvertisement related to this threat
 ```
-https[:]//ww8.0123movie[.]net
+https://ww8.0123movie.net
 ```
 
 ### Distribution Domains observed
