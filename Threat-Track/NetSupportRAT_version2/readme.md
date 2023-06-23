@@ -11,7 +11,7 @@ A victim, visits a domain that serves malvertisements. These advertisements redi
 https://app.any.run/tasks/8d094aed-c8ea-4e76-81ff-3d6cde178ffc  
 https://tria.ge/230609-t7arvscf67/behavioral2  
 
-### Observed sites with malvertisement related to this threat
+### Observe sites with malvertisement related to this threat
 ```
 https://ww8.0123movie.net
 ```
