@@ -76,6 +76,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Wellness](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Wellness)
 - [XMRig](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/XMRig)
 - [flbmusic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/flbmusic)
+- [leading](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/leading)
 - [streamlink-twitch-gui](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streamlink-twitch-gui)
 
 > Do you find my work helpful and want to show your support? Feel free to add me on [Twitter](https://twitter.com/x3ph1).
