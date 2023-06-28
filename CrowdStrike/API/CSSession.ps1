@@ -8,9 +8,9 @@ Request-FalconToken -ClientId EnterClientIDHere -ClientSecret EnterClientSecretH
 function help {
     "
     [!] Usage:
-    .\CSSession.ps1 Hostname
-    .\CSSession.ps1 help (Usage Example)
-    .\CSSession.ps1 install (Installs PSFalcon Module)
+    .\CSSession.ps1 Hostname   (Connects to a host using Real-Time-Response via API)
+    .\CSSession.ps1 help       (Usage Example)
+    .\CSSession.ps1 install    (Installs PSFalcon Module)
     "
 }
 if ($hostname -eq "help") {
@@ -35,17 +35,17 @@ Class CSSession {
         DO 
         {
             $rtrcommand = Read-Host "Type Command:>  "
-            $detectOPT = $rtrcommand.split(" ")
-            $cmd = @("ps","ls","cp","encrypt","get","kill","map","memdump","mkdir","mv","reg query","reg delete","reg load","reg set","reg unload","restart","rm","shutdown","umount","unmap","update history","update install","update list","update install","xmemdump","zip", "cat","ipconfig","ifconfig")        
-
-            foreach ($i in $cmd) {
-                if ($detectOPT[0] -eq $i) {
-                    $cmdNarg = $rtrcommand.replace("${i} ", "${i}??").split("??")
-                    $result = Invoke-FalconRTR -Command "$($cmdNarg[0])" -Arguments "$($cmdNarg[2])" -HostIds $($host_id.device_id) -QueueOffline $true
+            if ($rtrcommand -eq "exit") {exit}
+            $cmds = @("ps","ls","cp","encrypt","get","kill","map","memdump","mkdir","mv","reg query","reg delete","reg load","reg set","reg unload","restart","rm","shutdown","umount","unmap","update history","update install","update list","update install","xmemdump","zip", "cat","ipconfig","ifconfig")
+            $match = [RegEx]::Match($rtrcommand, "^(reg query|reg delete|reg load|reg set|reg unload|update history|update install|update list|update install|\w+)\s*(.*)")
+            $command = $match.Groups[1].Value
+            $arguments = $match.Groups[2].Value.Trim()
+            foreach ($cmd in $cmds) {
+                if ($command -eq $cmd) {
+                    $result = Invoke-FalconRTR -Command "$cmd" -Arguments "$arguments" -HostIds $($host_id.device_id) -QueueOffline $true
                     write-host $result
                 }
             }
-            if ($rtrcommand -eq "exit") {exit}
         } While ($a -le $max)}
 }
 
