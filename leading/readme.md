@@ -9,3 +9,7 @@
 ### Description
 
 I created an automated script to remove leading Adware. This remediation script can be run with or without Crowdstrike.
+
+### Updates
+
+- 06-27-2023 Updated and optimized code.
