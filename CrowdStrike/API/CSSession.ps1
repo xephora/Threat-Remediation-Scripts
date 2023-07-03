@@ -3,7 +3,7 @@ param (
     [string] $hostname
 )
 Import-Module -Name psfalcon
-Request-FalconToken -ClientId EnterClientIDHere -ClientSecret EnterClientSecretHere
+Request-FalconToken -ClientId <CID> -ClientSecret <SECRET>
 
 function help {
     "
