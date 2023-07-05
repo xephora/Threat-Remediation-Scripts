@@ -23,3 +23,10 @@ The following paths, registry keys, tasks, shortcuts were added to the remediati
 - shortcut `OneLaunchChromium.lnk` will be removed from users startup folder.
 - Tasks `ChromiumStartupProxy` and `OneLaunchUpdateTask` will be removed from both Filesystem and Registry Hive
 - Startup Key `OneLaunchChromium` will be removed from the registry hive.
+
+### Updates 07-05-2023
+
+The following shortcuts were added to the remediation script.
+
+- shortcut `OneLaunchUpdater.lnk` will be removed from the startup folder
+- shortcut `OneLaunch.lnk` will be removed from the user's desktop.
