@@ -31,7 +31,7 @@ Class CSSession {
         $host_id = Get-FalconHost -Detailed -Filter "hostname:'$($this.hostname)'" | Select-Object device_id
         $a = 0
         $max = 100
-
+        if (!$host_id){ Write-Host "[!] Failed to retrieve host id. Host likely doesn't exist in CrowdStrike."; return }
         DO 
         {
             $rtrcommand = Read-Host "Type Command:>  "
