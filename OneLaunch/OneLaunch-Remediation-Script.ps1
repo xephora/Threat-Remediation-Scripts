@@ -3,6 +3,7 @@ Get-Process onelaunchtray -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-Process chromium -ErrorAction SilentlyContinue | Stop-Process -Force
 sleep 2
 
+
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 foreach ($i in $user_list) {
     $installers = @(gci C:\users\$i -r -fi "OneLaunch*.exe" | % {$_.FullName})
@@ -25,6 +26,18 @@ foreach ($i in $user_list) {
         rm "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchChromium.lnk" -ErrorAction SilentlyContinue
         if (test-path -Path "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchChromium.lnk") {
             "Failed to remove OneLaunch -> C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchChromium.lnk"
+        }
+    }
+    if (test-path -Path "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchUpdater.lnk") {
+        rm "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchUpdater.lnk" -ErrorAction SilentlyContinue
+        if (test-path -Path "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchUpdater.lnk") {
+            "Failed to remove OneLaunch -> C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\OneLaunchUpdater.lnk"
+        }
+    }
+    if (test-path -Path "C:\Users\$i\desktop\OneLaunch.lnk") {
+        rm "C:\Users\$i\desktop\OneLaunch.lnk" -ErrorAction SilentlyContinue
+        if (test-path -Path "C:\Users\$i\desktop\OneLaunch.lnk") {
+            "Failed to remove OneLaunch -> C:\Users\$i\desktop\OneLaunch.lnk"
         }
     }
     if (test-path -Path "C:\Users\$i\appdata\local\OneLaunch") {
