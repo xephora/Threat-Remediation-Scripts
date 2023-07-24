@@ -36,7 +36,7 @@ Class CSSession {
         {
             $rtrcommand = Read-Host "Type Command:>  "
             if ($rtrcommand -eq "exit") {exit}
-            $cmds = @("ps","ls","cp","encrypt","get","kill","map","memdump","mkdir","mv","reg query","reg delete","reg load","reg set","reg unload","restart","rm","shutdown","umount","unmap","update history","update install","update list","update install","xmemdump","zip", "cat","ipconfig","ifconfig")
+            $cmds = @("ps","ls","cp","encrypt","get","kill","map","memdump","mkdir","mv","reg query","reg delete","reg load","reg set","reg unload","restart","rm","shutdown","umount","unmap","update history","update install","update list","update install","xmemdump","zip", "cat","ipconfig","ifconfig","filehash")
             $match = [RegEx]::Match($rtrcommand, "^(reg query|reg delete|reg load|reg set|reg unload|update history|update install|update list|update install|\w+)\s*(.*)")
             $command = $match.Groups[1].Value
             $arguments = $match.Groups[2].Value.Trim()
