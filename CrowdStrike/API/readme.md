@@ -41,3 +41,4 @@ armsvc                   4628 11/9/2022 1:06:12 AM              7,296     0.19  
 
 - Updated and optimized code for CSSession.
 - Handled hosts with null host ids.
+- Added filehash as a command
