@@ -128,4 +128,7 @@ https://developer.chrome.com/docs/extensions/reference/omnibox/
 67.205.161.198/3003/win08rhmeer087/index.html
 147.182.133.150/3003/win08rhmeer087/index.html
 138.197.147.68/3003/win08rhmeer087/index.html
+46.101.19.126/windows/Win08AmpMeEr0887/index.html
+165.232.96.216/windows/Win08AmpMeEr0887/index.html
+206.189.19.51/windows/Win08AmpMeEr0887/index.html
 ```
