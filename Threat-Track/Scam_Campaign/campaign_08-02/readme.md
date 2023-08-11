@@ -1,6 +1,6 @@
 ## Observations
 
-At the beginning of August 2nd, 2023, I observed a series of browser hijacking websites with similar patterns.  All of these websites were part of Digital Ocean and use similar endpoints with slight variations.  The threat actors route these websites using Google Ad Services through a chain of redirects.  Google Tag Manager and Chrome Omnibox contributes as well.  Omni using Google Ad Services and Google Tag Manager via Tags.  All of these websites lock the browser, prompt an alert, forcing the victim to call a phone number, which leads to unauthorized access using RMM Tools such as AnyDesk/TeamViewer/ConnectWise and resulting in theft of money.
+On August 2nd, 2023, I observed a series of browser-hijacking websites exhibiting similar patterns. All these websites were hosted on Digital Ocean and utilized similar endpoints, with slight variations. The threat actors routed these websites using Google Ad Services via a series of redirects. Both Google Tag Manager and the Chrome Omnibox also played a role. Chrome Omnibox interfaced with Google Ad Services and Google Tag Manager using tags. Each of these malicious websites would lock the browser and prompt an alert, forcing the victim to call a "support" phone number. Once engaged, unauthorized access was gained using RMM tools like AnyDesk, TeamViewer, or ConnectWise, often resulting in the theft of money.
 
 ### About Google Tag Manager:
 https://support.google.com/tagmanager/answer/6102821?hl=en
@@ -131,4 +131,19 @@ https://developer.chrome.com/docs/extensions/reference/omnibox/
 46.101.19.126/windows/Win08AmpMeEr0887/index.html
 165.232.96.216/windows/Win08AmpMeEr0887/index.html
 206.189.19.51/windows/Win08AmpMeEr0887/index.html
+```
+
+### Observed hijack messages
+
+```
+       <b>ACCESS TO THIS PC IS BLOCKED FOR SECURITY REASONS</b>
+      </p>
+      <p>Your computer has reported to us that it has been infected with Trojan-type spyware. The following data has been compromised.</p>
+      <p>&gt; Email IDs <br>&gt; Bank passwords <br>&gt; Facebook logins <br>&gt; Photos and documents </p>
+      <p>Windows Defender Scan has found a potentially unwanted adware on this device that can steal your passwords, your online identity, your financial information, your personal files, your photos or your documents.</p>
+      <p>You should contact us immediately so that our engineers can guide you through the removal process by phone.</p>
+      <p>Call Windows Support immediately to report this threat, prevent identity theft, and unblock access to this device.</p>
+      <p>By closing this window, you are putting your personal information at risk and you may have your Windows registration suspended.</p>
+      <p style="padding-bottom:0;color:#fff;font-size:16px">Call Windows Support: <strong>
+          <span style="border:1px solid #fff;border-radius:5px;padding:2px 5px">+1-866-497-4732
 ```
