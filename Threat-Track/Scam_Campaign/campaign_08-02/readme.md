@@ -131,6 +131,7 @@ https://developer.chrome.com/docs/extensions/reference/omnibox/
 46.101.19.126/windows/Win08AmpMeEr0887/index.html
 165.232.96.216/windows/Win08AmpMeEr0887/index.html
 206.189.19.51/windows/Win08AmpMeEr0887/index.html
+159.65.59.3/virusdetect/Win08AmpMeEr0887/index.html
 ```
 
 ### Observed hijack messages
