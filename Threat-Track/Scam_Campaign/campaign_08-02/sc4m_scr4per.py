@@ -22,7 +22,7 @@ def scrape_scammers(target):
         print(f"[!] Connection Failure for {ip}: {e}")
 
 if __name__ == "__main__":
-    # ranges.txt contains a list of CIDR blocks such as 192.168.1.0/24..192.168.2.0/24..etc
+    # ranges.txt contains a list of CIDR blocks
     with open("ranges.txt", "r") as f:
         targets = [line.strip() for line in f]
 
