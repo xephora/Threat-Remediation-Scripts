@@ -1,3 +1,6 @@
+################################################################################################################################################
+# Experimental spray technique to hunt for browser hijacking websites. "ranges.txt" will need to contains a list of Digital Ocean CIDR blocks. #
+################################################################################################################################################
 import requests
 import sys
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
