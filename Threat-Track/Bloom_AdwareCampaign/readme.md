@@ -343,3 +343,11 @@ Your File Is Ready To Download.exe
 Framework.exe
 1becc3d19333e9d8d212477bba8b6680906b1758ac52e98159c72895b480805a
 ```
+
+### Observed hashes August 2023
+
+```
+________.exe
+21ae1d88e675c9a2d51a2f68beadf24a21c1b16f58fc042ff97ad8e52501300d
+```
+
