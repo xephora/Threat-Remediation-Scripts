@@ -17,7 +17,7 @@ echo "Checking System Appdata"
 ls -l "/Library/Application Support"
 echo -e "\n\n"
 echo "Checking user downloads folder for suspicious install packages"
-ls -l /Users/$username/downloads/*pkg 2>/dev/null
+ls -l /Users/$username/downloads/*.pkg 2>/dev/null
 ls -l /Users/$username/downloads/*.dmg 2>/dev/null
 ls -l /Users/$username/downloads/*.zip 2>/dev/null
 ls -l /Users/$username/downloads/*.7z 2>/dev/null
