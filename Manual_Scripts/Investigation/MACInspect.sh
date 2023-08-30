@@ -52,3 +52,9 @@ echo "Checking root profile"
 echo "/var/root"
 ls -l /var/root
 echo -e "\n\n"
+
+echo -e "\n[+] Checking all users Library for hidden files/directories"
+for i in $(ls /Users | grep -v "\."); do echo "/Users/$i/Library" && ls "/Users/$i/Library" 2>/dev/null | grep -E "^\.[a-zA-Z0-9\-]+"; done
+
+echo -e "\n[+] Checking all users Application Support for hidden files/directories"
+for i in $(ls /Users | grep -v "\."); do echo "/Users/$i/Library/Application Support" && ls "/Users/$i/Library/Application Support" 2>/dev/null | grep -E "^\.[a-zA-Z0-9\-]+"; done
