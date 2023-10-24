@@ -54,3 +54,17 @@ foreach ($i in $user_list) {
         }
     }
 }
+
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+foreach($j in $sid_list) {
+    if ($j -notlike "*_Classes*") {
+    	$exists7 = test-path -path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
+        if ($exists7 -eq $True) {
+            rm "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803" -ErrorAction SilentlyContinue
+    	    $exists7 = test-path -path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
+            if ($exists7 -eq $True) {
+                "PDFunk Removal Unsuccessful => Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
+            }
+        }
+    }
+}
