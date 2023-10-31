@@ -58,3 +58,9 @@ for i in $(ls /Users | grep -v "\."); do echo "/Users/$i/Library" && ls "/Users/
 
 echo -e "\n[+] Checking all users Application Support for hidden files/directories"
 for i in $(ls /Users | grep -v "\."); do echo "/Users/$i/Library/Application Support" && ls "/Users/$i/Library/Application Support" 2>/dev/null | grep -E "^\.[a-zA-Z0-9\-]+"; done
+
+echo -e "\n[+] Connections Listening"
+lsof -nP -iTCP -sTCP:LISTEN
+
+echo -e "\n[+] Connections Established"
+lsof -nP -iTCP -sTCP:ESTABLISHED
