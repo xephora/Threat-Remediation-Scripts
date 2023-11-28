@@ -14,6 +14,7 @@ echo "/Library/LaunchDaemons"
 ls -l /Library/LaunchDaemons
 echo -e "\n\n"
 echo "Checking System Appdata"
+echo "/Library/Application Support"
 ls -l "/Library/Application Support"
 echo -e "\n\n"
 echo "Checking user downloads folder for suspicious install packages"
