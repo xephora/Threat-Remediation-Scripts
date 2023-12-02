@@ -36,6 +36,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [AppMaster](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AppMaster)
 - [AppRun](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AppRun)
 - [AskPartnerNetwork](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AskPartnerNetwork)
+- [Ask Toolbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AskToolbar)
 - [BBSK(SecureBrowser)](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BBSK(SecureBrowser))
 - [Bloom](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Bloom)
 - [BrightTramp](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BrightTramp)
