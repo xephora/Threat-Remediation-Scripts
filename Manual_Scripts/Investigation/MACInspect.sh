@@ -1,4 +1,5 @@
 # Investigate the following account below.  Please replace `<username>` with the target username below:
+# I recommend running the script with higher-level of privileges, but not required.
 username="<USERNAME>"
 
 echo "Checking cronjobs"
