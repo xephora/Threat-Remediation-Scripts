@@ -46,6 +46,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Clear](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clear)
 - [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
+- [DebuggerStepperBoundaryAttribute](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DebuggerStepperBoundaryAttribute)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
 - [DriverTonic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverTonic)
 - [Editor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Editor)
