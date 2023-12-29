@@ -27,6 +27,10 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - For computers that do not have chrome installed, the WinInspect was breaking when enumerating history files.  I added a check if the chrome directory exists.  Small QoL imporvement.
 - WinInspect_v3 will be decommissioned.
 
+### Update to WinInspect_v4 (12-29-2023)
+- Added the updated Edge history file location path to script. "%profile%\AppData\Local\Microsoft\Edge\User Data\Default\History"
+- Enumerates all Edge profiles.
+
 ## ScanDLL
 
 Description:  
