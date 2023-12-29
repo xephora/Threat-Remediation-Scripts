@@ -193,6 +193,23 @@ if (test-path $IEHistoryfile) {
 	Write-Output "------------------------"
 }
 
+# Added chrome-based Edge
+$exists=test-path "C:\users\$username\AppData\Local\Microsoft\Edge\User Data"
+if ($exists) {
+    $historyFilePaths=@(gci "C:\users\$username\AppData\Local\Microsoft\Edge\User Data" -r -fi "history" | % { $_.FullName }); 
+    foreach ($filePath in $historyFilePaths) {
+        if (test-path $filepath) {
+        $fileInfo = Get-Item $filePath | Select-Object FullName, Length, CreationTime, LastWriteTime
+        $fileSizeMB = $fileInfo.Length / 1MB
+        Write-Output "File path: $($fileInfo.FullName)"
+        Write-Output "File size: $fileSizeMB MB"
+        Write-Output "Creation date: $($fileInfo.CreationTime)"
+        Write-Output "Modification date: $($fileInfo.LastWriteTime)"
+        Write-Output "------------------------"
+        }
+    }
+}
+
 # Check for profile processes
 "`n`n [+] Checking Profile-based processes"
 Get-Process |
