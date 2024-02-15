@@ -13,8 +13,6 @@ public class DllScanner
         using (StreamWriter writer = new StreamWriter(logPath, true))
         {
             writer.WriteLine("[+] Scanning DLLs...");
-
-            // Check if running as administrator
             var principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
             bool isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
 
