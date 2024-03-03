@@ -1,6 +1,6 @@
 # Introduction
 
-Over the course of two years, I have developed a number of scripts to assist me with my investigations and remediation efforts.  I figured, why not share them to the public, in hopes it helps you.
+Since 2021, I have developed a number of scripts to assist me with my investigations and remediation efforts.  I figured, why not share them to the public, in hopes it helps you.
 
 # How do these scripts work? 
 
