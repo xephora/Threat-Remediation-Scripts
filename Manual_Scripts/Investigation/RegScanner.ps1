@@ -38,6 +38,7 @@ public class RegistryScanner
 		{
 			foreach (string subKeyName in root.GetSubKeyNames())
 			{
+   				// Skips SAM to avoid issues lol
 				if (subKeyName.Equals("SAM", StringComparison.OrdinalIgnoreCase))
 				{
 					continue; 
