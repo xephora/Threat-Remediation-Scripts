@@ -21,6 +21,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 - [Win-PortScanner](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/Win-PortScanner.ps1) - Win-PortScanner is an extremely light port scanner.
 - [ScanDll](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/ScanDll.ps1) - ScanDll is tool to help search processes for a particular dynamic-link library.
 - [ScanDllv2](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/ScanDll_v2.ps1) - ScanDllv2 is a tool designed to search processes for a specific dynamic-link library using C#. It's much faster than ScanDll, but the output is written to a log file due to issues with standard output display on the CrowdStrike RTR UI.
+- [RegScanner](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/RegScanner.ps1) - An amazingly fast tool designed to search for a registry key or value using a unique keyword. 
 - [ScreenConnect-C2Extractor](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/ScreenConnect-C2Extractor.ps1) - ScreenConnect-C2Extractor retrieves the C2 from the `user.config` of ScreenConnect aka ConnectWise Client.
 
 ### Crowdstrike API Scripts
