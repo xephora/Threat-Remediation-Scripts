@@ -83,6 +83,6 @@ public class RegistryScanner
 "@
 
 Add-Type -TypeDefinition $csharpCode -Language CSharp
-# Please make sure to enter the keyword reg key file you are searching for.
+# Please make sure to enter the keyword reg keyword you are searching for.
 [RegistryScanner]::ScanRegistryForKeyword("KEYWORD_HERE")
 # The log file is written to C:\windows\temp\registry_scan_results.log
