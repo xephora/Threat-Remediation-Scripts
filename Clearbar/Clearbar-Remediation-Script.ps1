@@ -50,48 +50,45 @@ Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\S
 Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker' -Recurse -ErrorAction SilentlyContinue
 
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
-foreach ($i in $sid_list) {
-    if ($i -notlike "*_Classes*") {
-        $keyexists = test-path -path "Registry::$i\Software\ClearBar"
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1") {
+            Remove-Item "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1" -Recurse -ErrorAction SilentlyContinue
+            if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1") {
+                "Failed to remove OneLaunch -> Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1"
+            }
+        }
+        $keyexists = test-path -path "Registry::$sid\Software\ClearBar"
         if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$i\Software\ClearBar" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$i\Software\ClearBar"
+            Remove-Item -Path "Registry::$sid\Software\ClearBar" -Recurse -ErrorAction SilentlyContinue
+            $keyexists = test-path -path "Registry::$sid\Software\ClearBar"
             if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$i\Software\ClearBar"
+                "Failed to remove Clearbar => Registry::$sid\Software\ClearBar"
             }
         }
-        $keyexists = test-path -path "Registry::$i\Software\ClearBar.App"
+        $keyexists = test-path -path "Registry::$sid\Software\ClearBar.App"
         if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$i\Software\ClearBar.App" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$i\Software\ClearBar.App"
+            Remove-Item -Path "Registry::$sid\Software\ClearBar.App" -Recurse -ErrorAction SilentlyContinue
+            $keyexists = test-path -path "Registry::$sid\Software\ClearBar.App"
             if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$i\Software\ClearBar.App"
+                "Failed to remove Clearbar => Registry::$sid\Software\ClearBar.App"
             }
         }
-        $keyexists = test-path -path "Registry::$i\Software\ClearBrowser"
+        $keyexists = test-path -path "Registry::$sid\Software\ClearBrowser"
         if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$i\Software\ClearBrowser" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$i\Software\ClearBrowser"
+            Remove-Item -Path "Registry::$sid\Software\ClearBrowser" -Recurse -ErrorAction SilentlyContinue
+            $keyexists = test-path -path "Registry::$sid\Software\ClearBrowser"
             if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$i\Software\ClearBrowser"
+                "Failed to remove Clearbar => Registry::$sid\Software\ClearBrowser"
             }
         }
-        $regkeys = @(gci "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\*_is1")
-        foreach ($key in $regkeys) {
-            if (test-path -Path $key) {
-                Remove-Item -Path "Registry::$key" -Recurse
-                if (test-path -Path $key) {
-                    "Failed to remove Clearbar -> $key"
-                }
-            }
-        }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
+        $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
         $keyexists = (Get-Item $keypath).Property -contains "ClearBar"
         if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "ClearBar" -ErrorAction SilentlyContinue
+            Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "ClearBar" -ErrorAction SilentlyContinue
             $keyexists = (Get-Item $keypath).Property -contains "ClearBar"
             if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.ClearBar"
+                "Failed to remove Clearbar => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.ClearBar"
             }
         }
     }
