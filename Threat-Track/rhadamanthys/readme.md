@@ -1,4 +1,4 @@
-### Decryption script
+### Decryption script for sample 3a5c4bcadbdfdae9975bd89b29a553cf249d1c9492f4f08e99a1468b27ac8306
 
 ```ps
 function aesdecrypt($EBfDE){
