@@ -11,8 +11,7 @@ def dump_pspayload(PE):
         powershell_payload = PE.get_resources().pop()['Data']
         with open("payload.ps1","wb") as f:
             f.write(powershell_payload)
-        if b";};" in powershell_payload:
-            print("[+] Dumping Powershell payload.")
+        print("[+] Dumping Powershell payload.")
 
 if __name__ == "__main__":
         PE = sys.argv[1]
