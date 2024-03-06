@@ -55,15 +55,7 @@ rm "C:\windows\system32\tasks\OneLaunchUpdateTask" -ErrorAction SilentlyContinue
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 foreach ($i in $sid_list) {
     if ($i -notlike "*_Classes*") {
-        $regkeys = @(gci "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\*_is1")
-        foreach ($key in $regkeys) {
-            if (test-path -Path $key) {
-                Remove-Item -Path "Registry::$key" -Recurse
-                if (test-path -Path $key) {
-                    "Failed to remove OneLaunch -> $key"
-                }
-            }
-        }
+        # uninstall removal key is under construction
         $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
         $keyexists = (Get-Item $keypath).Property -contains "OneLaunch"
         if ($keyexists -eq $True) {
