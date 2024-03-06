@@ -30,3 +30,13 @@ The following shortcuts were added to the remediation script.
 
 - shortcut `OneLaunchUpdater.lnk` will be removed from the startup folder
 - shortcut `OneLaunch.lnk` will be removed from the user's desktop.
+
+### Updates 03-06-2024
+
+Optimizations have been made to eliminate redundancy, and a bug related to the removal of the uninstall key has been fixed.
+
+- Registry property `HKU\SID\SOFTWARE\RegisteredApplications.OneLaunch` will be removed from the registry hive.
+- Registry key `HKU\SID\SOFTWARE\Classes\OneLaunchHTML` will be removed from the registry hive.
+- Removed redundancy when cleaning installation packages from the users' downloads folder.
+- Removal of uninstall key will now target `HKU\SID\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1`.
+- Thank you to @syntax53 for reporting the issues https://github.com/xephora/Threat-Remediation-Scripts/issues/4.
