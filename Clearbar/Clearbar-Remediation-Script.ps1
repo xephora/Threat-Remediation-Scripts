@@ -8,7 +8,6 @@ foreach ($i in $user_list) {
     foreach ($install in $installers) {
         if (test-path -Path $install) {
             rm "$install" -ErrorAction SilentlyContinue
-            $installers = @(gci C:\users\$i -r -fi "Clear-*.exe" | % {$_.FullName})
             if (test-path -Path $install) {
                 "Failed to remove Clearbar -> $install"
             }
