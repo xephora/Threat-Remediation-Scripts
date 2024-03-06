@@ -3,7 +3,6 @@ Get-Process onelaunchtray -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-Process chromium -ErrorAction SilentlyContinue | Stop-Process -Force
 sleep 2
 
-
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 foreach ($i in $user_list) {
     $installers = @(gci C:\users\$i -r -fi "OneLaunch*.exe" | % {$_.FullName})
@@ -53,37 +52,42 @@ rm "C:\windows\system32\tasks\ChromiumLaunchTask" -ErrorAction SilentlyContinue
 rm "C:\windows\system32\tasks\OneLaunchUpdateTask" -ErrorAction SilentlyContinue
 
 $sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
-foreach ($i in $sid_list) {
-    if ($i -notlike "*_Classes*") {
-        # uninstall removal key is under construction
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1") {
+            Remove-Item "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1" -Recurse -ErrorAction SilentlyContinue
+            if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1") {
+                "Failed to remove OneLaunch -> Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1"
+            }
+        }
+        $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
         $keyexists = (Get-Item $keypath).Property -contains "OneLaunch"
         if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneLaunch" -ErrorAction SilentlyContinue
+            Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneLaunch" -ErrorAction SilentlyContinue
             $keyexists = (Get-Item $keypath).Property -contains "OneLaunch"
             if ($keyexists -eq $True) {
-                "Failed to remove OneLaunch => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.OneLaunch"
+                "Failed to remove OneLaunch => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.OneLaunch"
             }
         }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
+        $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
         $keyexists = (Get-Item $keypath).Property -contains "OneLaunchChromium"
         if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneLaunchChromium" -ErrorAction SilentlyContinue
+            Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneLaunchChromium" -ErrorAction SilentlyContinue
             $keyexists = (Get-Item $keypath).Property -contains "OneLaunchChromium"
             if ($keyexists -eq $True) {
-                "Failed to remove OneLaunch => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.OneLaunchChromium"
+                "Failed to remove OneLaunch => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.OneLaunchChromium"
             }
         }
-        $startupkeys = (gi "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run").Property
+        $startupkeys = (gi "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run").Property
         foreach ($key in $startupkeys) {
             if ($key -like "GoogleChromeAutoLaunch*") {
-                Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "$key" -ErrorAction SilentlyContinue
+                Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "$key" -ErrorAction SilentlyContinue
             }
         }
-        if (test-path -path "Registry::$i\Software\OneLaunch") {
-            Remove-Item -Path "Registry::$i\Software\OneLaunch" -Recurse -ErrorAction SilentlyContinue
-            if (test-path -path "Registry::$i\Software\OneLaunch") {
-                "Failed to remove OneLaunch -> Registry::$i\Software\OneLaunch"
+        if (test-path -path "Registry::$sid\Software\OneLaunch") {
+            Remove-Item -Path "Registry::$sid\Software\OneLaunch" -Recurse -ErrorAction SilentlyContinue
+            if (test-path -path "Registry::$sid\Software\OneLaunch") {
+                "Failed to remove OneLaunch -> Registry::$sid\Software\OneLaunch"
             }
         }
     }
