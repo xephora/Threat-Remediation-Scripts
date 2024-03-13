@@ -31,6 +31,10 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Added the updated Edge history file location to the script. "%profile%\AppData\Local\Microsoft\Edge\User Data\Default\History"
 - Enumerates all Edge profiles.
 
+### Update to WinInspect_v4 (3-12-2023)
+- Shifted down service enumeration to speed up runtime.
+- Added temp file enumeration.
+
 ## ScanDLL
 
 Description:  
