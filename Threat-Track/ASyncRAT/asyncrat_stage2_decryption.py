@@ -27,10 +27,8 @@ def get_PEstreams(PE):
 
 if __name__ == "__main__":
         PE = sys.argv[1]
-        mode = sys.argv[2]
         dotnet_file = DotNetPE(PE)
-        if "resources" in mode:
-                encrypted_data = get_PEstreams(dotnet_file) # Resouce stream is taking out of the .net bin containing the encrypted blob
+        encrypted_data = get_PEstreams(dotnet_file) # Resouce stream is taking out of the .net bin containing the encrypted blob
         key = b64decode("UZvlWL382SgvCZYlj18UTZUOUtJMFPCo9FZJzxSxiHw=")
         iv = b64decode("RqIrsHLwODhnyJldiyQd5g==")
         aes_decrypt(encrypted_data, key, iv) # Encrypted data is decrypted and then written to disk.
