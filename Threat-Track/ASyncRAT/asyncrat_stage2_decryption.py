@@ -31,4 +31,4 @@ if __name__ == "__main__":
         encrypted_data = get_PEstreams(dotnet_file) # Resouce stream is taking out of the .net bin containing the encrypted blob
         key = b64decode("UZvlWL382SgvCZYlj18UTZUOUtJMFPCo9FZJzxSxiHw=")
         iv = b64decode("RqIrsHLwODhnyJldiyQd5g==")
-        aes_decrypt(encrypted_data, key, iv) # Encrypted data is decrypted and then written to disk.
+        aes_decrypt(encrypted_data, key, iv) # The data is decrypted and then written to disk.
