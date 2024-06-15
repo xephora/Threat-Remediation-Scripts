@@ -42,3 +42,6 @@ armsvc                   4628 11/9/2022 1:06:12 AM              7,296     0.19  
 - Updated and optimized code for CSSession.
 - Handled hosts with null host ids.
 - Added filehash as a command
+
+### Known issues
+- Currently, CSSESSION does not work with updated version of psfalcon.  We will investigate and resolve the problem as soon as possible. 
