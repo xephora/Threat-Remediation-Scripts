@@ -13,3 +13,4 @@ I created an automated script to remove PCAppStore Adware.
 ### Updates
 
 - Major improvements were made to the PCAppstore remediation script. 12-02-2023 👍
+- Small improvement was made to remove the watchdog process, remove addition PCAppStore registry keys. 07-26-2024.
