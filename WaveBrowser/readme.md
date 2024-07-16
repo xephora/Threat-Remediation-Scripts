@@ -31,9 +31,6 @@
 
 - Additional registry key paths have been added to the remediation script.
 
-*Update 07-16-2024 *
-- Script has been updated and templated
-
 ```
 HKU\{SID}\WavesorSWUpdater.CredentialDialogUser
 HKU\{SID}\WavesorSWUpdater.CredentialDialogUser.1.0
@@ -54,6 +51,9 @@ C:\USERS\{PROFILE}\APPDATA\ROAMING\MICROSOFT\INTERNET EXPLORER\QUICK LAUNCH\WAVE
 C:\USERS\{PROFILE}\APPDATA\ROAMING\MICROSOFT\WINDOWS\START MENU\PROGRAMS\WAVEBROWSER.LNK
 C:\USERS\{PROFILE}\DESKTOP\WAVEBROWSER.LNK
 ```
+
+*Update 07-16-2024 *
+- Script has been updated and templated
 
 ### Known Issues
 - For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
