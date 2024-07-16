@@ -2,6 +2,8 @@ $process = Get-Process PCAppStore -ErrorAction SilentlyContinue
 if ($process) { $process | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2 }
 $process = Get-Process NW_store -ErrorAction SilentlyContinue
 if ($process) { $process | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2 }
+$process = Get-Process Watchdog -ErrorAction SilentlyContinue
+if ($process) { $process | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2 }
 sleep 2
 
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
@@ -34,19 +36,21 @@ foreach ($user in $user_list) {
 $sid_list = Get-Item -Path "Registry::HKU\-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
 foreach ($sid in $sid_list) {
     if ($sid -notlike "*_Classes*") {
-        $paths = @(
-            "Registry::$sid\SOFTWARE\PCAppStore",
-            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run\PCApp"
+        $keynames = @(
+            "PCAppStore",
+            "PcAppStoreUpdater"
         )
-        foreach ($path in $paths) {
-            write-host "Cleaning $path"
-            if (test-path $path) {
-                Remove-Item -Path $path -Recurse -ErrorAction SilentlyContinue
-                if (test-path $path) {
-                    "[!] Failed to remove PCAppstore => $path"
+        foreach ($key in $keynames) {
+            $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+            $keyexists = (Get-Item $keypath).Property -contains "$key"
+            if ($keyexists -eq $True) {
+                Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "$key" -ErrorAction SilentlyContinue
+                $keyexists = (Get-Item $keypath).Property -contains "$key"
+                if ($keyexists -eq $True) {
+                    "Failed to remove OneLaunch => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.$key"
                 }
             }
-        }
+        } 
     }
 }
 
