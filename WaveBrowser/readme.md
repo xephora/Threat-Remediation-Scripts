@@ -53,7 +53,7 @@ C:\USERS\{PROFILE}\DESKTOP\WAVEBROWSER.LNK
 ```
 
 *Update 07-16-2024 *
-- Script has been updated and templated
+- Script has been templated
 
 ### Known Issues
 - For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
