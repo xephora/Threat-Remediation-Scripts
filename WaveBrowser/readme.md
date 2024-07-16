@@ -31,6 +31,9 @@
 
 - Additional registry key paths have been added to the remediation script.
 
+*Update 07-16-2024 *
+- Script has been updated and templated
+
 ```
 HKU\{SID}\WavesorSWUpdater.CredentialDialogUser
 HKU\{SID}\WavesorSWUpdater.CredentialDialogUser.1.0
