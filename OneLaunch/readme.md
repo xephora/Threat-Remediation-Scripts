@@ -39,8 +39,13 @@ Optimizations have been made to eliminate redundancy, and a bug related to the r
 - Registry key `HKU\SID\SOFTWARE\Classes\OneLaunchHTML` will be removed from the registry hive.
 - Removed redundancy when cleaning installation packages from the users' downloads folder.
 - Removal of uninstall key will now target `HKU\SID\Software\Microsoft\Windows\CurrentVersion\Uninstall\{4947c51a-26a9-4ed0-9a7b-c21e5ae0e71a}_is1`.
-- Thank you to @syntax53 for reporting the issues https://github.com/xephora/Threat-Remediation-Scripts/issues/4.
+- Thank you to @syntax53 for reporting the issue https://github.com/xephora/Threat-Remediation-Scripts/issues/4.
 
 ### Update 07-16-2024
 
 Code has been cleaned up and templated.
+
+### Update 07-23-2024
+
+- Added path `C:\users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneLaunch` to the remediation script.
+- Thank you to @zzLukozz for reporting the issue. https://github.com/xephora/Threat-Remediation-Scripts/issues/6
