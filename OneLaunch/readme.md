@@ -47,5 +47,5 @@ Code has been cleaned up and templated.
 
 ### Update 07-23-2024
 
-- Added path `C:\users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneLaunch` to the remediation script.
+- Added path `C:\users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneLaunch` to the remediation script.  This new path was added after the software upgraded to 
 - Thank you to @zzLukozz for reporting the issue. https://github.com/xephora/Threat-Remediation-Scripts/issues/6
