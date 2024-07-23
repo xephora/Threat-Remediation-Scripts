@@ -40,11 +40,16 @@ foreach ($user in $user_list) {
             }
         }
     }
-    $localPath = "C:\Users\$user\appdata\local\OneLaunch"
-    if (Test-Path -Path $localPath) {
-        Remove-Item $localPath -Force -Recurse -ErrorAction SilentlyContinue
+    $localPaths = @(
+        "C:\Users\$user\appdata\local\OneLaunch",
+        "C:\Users\$user\appdata\Roaming\Microsoft\Windows\Start Menu\Programs\OneLaunch"
+    )
+    foreach ($localPath in $localpaths) {
         if (Test-Path -Path $localPath) {
-            Write-Host "Failed to remove OneLaunch -> $localPath"
+            Remove-Item $localPath -Force -Recurse -ErrorAction SilentlyContinue
+            if (Test-Path -Path $localPath) {
+                Write-Host "Failed to remove OneLaunch -> $localPath"
+            }
         }
     }
 }
