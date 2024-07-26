@@ -57,6 +57,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Framework](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Framework)
 - [Gallery](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Gallery)
 - [GameCenter](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/GameCenter)
+- [GamerHash](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/GamerHash)
 - [Headlines](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Headlines)
 - [Healthy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Healthy)
 - [IBuddy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/IBuddy)
