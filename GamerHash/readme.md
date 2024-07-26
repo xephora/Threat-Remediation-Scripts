@@ -9,4 +9,4 @@
 
 ### Description
 
-I created a script to remediate GamerHash.
+I created a script to remediate GamerHash, a cryptominer.
