@@ -9,7 +9,7 @@
 - Removes WaveBrowser Registry Keys
 - Removes WaveBrowser Uninstall Key
 
-### Tested on Windows 7/10/11
+### Tested on Windows 10/11
 
 ### Why multiple scripts?
 
@@ -55,5 +55,21 @@ C:\USERS\{PROFILE}\DESKTOP\WAVEBROWSER.LNK
 *Update 07-16-2024 *
 - Script has been templated
 
-### Known Issues
-- For Windows 7, The removal of scheduled task doesn't work.  However, it still removes the other files, registry keys and kills the processes perfectly fine.
+*Update 09-24-2024 *
+- Additional paths have been added to the remediation script.  Thanks you @chan-man for reporting the issue. https://github.com/xephora/Threat-Remediation-Scripts/issues/10
+  
+```
+C:\Users\{USERNAME}\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\WaveBrowser.lnk
+"HKEY_USERS\{SID}\Software\RegisteredApplications" "WaveBrowser.5QMLTPZDDJG2BQZHV26QUN4ZK4"
+"HKEY_USERS\{SID}\Software\Classes\CLSID\{9CD78CBC-FD21-4FFF-B452-9D792A58B7C4}\LocalServer32"
+"HKEY_USERS\{SID}_Classes\CLSID\{9CD78CBC-FD21-4FFF-B452-9D792A58B7C4}\LocalServer32"
+"HKEY_USERS\{SID}\Software\Microsoft\Windows\CurrentVersion\App Paths\wavebrowser.exe"
+"HKEY_USERS\{SID}\Software\Clients\StartMenuInternet\WaveBrowser.5QMLTPZDDJG2BQZHV26QUN4ZK4"
+```
+
+- Windows 7 WaveBrowser remediation scripts have officially been decommissioned.  Please upgrade your system to Win10/11.
+  
+```
+WaveBrowser-Remediation-Script-Win7-BrowserKill.ps1
+WaveBrowser-Remediation-Script-Win7.ps1
+```
