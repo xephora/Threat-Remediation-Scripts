@@ -87,6 +87,6 @@ The following library contains a list of common unwanted software/adware that ar
 - [streaming](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streaming)
 - [streamlink-twitch-gui](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streamlink-twitch-gui)
 
-> Do you find my work helpful and want to show your support? Feel free to add me on [Twitter](https://twitter.com/x3ph1).
+>  Do you find my work helpful and want to show your support? Feel free to add me on [Twitter](https://twitter.com/x3ph1).  If you'd like to show even more support, you can also tip me at [Ko-Fi](https://ko-fi.com/x3ph_trs).  There's absolutely no pressure to do so; I appreciate your support either way!
 
 > Any issues with a script, please feel free to report it as an [issue](https://github.com/xephora/Threat-Remediation-Scripts/issues).
