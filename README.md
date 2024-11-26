@@ -24,6 +24,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 - [RegScanner](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/RegScanner.ps1) - An amazingly fast tool designed to search for a registry key or value using a unique keyword.
 - [Win-DiskImage-Toolkit](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/Win-DiskImage-Toolkit.ps1) - A simple tool to quickly enumerate or unmount a disk image.
 - [ScreenConnect-C2Extractor](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/ScreenConnect-C2Extractor.ps1) - ScreenConnect-C2Extractor retrieves the C2 from the `user.config` of ScreenConnect aka ConnectWise Client.
+- [Win-PacketCapture](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/Win-PacketCapture.ps1) - A guided script to generate a packet dump for analysis.
 
 ### Crowdstrike API Scripts
 
