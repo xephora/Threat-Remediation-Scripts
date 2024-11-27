@@ -1,3 +1,4 @@
+Get-Process Clear -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-Process ClearBar -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-Process ClearBrowser -ErrorAction SilentlyContinue | Stop-Process -Force
 sleep 2
