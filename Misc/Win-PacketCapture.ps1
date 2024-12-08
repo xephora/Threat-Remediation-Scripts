@@ -27,7 +27,7 @@
 # pktmon stop
 
 # Convert your etl capture into a pcap
-# pktmon etl2pcap -o output.pcap
+# pktmon etl2pcap .\file.etl -o output.pcap
 
 # When finishing packet capturing, you can remove the filter
 # pktmon filter remove
