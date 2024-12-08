@@ -1,177 +1,115 @@
-Get-Process Clear -ErrorAction SilentlyContinue | Stop-Process -Force
-Get-Process ClearBar -ErrorAction SilentlyContinue | Stop-Process -Force
-Get-Process ClearBrowser -ErrorAction SilentlyContinue | Stop-Process -Force
-sleep 2
+$process = Get-Process Clear -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+}
+$process = Get-Process ClearBar -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+}
+$process = Get-Process ClearBrowser -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+}
+Start-Sleep -Seconds 2
 
 $user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
 foreach ($user in $user_list) {
-    $installers = @(gci C:\users\$user -r -fi "Clear-*.exe" | % {$_.FullName})
+    $installers = @(Get-ChildItem C:\users\$user -Recurse -Filter "Clear-*.exe" | ForEach-Object { $_.FullName })
     foreach ($install in $installers) {
-        if (test-path -Path $install) {
-            rm "$install" -ErrorAction SilentlyContinue
-            if (test-path -Path $install) {
-                "Failed to remove Clearbar -> $install"
+        if (Test-Path -Path $install) {
+            Remove-Item $install -ErrorAction SilentlyContinue
+            if (Test-Path -Path $install) {
+                Write-Host "Failed to remove Clearbar installer -> $install"
             }
         }
     }
 
-    $installers = @(gci C:\users\$user -r -fi "EasyPrint.*.exe" | % {$_.FullName})
-    foreach ($install in $installers) {
-        if (test-path -Path $install) {
-            rm "$install" -ErrorAction SilentlyContinue
-            $installers = @(gci C:\users\$i -r -fi "EasyPrint.*.exe" | % {$_.FullName})
-            if (test-path -Path $install) {
-                "Failed to remove Clearbar -> $install"
+    $paths = @(
+        "C:\Users\$user\AppData\Local\Programs\Clear",
+        "C:\Users\$user\AppData\Local\Clear",
+        "C:\Users\$user\AppData\Local\ClearBar",
+        "C:\Users\$user\AppData\Local\ClearBrowser",
+        "C:\Users\$user\AppData\Local\Programs\ClearBar"
+    )
+    foreach ($path in $paths) {
+        if (Test-Path -Path $path) {
+            Remove-Item $path -Force -Recurse -ErrorAction SilentlyContinue
+            if (Test-Path -Path $path) {
+                Write-Host "Failed to remove Clearbar -> $path"
             }
         }
     }
+}
 
-    if (test-path "C:\Users\$user\AppData\Local\Programs\Clear") {
-        rm "C:\Users\$user\AppData\Local\Programs\Clear" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path "C:\Users\$user\AppData\Local\Programs\Clear") {
-            "Failed to remove Clearbar -> C:\Users\$user\AppData\Local\Programs\Clear"
-        }
-    }
-
-    if (test-path "C:\Users\$user\appdata\local\Clear") {
-        rm "C:\Users\$user\appdata\local\Clear" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path "C:\Users\$user\appdata\local\Clear") {
-            "Failed to remove Clearbar -> C:\Users\$user\appdata\local\Clear"
-        }
-    }
-
-    if (test-path -Path "C:\Users\$user\appdata\local\ClearBar") {
-        rm "C:\Users\$user\appdata\local\ClearBar" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$user\appdata\local\ClearBar") {
-            "Failed to remove Clearbar -> C:\Users\$user\appdata\local\ClearBar"
-        }
-    }
-
-    if (test-path -Path "C:\Users\$user\appdata\local\ClearBrowser") {
-        rm "C:\Users\$user\appdata\local\ClearBrowser" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$user\appdata\local\ClearBrowser") {
-            "Failed to remove Clearbar -> C:\Users\$user\appdata\local\ClearBrowser"
-        }
-    }
-
-    if (test-path -Path "C:\Users\$user\appdata\local\programs\ClearBar") {
-        rm "C:\Users\$user\appdata\local\programs\ClearBar" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$user\appdata\local\programs\ClearBar") {
-            "Failed to remove Clearbar -> C:\Users\$user\appdata\local\programs\ClearBar"
+$tasks = @(
+    "C:\windows\system32\tasks\ClearbarStartAtLoginTask",
+    "C:\windows\system32\tasks\ClearbarUpdateChecker",
+    "C:\windows\system32\tasks\ClearStartAtLoginTask",
+    "C:\windows\system32\tasks\ClearUpdateChecker"
+)
+foreach ($task in $tasks) {
+    if (Test-Path -Path $task) {
+        Remove-Item $task -ErrorAction SilentlyContinue
+        if (Test-Path -Path $task) {
+            Write-Host "Failed to remove Clearbar task -> $task"
         }
     }
 }
 
-if (test-path "C:\windows\system32\tasks\ClearbarStartAtLoginTask") {
-    Remove-Item -Path "C:\windows\system32\tasks\ClearbarStartAtLoginTask" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\ClearbarStartAtLoginTask") {
-        "Failed to remove Clearbar -> C:\windows\system32\tasks\ClearbarStartAtLoginTask"
+$taskCacheKeys = @(
+    'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarStartAtLoginTask',
+    'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker',
+    'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearStartAtLoginTask',
+    'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearUpdateChecker',
+    'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearWeatherCheck'
+)
+foreach ($taskCacheKey in $taskCacheKeys) {
+    if (Test-Path -Path $taskCacheKey) {
+        Remove-Item $taskCacheKey -Recurse -ErrorAction SilentlyContinue
+        if (Test-Path -Path $taskCacheKey) {
+            Write-Host "Failed to remove Clearbar -> $taskCacheKey"
+        }
     }
 }
 
-if (test-path "C:\windows\system32\tasks\ClearbarUpdateChecker") {
-    Remove-Item -Path "C:\windows\system32\tasks\ClearbarUpdateChecker" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\ClearbarUpdateChecker") {
-        "Failed to remove Clearbar -> C:\windows\system32\tasks\ClearbarUpdateChecker"
+$registryKeys = @(
+    'Registry::HKLM\SOFTWARE\WOW6432Node\Microsoft\Tracing\ClearBar_RASAPI32',
+    'Registry::HKLM\SOFTWARE\WOW6432Node\Microsoft\Tracing\ClearBar_RASMANCS'
+)
+foreach ($key in $registryKeys) {
+    if (Test-Path -Path $key) {
+        Remove-Item $key -Recurse -ErrorAction SilentlyContinue
+        if (Test-Path -Path $key) {
+            Write-Host "Failed to remove Clearbar -> $key"
+        }
     }
 }
 
-if (test-path "C:\windows\system32\tasks\ClearStartAtLoginTask") {
-    Remove-Item -Path "C:\windows\system32\tasks\ClearStartAtLoginTask" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\ClearStartAtLoginTask") {
-        "Failed to remove Clearbar -> C:\windows\system32\tasks\ClearStartAtLoginTask"
-    }
-}
-
-if (test-path "C:\windows\system32\tasks\ClearUpdateChecker") {
-    Remove-Item -Path "C:\windows\system32\tasks\ClearUpdateChecker" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\ClearUpdateChecker") {
-        "Failed to remove Clearbar -> C:\windows\system32\tasks\ClearUpdateChecker"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarStartAtLoginTask') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarStartAtLoginTask' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarStartAtLoginTask') {
-        "Failed to remove Clearbar -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarStartAtLoginTask"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker') {
-        "Failed to remove Clearbar -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearbarUpdateChecker"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearStartAtLoginTask') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearStartAtLoginTask' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearStartAtLoginTask') {
-        "Failed to remove Clearbar -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearStartAtLoginTask"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearUpdateChecker') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearUpdateChecker' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearUpdateChecker') {
-        "Failed to remove Clearbar -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\ClearUpdateChecker"
-    }
-}
-
-$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
 foreach ($sid in $sid_list) {
     if ($sid -notlike "*_Classes*") {
-        if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1") {
-            Remove-Item "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1" -Recurse -ErrorAction SilentlyContinue
-            if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1") {
-                "Failed to remove Clearbar -> Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1"
+        $registryPaths = @(
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D5806CCB-8635-4E7A-94FC-BF2723167477}_is1",
+            "Registry::$sid\Software\ClearBar",
+            "Registry::$sid\Software\ClearBar.App",
+            "Registry::$sid\Software\ClearBrowser"
+        )
+        foreach ($regPath in $registryPaths) {
+            if (Test-Path -Path $regPath) {
+                Remove-Item $regPath -Recurse -ErrorAction SilentlyContinue
+                if (Test-Path -Path $regPath) {
+                    Write-Host "Failed to remove Clearbar -> $regPath"
+                }
             }
         }
-
-        $keyexists = test-path -path "Registry::$sid\Software\ClearBar"
-        if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$sid\Software\ClearBar" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$sid\Software\ClearBar"
-            if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$sid\Software\ClearBar"
-            }
-        }
-
-        $keyexists = test-path -path "Registry::$sid\Software\ClearBar.App"
-        if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$sid\Software\ClearBar.App" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$sid\Software\ClearBar.App"
-            if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$sid\Software\ClearBar.App"
-            }
-        }
-
-        $keyexists = test-path -path "Registry::$sid\Software\ClearBrowser"
-        if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$sid\Software\ClearBrowser" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$sid\Software\ClearBrowser"
-            if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$sid\Software\ClearBrowser"
-            }
-        }
-        
-        $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "ClearBar"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "ClearBar" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "ClearBar"
-            if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.ClearBar"
-            }
-        }
-
-        $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "Clear"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Clear" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "Clear"
-            if ($keyexists -eq $True) {
-                "Failed to remove Clearbar => Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run.Clear"
+        $runKeys = @("ClearBar", "Clear")
+        foreach ($runKey in $runKeys) {
+            $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+            if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
+                Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
+                if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
+                    Write-Host "Failed to remove Clearbar -> $keypath.$runKey"
+                }
             }
         }
     }
