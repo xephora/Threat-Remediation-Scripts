@@ -24,10 +24,33 @@ $process_names = @("epibrowser")
 }
 
 Start-Sleep -Seconds 2
-$file_paths = @("\AppData\Local\EPISoftware\")
+$file_paths = @("\AppData\Local\EPISoftware\",
+"\appdata\Roaming\Microsoft\Windows\Start Menu\Programs\EpiBrowser.lnk"
+"\appdata\Roaming\Microsoft\Windows\Start Menu\Programs\EpiStart.lnk"
+)
 
 # Iterate through users for Epibrowser-related directories and deletes them
 foreach ($folder in (Get-ChildItem C:\Users)) {
+	foreach ($fpath in $file_paths) {
+		$path = Join-Path -Path $folder.FullName -ChildPath $fpath
+		# Debugging output
+		Write-Output "Checking path: $path"
+		if (Test-Path $path) {
+			Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
+			if (-not (Test-Path $path)) {
+				Write-Output "$path has been deleted."
+			} else {
+				Write-Output "$path could not be deleted."
+			}
+		} else {
+			Write-Output "$path does not exist."
+		}
+	}
+}
+
+# Deletes system32 task
+$file_paths = @("EpiBrowserStartup*")
+foreach ($folder in (Get-item C:\Windows\system32\tasks\)) {
 	foreach ($fpath in $file_paths) {
 		$path = Join-Path -Path $folder.FullName -ChildPath $fpath
 		# Debugging output
@@ -73,6 +96,67 @@ foreach($registry_hive in (get-childitem registry::hkey_users)){
 	}
 }
 
+# Further removing traces from user registry
+$keys = @(
+"\Software\Classes\EPIHTML*",
+"\Software\Classes\EPIPDF*",
+"\Software\Clients\StartMenuInternet\EpiBrowser*",
+"\Software\Microsoft\Windows\CurrentVersion\App Paths\epibrowser.exe",
+"\Software\Microsoft\Windows\CurrentVersion\App Paths\epibrowser.exe",
+"\Software\Microsoft\Windows\CurrentVersion\Uninstall\EPISoftware EpiBrowser"
+)
+foreach($registry_hive in (get-childitem registry::hkey_users)){
+	foreach ($key in $keys){
+		$path = $registry_hive.pspath + $key
+		if (test-path $path){
+			$reg_key = Get-Item $path
+			$prop_value = $reg_key.PSChildName | Where-Object { $_ -like $key.Split('\')[-1] }
+			if ($prop_value){
+				Remove-Item $path -Force -Recurse
+				Write-output "$path registry key has been removed."
+			}
+		}
+	}
+}
+
+$keys = @(
+"\Software\Classes\.shtml\OpenWithProgids\",
+"\Software\Classes\.htm\OpenWithProgids\"
+)
+$reg_properties = @("EPIHTML*")
+foreach($registry_hive in (get-childitem registry::hkey_users)){
+	foreach($key in $keys){
+		foreach($reg_property in $reg_properties){
+			$path = $registry_hive.pspath + $key
+			if (test-path $path){
+				$reg_key = Get-Item $path
+				$prop_value = $reg_key.Property | Where-Object { $_ -like $reg_property }
+				if ($prop_value){
+					Remove-ItemProperty $path $prop_value
+					Write-output "$path\$prop_value registry property value has been removed."
+				}
+			}
+		}
+	}
+}
+# Removing traces from Local Machine registry
+$reg_properties = @(
+"\Software\Microsoft\MediaPlayer\ShimInclusionList\epibrowser.exe",
+"\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\EpiBrowserStartup*"
+)
+$registry_hive = Get-Item registry::HKEY_LOCAL_MACHINE
+foreach($property in $reg_properties){
+	$path = $registry_hive.pspath
+	if (test-path $path){
+		$reg_key = Get-Item $path
+		$prop_value = $reg_key.GetValueNames() | Where-Object { $_ -like $property }
+		if ($prop_value){
+			Remove-ItemProperty $path $prop_value
+			Write-output "$path\$prop_value registry property value has been removed."
+			}
+		}
+}
+
 $schtasknames = @("EpiBrowserStartup*")
 $c = 0
 
@@ -87,5 +171,5 @@ foreach ($taskname in $schtasknames){
 }
 
 if ($c -eq 0){
-	Write-Output "No OneStart scheduled tasks were found."
+	Write-Output "No Epibrowser scheduled tasks were found."
 }
