@@ -2,174 +2,127 @@
 #Based on Onelaunch removal script:
 #https://github.com/xephora/Threat-Remediation-Scripts/blob/main/OneLaunch/OneLaunch-Remediation-Script.ps1
 
-# find running processes with "epibrowser" in them
-$valid_path = "C:\Users\*\AppData\Local\EPISoftware\*"
-$process_names = @("epibrowser")
-    foreach ($proc in $process_names){
-	$OL_processes = Get-Process | Where-Object { $_.Name -like $proc }
-	if ($OL_processes.Count -eq 0){
-		Write-Output "No $proc processes were found."
-	}else {
-		write-output "The following processes contained $proc and file paths will be checked: $OL_processes"
-		foreach ($process in $OL_processes){
-			$path = $process.Path
-			if ($path -like $valid_path){
-				Stop-Process $process -Force
-				Write-Output "$proc process file path matches and has been stopped."
-			}else {
-				Write-Output "$proc file path doesn't match and process was not stopped."
-			}
-		}
-	}
+$process = Get-Process epibrowser -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
 }
-
+$process = Get-Process setup -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
+}
 Start-Sleep -Seconds 2
-$file_paths = @("\AppData\Local\EPISoftware\",
-"\appdata\Roaming\Microsoft\Windows\Start Menu\Programs\EpiBrowser.lnk"
-"\appdata\Roaming\Microsoft\Windows\Start Menu\Programs\EpiStart.lnk"
+
+$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
+foreach ($user in $user_list) {
+    if ($user -notlike "*Public*") {
+        $paths = @(
+            "C:\Users\$user\AppData\Local\EPISoftware",
+            "C:\Users\$user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\EpiBrowser.lnk",
+            "C:\Users\$user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\EpiStart.lnk"
+        )
+        foreach ($path in $paths) {
+            if (Test-Path -Path $path) {
+                Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
+                if (Test-Path -Path $path) {
+                    Write-Host "Failed to remove EpiBrowser -> $path"
+                }
+            }
+        }
+    }
+}
+
+$tasks = @(
+    "EpiBrowserStartup*"
 )
-
-# Iterate through users for Epibrowser-related directories and deletes them
-foreach ($folder in (Get-ChildItem C:\Users)) {
-	foreach ($fpath in $file_paths) {
-		$path = Join-Path -Path $folder.FullName -ChildPath $fpath
-		# Debugging output
-		Write-Output "Checking path: $path"
-		if (Test-Path $path) {
-			Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-			if (-not (Test-Path $path)) {
-				Write-Output "$path has been deleted."
-			} else {
-				Write-Output "$path could not be deleted."
-			}
-		} else {
-			Write-Output "$path does not exist."
-		}
-	}
+foreach ($task in $tasks) {
+    $taskPath = "C:\windows\system32\tasks\$task"
+    if (Test-Path -Path $taskPath) {
+        Remove-Item -Path $taskPath -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path -Path $taskPath) {
+            Write-Host "Failed to remove EpiBrowser task -> $taskPath"
+        }
+    }
 }
 
-# Deletes system32 task
-$file_paths = @("EpiBrowserStartup*")
-foreach ($folder in (Get-item C:\Windows\system32\tasks\)) {
-	foreach ($fpath in $file_paths) {
-		$path = Join-Path -Path $folder.FullName -ChildPath $fpath
-		# Debugging output
-		Write-Output "Checking path: $path"
-		if (Test-Path $path) {
-			Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-			if (-not (Test-Path $path)) {
-				Write-Output "$path has been deleted."
-			} else {
-				Write-Output "$path could not be deleted."
-			}
-		} else {
-			Write-Output "$path does not exist."
-		}
-	}
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        $registryPaths = @(
+            "Registry::$sid\Software\EPISoftware",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\EPISoftware EpiBrowser"
+        )
+        foreach ($regPath in $registryPaths) {
+            if (Test-Path -Path $regPath) {
+                Remove-Item -Path $regPath -Recurse -Force -ErrorAction SilentlyContinue
+                if (Test-Path -Path $regPath) {
+                    Write-Host "Failed to remove EpiBrowser -> $regPath"
+                }
+            }
+        }
+
+        $runKeys = @("EpiBrowserStartup", "EpiBrowserUpdate")
+        foreach ($runKey in $runKeys) {
+            $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+            if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
+                Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
+                if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
+                    Write-Host "Failed to remove EpiBrowser -> $keypath.$runKey"
+                }
+            }
+        }
+
+        $classKeys = @(
+            "Registry::$sid\Software\Classes\EPIHTML*",
+            "Registry::$sid\Software\Classes\EPIPDF*",
+            "Registry::$sid\Software\Clients\StartMenuInternet\EpiBrowser*",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\App Paths\epibrowser.exe"
+        )
+        foreach ($classKey in $classKeys) {
+            if (Test-Path -Path $classKey) {
+                Remove-Item $classKey -Force -Recurse -ErrorAction SilentlyContinue
+                if (Test-Path -Path $classKey) {
+                    Write-Host "Failed to remove EpiBrowser -> $classKey"
+                }
+            }
+        }
+    }
 }
 
-$reg_paths = @("\Software\EPISoftware")
-
-# iterate through users for epibrowser related registry keys and removes them
-foreach ($registry_hive in (get-childitem registry::hkey_users)) {
-	foreach ($regpath in $reg_paths){
-		$path = $registry_hive.pspath + $regpath
-		if (test-path $path) {
-			Remove-item -Path $path -Recurse -Force
-			write-output "$path has been removed."
-		}
-	}
-}
-
-$reg_properties = @("EpiBrowserStartup", "EpiBrowserUpdate")
-foreach($registry_hive in (get-childitem registry::hkey_users)){
-	foreach ($property in $reg_properties){
-		$path = $registry_hive.pspath + "\software\microsoft\windows\currentversion\run"
-		if (test-path $path){
-			$reg_key = Get-Item $path
-			$prop_value = $reg_key.GetValueNames() | Where-Object { $_ -like $property }
-			if ($prop_value){
-				Remove-ItemProperty $path $prop_value
-				Write-output "$path\$prop_value registry property value has been removed."
-			}
-		}
-	}
-}
-
-# Further removing traces from user registry
-$keys = @(
-"\Software\Classes\EPIHTML*",
-"\Software\Classes\EPIPDF*",
-"\Software\Clients\StartMenuInternet\EpiBrowser*",
-"\Software\Microsoft\Windows\CurrentVersion\App Paths\epibrowser.exe",
-"\Software\Microsoft\Windows\CurrentVersion\App Paths\epibrowser.exe",
-"\Software\Microsoft\Windows\CurrentVersion\Uninstall\EPISoftware EpiBrowser"
+$taskCacheKeys = @(
+    "Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\EpiBrowserStartup*"
 )
-foreach($registry_hive in (get-childitem registry::hkey_users)){
-	foreach ($key in $keys){
-		$path = $registry_hive.pspath + $key
-		if (test-path $path){
-			$reg_key = Get-Item $path
-			$prop_value = $reg_key.PSChildName | Where-Object { $_ -like $key.Split('\')[-1] }
-			if ($prop_value){
-				Remove-Item $path -Force -Recurse
-				Write-output "$path registry key has been removed."
-			}
-		}
-	}
+foreach ($taskCacheKey in $taskCacheKeys) {
+    if (Test-Path -Path $taskCacheKey) {
+        Remove-Item -Path $taskCacheKey -Recurse -ErrorAction SilentlyContinue
+    }
 }
 
-$keys = @(
-"\Software\Classes\.shtml\OpenWithProgids\",
-"\Software\Classes\.htm\OpenWithProgids\"
+$registryLMKeys = @(
+    "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MediaPlayer\ShimInclusionList\epibrowser.exe"
 )
-$reg_properties = @("EPIHTML*")
-foreach($registry_hive in (get-childitem registry::hkey_users)){
-	foreach($key in $keys){
-		foreach($reg_property in $reg_properties){
-			$path = $registry_hive.pspath + $key
-			if (test-path $path){
-				$reg_key = Get-Item $path
-				$prop_value = $reg_key.Property | Where-Object { $_ -like $reg_property }
-				if ($prop_value){
-					Remove-ItemProperty $path $prop_value
-					Write-output "$path\$prop_value registry property value has been removed."
-				}
-			}
-		}
-	}
-}
-# Removing traces from Local Machine registry
-$reg_properties = @(
-"\Software\Microsoft\MediaPlayer\ShimInclusionList\epibrowser.exe",
-"\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\EpiBrowserStartup*"
-)
-$registry_hive = Get-Item registry::HKEY_LOCAL_MACHINE
-foreach($property in $reg_properties){
-	$path = $registry_hive.pspath
-	if (test-path $path){
-		$reg_key = Get-Item $path
-		$prop_value = $reg_key.GetValueNames() | Where-Object { $_ -like $property }
-		if ($prop_value){
-			Remove-ItemProperty $path $prop_value
-			Write-output "$path\$prop_value registry property value has been removed."
-			}
-		}
+foreach ($lmKey in $registryLMKeys) {
+    if (Test-Path -Path $lmKey) {
+        Remove-Item $lmKey -Recurse -ErrorAction SilentlyContinue
+        if (Test-Path -Path $lmKey) {
+            Write-Host "Failed to remove EpiBrowser -> $lmKey"
+        }
+    }
 }
 
 $schtasknames = @("EpiBrowserStartup*")
 $c = 0
 
-# find epibrowser related scheduled tasks and unregister them
-foreach ($taskname in $schtasknames){
-	$tasks = get-scheduledtask -taskname $taskname -ErrorAction SilentlyContinue
-	foreach ($task in $tasks){
-		$c++
-		Unregister-ScheduledTask -TaskName $task.taskname -Confirm:$false
-		Write-Output "Scheduled task '$task' has been removed."
-	}
+foreach ($taskname in $schtasknames) {
+    $tasks = Get-ScheduledTask -TaskName $taskname -ErrorAction SilentlyContinue
+    foreach ($task in $tasks) {
+        $c++
+        Unregister-ScheduledTask -TaskName $task.TaskName -Confirm:$false -ErrorAction SilentlyContinue
+        Write-Host "Scheduled task '$task.TaskName' has been removed."
+    }
 }
 
-if ($c -eq 0){
-	Write-Output "No Epibrowser scheduled tasks were found."
+if ($c -eq 0) {
+    Write-Host "No EpiBrowser scheduled tasks were found."
 }
