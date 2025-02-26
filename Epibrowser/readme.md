@@ -9,4 +9,4 @@
 
 ### Description
 
-I created a script to remediate EpiBrowser.
+A contributor by the name of @JeremyBBD has developed an automated script to remove EpiBrowser.
