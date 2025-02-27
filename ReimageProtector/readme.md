@@ -4,6 +4,7 @@ A remediation script will be created shortly.
 
 ### File System:
 ```
+C:\Program Files\Reimage
 C:\ProgramData\Reimage Protector
 C:\users\{profile}\Downloads\ReimageRepair.exe
 ```
