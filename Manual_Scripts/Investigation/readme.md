@@ -40,6 +40,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Checks `programs` directory within `Start Menu` in addition to `startup`.
 - Checks for apps installed from the Windows app store.
 - Checks for user's PowerShell history file.
+- Removed the temporary file enumeration to improve runtime efficiency and preserve screen real estate.
 
 ## ScanDLL
 
