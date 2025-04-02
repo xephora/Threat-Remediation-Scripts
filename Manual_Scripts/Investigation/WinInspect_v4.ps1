@@ -294,6 +294,17 @@ foreach ($disk in $logicalDisks) {
     $diskInfo | ConvertTo-Json
 }
 
+"`n`n[+] Enuerating PowerShell History"
+$filePath = "C:\Users\$username\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+
+if (Test-Path $filePath) {
+    $file = Get-Item $filePath
+    $sizeInMB = [Math]::Round($file.Length / 1MB, 2)
+
+    Write-Host "Path: $($file.FullName)"
+    Write-Host "Size (MB): $sizeInMB"
+}
+
 "`n`n [+] Enumerating Chrome Extensions"
 if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\default") {
     $defaultExtensions = @(gci "C:\Users\$username\appdata\local\Google\chrome\User Data\default\extensions" -r -fi "manifest.json" | % { $_.FullName})
