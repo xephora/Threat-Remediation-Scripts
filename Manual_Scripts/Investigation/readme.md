@@ -35,6 +35,9 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Shifted down service enumeration to speed up runtime.
 - Added temp file enumeration.
 
+### Update to WinInspect_v4 (4-2-2025)
+- Added Uninstall keys enumeration
+
 ## ScanDLL
 
 Description:  
