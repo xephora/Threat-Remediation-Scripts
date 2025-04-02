@@ -37,6 +37,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 
 ### Update to WinInspect_v4 (4-2-2025)
 - Added Uninstall keys enumeration
+- Checks `programs` directory within `Start Menu` in addition to `startup`.
 
 ## ScanDLL
 
