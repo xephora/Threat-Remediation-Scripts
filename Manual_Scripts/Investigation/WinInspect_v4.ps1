@@ -162,6 +162,23 @@ foreach ($j in $sid_list) {
     }
 }
 
+"`n`n [+] Checking Uninstall Keys"
+Get-ChildItem "Registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" `
+| ForEach-Object {
+    $keyName = $_.PSChildName
+    $props = Get-ItemProperty -Path $_.PSPath -ErrorAction SilentlyContinue
+    
+    if ($props.DisplayName) {
+        [PSCustomObject]@{
+            KeyName         = $keyName
+            DisplayName     = $props.DisplayName
+            DisplayVersion  = $props.DisplayVersion
+            Publisher       = $props.Publisher
+            UninstallString = $props.UninstallString
+        }
+    }
+}|convertto-json
+
 "`n`n[+] Chrome History files"
 $exists=test-path "C:\users\$username\AppData\Local\google\Chrome\User Data"
 if ($exists) {
