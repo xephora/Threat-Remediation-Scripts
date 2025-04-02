@@ -372,6 +372,12 @@ foreach ($file in $tmpFiles) {
     }
 }
 
+"`n`n[+] Checking for AppxPacakages"
+Get-AppxPackage `
+| Where-Object { $_.Name -like "*Microsoft*" } `
+| Select-Object Name, PackageFullName, InstallLocation `
+| ConvertTo-Json
+
 # Running Services
 "`n`n[+] Checking for running services"
 Get-Service | Where-Object { $_.Status -eq "Running" } | ForEach-Object {
