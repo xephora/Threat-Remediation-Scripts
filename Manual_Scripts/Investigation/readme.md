@@ -35,7 +35,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Shifted down service enumeration to speed up runtime.
 - Added temp file enumeration.
 
-### Update to WinInspect_v4 (4-2-2025)
+### Major update to WinInspect_v4 (4-2-2025)
 - Added Uninstall keys enumeration
 - Checks `programs` directory within `Start Menu` in addition to `startup`.
 - Checks for apps installed from the Windows app store.
