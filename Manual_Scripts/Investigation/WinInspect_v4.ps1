@@ -2,10 +2,33 @@
 $username = "USERNAME"
 
 # File System - Startups
-"[+]  Checking Startup Locations"
+"[+]  Checking Start Menu Startup"
 $folders = @(
     "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup",
     "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
+)
+$results = @()
+
+foreach ($folder in $folders) {
+    Get-ChildItem -Path $folder -Filter "*.lnk" -Force -ErrorAction SilentlyContinue | ForEach-Object {
+        $shell = New-Object -ComObject WScript.Shell
+        $shortcut = $shell.CreateShortcut($_.FullName)
+        $targetPath = $shortcut.TargetPath
+
+        $result = @{
+            'ShortcutPath' = $_.FullName
+            'TargetPath'   = $targetPath
+        }
+        $results += $result
+    }
+}
+$results | ConvertTo-Json
+
+# File System - Program Shortcuts
+"[+]  Checking Start Menu Location"
+$folders = @(
+    "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs",
+    "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 )
 $results = @()
 
