@@ -39,6 +39,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Added Uninstall keys enumeration
 - Checks `programs` directory within `Start Menu` in addition to `startup`.
 - Checks for apps installed from the Windows app store.
+- Checks for user's PowerShell history file.
 
 ## ScanDLL
 
