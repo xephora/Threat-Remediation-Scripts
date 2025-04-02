@@ -354,35 +354,6 @@ if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*
     }
 }
 
-"`n`n [+] Enumerating Temp Directory"
-$tmpFiles = Get-ChildItem -Path $tempDir -Filter *.tmp
-foreach ($file in $tmpFiles) {
-    try {
-        $bytes = New-Object byte[] 4
-        $fileStream = [System.IO.File]::OpenRead($file.FullName)
-        $fileStream.Read($bytes, 0, 4) | Out-Null
-        $fileStream.Close()
-        $fileSignature = ($bytes | ForEach-Object { $_.ToString("X2") }) -join ''
-
-        $fileType = "Unknown"
-        foreach ($signature in $fileSignatures.Keys) {
-            if ($fileSignature.StartsWith($signature)) {
-                $fileType = $fileSignatures[$signature]
-                break
-            }
-        }
-
-        $versionInfo = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName)
-        if ($versionInfo -and $versionInfo.OriginalFilename) {
-            Write-Host "File: $($file.Name), Original File: $($versionInfo.OriginalFilename), Type: $fileType"
-        } else {
-            "File: $($file.Name), Type: $fileType"
-        }
-    } catch {
-        "File: $($file.Name) is currently in use and cannot be processed."
-    }
-}
-
 "`n`n[+] Checking for AppxPacakages"
 Get-AppxPackage `
 | Where-Object { $_.Name -like "*Microsoft*" } `
