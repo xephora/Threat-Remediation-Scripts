@@ -24,7 +24,7 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Disk enumeration now includes both logical disks and image disks (mounted ISOs), offering complete paths when available.
 
 ### Update to WinInspect_v4 (05-31-2023)
-- For computers that do not have chrome installed, the WinInspect was breaking when enumerating history files.  I added a check if the chrome directory exists.  Small QoL imporvement.
+- For computers that do not have chrome installed, the WinInspect was breaking when enumerating history files.  I added a check if the chrome directory exists.  Small QoL improvement.
 - WinInspect_v3 will be decommissioned.
 
 ### Update to WinInspect_v4 (12-29-2023)
