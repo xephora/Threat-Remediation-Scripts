@@ -20,7 +20,7 @@
     PS> CS-UninstallTokenGen.ps1 -Hostfile .\hosts.csv
 #>
 
-# After reviewing the source code for psfalcon sensor script, I was able to reconstruct a working poc designed for external tools such as Microsoft Intunes. It passively retrieves the uninstall maintenance token from a given hostname.
+# After reviewing the source code for psfalcon sensor script, I was able to reconstruct a working poc designed for external tools such as Microsoft Intunes. It passively retrieves the uninstall maintenance token from a given hostname. 
 # https://github.com/CrowdStrike/psfalcon/blob/f0b3a683b0e1d17857b1785b5e7da06097d7714d/public/psf-sensors.ps1#L323
 # Requirements: Refer to PSFalcon's wiki https://github.com/CrowdStrike/psfalcon/wiki/Uninstall-FalconSensor
 param(
