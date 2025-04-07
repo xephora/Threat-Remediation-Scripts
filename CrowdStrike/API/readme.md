@@ -1,3 +1,19 @@
+# CrowdSrike Uninstall Token Generator
+
+The tool generates a maintenance token from a given hostname.
+
+```
+Usage:
+CS-UninstallTokenGen.ps1 -Hostname hostname
+CS-UninstallTokenGen.ps1 -Hostfile .\hosts.csv
+CS-UninstallTokenGen.ps1 -Hostfile .\hosts.txt
+
+Result:
+CS-UninstallTokenGen.ps1 -hostname HOSTNAME01
+HOSTNAME01 maintenance_abcdef0123456789_token
+Maintenance tokens dumped to token_list.csv
+```
+
 # CrowdStrike API script (queued feature)
 
 ### The queued feature allows you to run a script on a host that is offline.  Once the host appears online, the script will run.
