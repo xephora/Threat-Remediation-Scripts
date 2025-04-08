@@ -14,6 +14,8 @@ HOSTNAME01 maintenance_abcdef0123456789_token
 Maintenance tokens dumped to token_list.csv
 ```
 
+Make sure the CID and secret are inserted into the script, and verify that you have the necessary API permissions.  Please refer to https://github.com/CrowdStrike/psfalcon/wiki/Uninstall-FalconSensor for the requirements.
+
 # CrowdStrike API script (queued feature)
 
 ### The queued feature allows you to run a script on a host that is offline.  Once the host appears online, the script will run.
