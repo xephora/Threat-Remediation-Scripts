@@ -76,6 +76,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
 - [ReimageProtector](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ReimageProtector)
 - [Restoro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Restoro)
+- [ShiftBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ShiftBrowser)
 - [SlimCleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/SlimCleaner)
 - [Strength](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Strength)
 - [Taskbarsystem](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Taskbarsystem)
