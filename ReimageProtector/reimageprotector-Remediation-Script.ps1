@@ -24,7 +24,7 @@ foreach ($user in $user_list) {
             if (Test-Path -Path $path) {
                 Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
                 if (Test-Path -Path $path) {
-                    Write-Host "Failed to remove ShiftBrowser -> $path"
+                    Write-Host "Failed to remove Reimage Protector -> $path"
                 }
             }
         }
@@ -39,7 +39,7 @@ foreach ($task in $tasks) {
     if (Test-Path -Path $taskPath) {
         Remove-Item -Path $taskPath -Recurse -Force -ErrorAction SilentlyContinue
         if (Test-Path -Path $taskPath) {
-            Write-Host "Failed to remove ShiftBrowser task -> $taskPath"
+            Write-Host "Failed to remove Reimage Protector task -> $taskPath"
         }
     }
 }
@@ -56,7 +56,7 @@ foreach ($sid in $sid_list) {
             if (Test-Path -Path $regPath) {
                 Remove-Item -Path $regPath -Recurse -Force -ErrorAction SilentlyContinue
                 if (Test-Path -Path $regPath) {
-                    Write-Host "Failed to remove ShiftBrowser -> $regPath"
+                    Write-Host "Failed to remove Reimage Protector -> $regPath"
                 }
             }
         }
@@ -67,7 +67,7 @@ foreach ($sid in $sid_list) {
             if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
                 Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
                 if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
-                    Write-Host "Failed to remove ShiftBrowser -> $keypath.$runKey"
+                    Write-Host "Failed to remove Reimage Protector -> $keypath.$runKey"
                 }
             }
         }
@@ -89,7 +89,7 @@ $keypath = "Registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
 if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
     Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
     if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
-        Write-Host "Failed to remove ShiftBrowser -> $keypath.$runKey"
+        Write-Host "Failed to remove Reimage Protector -> $keypath.$runKey"
     }
 }
 
