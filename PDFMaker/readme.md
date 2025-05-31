@@ -1,6 +1,6 @@
 # PDF Maker Remediation script
 
-### Other names known as
+### Other names for PDFMaker
 PDFFast
 
 ### Actions
