@@ -1,7 +1,7 @@
 # PDF Maker Remediation script
 
 ### Other names for PDFMaker
-PDFFast
+PDFast
 
 ### Actions
 - Terminates processes associated with PDF Maker
