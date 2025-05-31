@@ -46,7 +46,6 @@ foreach ($sid in $sid_list) {
             "Registry::$sid\Software\PDFMaker",
             "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\PDFMaker 1.0.1",
             "Registry::$sid\Software\Microsoft\Installer\Products\866A81E1E7D4B234D9D920D1BD30209A",
-            "Registry::$sid\Software\Caphyon",
             "Registry::$sid\Software\Microsoft\Installer\Products\2869F0CE147ABAD43AAB440DC66A40AD",
             "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\PDFast 1.0.0",
             "Registry::$sid\Software\PDFast",
