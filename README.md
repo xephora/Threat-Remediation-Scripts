@@ -71,6 +71,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [PCAppStore](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCAppStore)
 - [PCHelpSoftDriverUpdater](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCHelpSoftDriverUpdater)
 - [PC_Cleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PC_Cleaner)
+- [PDFMaker](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFMaker)
 - [PDFunk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFunk)
 - [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
