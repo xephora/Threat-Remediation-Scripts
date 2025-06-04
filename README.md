@@ -75,6 +75,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [PDFunk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFunk)
 - [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
+- [RecipeListener](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RecipeListener)
 - [ReimageProtector](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ReimageProtector)
 - [Restoro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Restoro)
 - [ShiftBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ShiftBrowser)
