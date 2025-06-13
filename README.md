@@ -80,6 +80,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [Restoro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Restoro)
 - [ShiftBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ShiftBrowser)
 - [SlimCleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/SlimCleaner)
+- [Sogou](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Sogou)
 - [Strength](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Strength)
 - [Taskbarsystem](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Taskbarsystem)
 - [Tone](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Tone)
