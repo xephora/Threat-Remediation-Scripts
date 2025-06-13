@@ -70,6 +70,77 @@ Running the script without administrator:
 [+] Discovered Dependency: C:\WINDOWS\SYSTEM32\FLTLIB.DLL on Process: explorer
 ```
 
+## UnloadDll
+
+Description:  
+Scans all processes for a specific module and attempts to unload it using FreeLibrary.
+
+- Designed for CrowdStrike but can also be run locally.
+- Be sure to replace the values with the appropriate username and module name you wish to unload.
+- Disclaimer: I am not responsible for any issues caused by unloading critical modules.
+
+```
+[DllScanner]::ScanAndUnload('jsmith', 'wlidprov.dll')
+Done. Results in C:\windows\temp\results.log
+
+PS C:\> cat C:\windows\temp\results.log
+[+] Starting scan at 6/13/2025 6:28:00 PM
+[>] SearchApp (4924) owned by DESKTOP-TEST\jsmith
+[>] svchost (5500) owned by DESKTOP-TEST\jsmith
+[>] OneDrive (7400) owned by DESKTOP-TEST\jsmith
+  [+] Found matching DLL: C:\Windows\System32\wlidprov.dll
+      BaseAddress: 0x7FFD9DED0000
+      [*] FreeLibrary queued (TID 7772)
+[>] msedgewebview2 (4116) owned by DESKTOP-TEST\jsmith
+[>] svchost (5048) owned by DESKTOP-TEST\jsmith
+[>] taskhostw (5096) owned by DESKTOP-TEST\jsmith
+[>] powershell (3028) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (7052) owned by DESKTOP-TEST\jsmith
+[>] smartscreen (8968) owned by DESKTOP-TEST\jsmith
+[>] msedge (4168) owned by DESKTOP-TEST\jsmith
+[>] msedgewebview2 (7836) owned by DESKTOP-TEST\jsmith
+[>] SecurityHealthSystray (5652) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (5364) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (6164) owned by DESKTOP-TEST\jsmith
+[>] msedge (10172) owned by DESKTOP-TEST\jsmith
+[>] ctfmon (4500) owned by DESKTOP-TEST\jsmith
+[>] msedge (4648) owned by DESKTOP-TEST\jsmith
+[>] vmtoolsd (6796) owned by DESKTOP-TEST\jsmith
+[>] SearchApp (492) owned by DESKTOP-TEST\jsmith
+[>] dllhost (7788) owned by DESKTOP-TEST\jsmith
+[>] msedgewebview2 (3736) owned by DESKTOP-TEST\jsmith
+[>] TextInputHost (7972) owned by DESKTOP-TEST\jsmith
+[>] SearchProtocolHost (3696) owned by DESKTOP-TEST\jsmith
+[>] msedge (8360) owned by DESKTOP-TEST\jsmith
+[>] taskhostw (3432) owned by DESKTOP-TEST\jsmith
+[>] ShellExperienceHost (9440) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (5988) owned by DESKTOP-TEST\jsmith
+[>] msedgewebview2 (4608) owned by DESKTOP-TEST\jsmith
+[>] msedgewebview2 (1056) owned by DESKTOP-TEST\jsmith
+[>] StartMenuExperienceHost (5780) owned by DESKTOP-TEST\jsmith
+[>] WinStore.App (9084) owned by DESKTOP-TEST\jsmith
+[>] sihost (4980) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (7736) owned by DESKTOP-TEST\jsmith
+[>] msedgewebview2 (6928) owned by DESKTOP-TEST\jsmith
+[>] SkypeApp (8744) owned by DESKTOP-TEST\jsmith
+[>] msedge (2208) owned by DESKTOP-TEST\jsmith
+[>] explorer (4348) owned by DESKTOP-TEST\jsmith
+  [+] Found matching DLL: C:\Windows\System32\wlidprov.dll
+      BaseAddress: 0x7FFD9DED0000
+      [*] FreeLibrary queued (TID 6284)
+[>] svchost (5012) owned by DESKTOP-TEST\jsmith
+[>] Taskmgr (6180) owned by DESKTOP-TEST\jsmith
+[>] ApplicationFrameHost (2584) owned by DESKTOP-TEST\jsmith
+[>] notepad (8492) owned by DESKTOP-TEST\jsmith
+[>] svchost (7900) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (1396) owned by DESKTOP-TEST\jsmith
+[>] UserOOBEBroker (3688) owned by DESKTOP-TEST\jsmith
+[>] WWAHost (2580) owned by DESKTOP-TEST\jsmith
+[>] conhost (9724) owned by DESKTOP-TEST\jsmith
+[>] RuntimeBroker (8296) owned by DESKTOP-TEST\jsmith
+[+] Scan complete at 6/13/2025 6:28:28 PM
+```
+
 # Win-PortScanner
 
 - A PowerShell Port scanner that is designed to quickly scan a neighboring device.  It only scans the very basic ports, DNS, SMB, HTTP, HTTPS, WinRM, RDP.
