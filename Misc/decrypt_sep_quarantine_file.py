@@ -30,7 +30,7 @@ def decode_payload(file):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python decrypt_sep_quarantine_file.py <encrypted_file>")
+        print("Usage: python decrypt_sep_quarantine_file.py <quarantine_file>")
         sys.exit(1)
 
     with open(sys.argv[1], "rb") as f:
