@@ -1,119 +1,90 @@
-Get-Process AppMaster -ErrorAction SilentlyContinue | Stop-Process -Force
-Get-Process AppSync -ErrorAction SilentlyContinue | Stop-Process -Force
-sleep 2
-
-$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
-foreach ($i in $user_list) {
-    if (test-path -Path "C:\Users\$i\appdata\roaming\AppMaster") {
-        rm "C:\Users\$i\appdata\roaming\AppMaster" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$i\appdata\roaming\AppMaster") {
-            "Failed to remove AppMaster -> C:\Users\$i\appdata\roaming\AppMaster"
-        }
-    }
-    if (test-path -Path "C:\Users\$i\AppData\Roaming\AppSync") {
-        rm "C:\Users\$i\AppData\Roaming\AppSync" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$i\AppData\Roaming\AppSync") {
-            "Failed to remove AppMaster -> C:\Users\$i\AppData\Roaming\AppSync"
-        }
-    }
+$process = Get-Process "AppMaster" -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
 }
 
-if (test-path "C:\windows\system32\tasks\Update_Normandoh") {
-    Remove-Item -Path "C:\windows\system32\tasks\Update_Normandoh" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\Update_Normandoh") {
-        "Failed to remove AppMaster -> C:\windows\system32\tasks\Update_Normandoh"
-    }
+$process = Get-Process "AppSync" -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
 }
+Start-Sleep -Seconds 2
 
-if (test-path "C:\windows\system32\tasks\UpdatePrt") {
-    Remove-Item -Path "C:\windows\system32\tasks\UpdatePrt" -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\UpdatePrt") {
-        "Failed to remove AppMaster -> C:\windows\system32\tasks\UpdatePrt"
-    }
-}
-
-if (test-path "C:\windows\system32\tasks\WaterfoxLimited") {
-    Remove-Item -Path "C:\windows\system32\tasks\WaterfoxLimited" -Recurse -ErrorAction SilentlyContinue
-    if (test-path "C:\windows\system32\tasks\WaterfoxLimited") {
-        "Failed to remove AppMaster -> C:\windows\system32\tasks\WaterfoxLimited"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Normandoh') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Normandoh' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Normandoh') {
-        "Failed to remove AppMaster -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Normandoh"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\UpdatePrt') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\UpdatePrt' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\UpdatePrt') {
-        "Failed to remove AppMaster -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\UpdatePrt"
-    }
-}
-
-if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\WaterfoxLimited') {
-    Remove-Item -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\WaterfoxLimited' -Recurse -ErrorAction SilentlyContinue
-    if (test-path 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\WaterfoxLimited') {
-        "Failed to remove AppMaster -> Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\WaterfoxLimited"
-    }
-}
-
-$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
-foreach ($i in $sid_list) {
-    if ($i -notlike "*_Classes*") {
-        $keyexists = test-path -path "Registry::$i\Software\WaterfoxLimited"
-        if ($keyexists -eq $True) {
-            Remove-Item -Path "Registry::$i\Software\WaterfoxLimited" -Recurse -ErrorAction SilentlyContinue
-            $keyexists = test-path -path "Registry::$i\Software\WaterfoxLimited"
-            if ($keyexists -eq $True) {
-                "Failed to remove AppMaster => Registry::$i\Software\WaterfoxLimited"
+$user_list = Get-Item C:\Users\* | Select-Object -ExpandProperty Name
+foreach ($user in $user_list) {
+    $paths = @(
+        "C:\Users\$user\AppData\Roaming\AppMaster",
+        "C:\Users\$user\AppData\Roaming\AppSync"
+    )
+    foreach ($path in $paths) {
+        if (Test-Path $path) {
+            Remove-Item $path -Recurse -Force -ErrorAction SilentlyContinue
+            if (Test-Path $path) {
+                "Failed to remove AppMaster -> $path"
             }
         }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "WaterfoxLimited"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "WaterfoxLimited" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "WaterfoxLimited"
-            if ($keyexists -eq $True) {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.WaterfoxLimited"
+    }
+}
+
+$tasks = @(
+    "Update_Normandoh",
+    "UpdatePrt",
+    "WaterfoxLimited"
+)
+foreach ($task in $tasks) {
+    $taskPath = "C:\Windows\System32\Tasks\$task"
+    if (Test-Path $taskPath) {
+        Remove-Item $taskPath -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path $taskPath) {
+            "Failed to remove AppMaster -> $taskPath"
+        }
+    }
+}
+
+$taskCacheKeys = @(
+    "Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\Update_Normandoh",
+    "Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\UpdatePrt",
+    "Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\TREE\WaterfoxLimited"
+)
+foreach ($key in $taskCacheKeys) {
+    if (Test-Path $key) {
+        Remove-Item $key -Recurse -ErrorAction SilentlyContinue
+        if (Test-Path $key) {
+            "Failed to remove AppMaster -> $key"
+        }
+    }
+}
+
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        # Keys to remove
+        $keysToRemove = @(
+            "Registry::$sid\Software\WaterfoxLimited",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Normandoh",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZipCruncher",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Waterfox 102.4.0 (x64 en-US)"
+        )
+        foreach ($key in $keysToRemove) {
+            if (Test-Path $key) {
+                Remove-Item $key -Recurse -ErrorAction SilentlyContinue
+                if (Test-Path $key) {
+                    "Failed to remove AppMaster => $key"
+                }
             }
         }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "AppSync"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "AppSync" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "AppSync"
-            if ($keyexists -eq $True) {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.AppSync"
-            }
-        }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "AppMaster"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "AppMaster" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "AppMaster"
-            if ($keyexists -eq $True) {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.AppMaster"
-            }
-        }
-        if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Normandoh") {
-            Remove-Item -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Normandoh" -Recurse -ErrorAction SilentlyContinue
-            if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Normandoh") {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Normandoh"
-            }
-        }
-        if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZipCruncher") {
-            Remove-Item -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZipCruncher" -Recurse -ErrorAction SilentlyContinue
-            if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZipCruncher") {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZipCruncher"
-            }
-        }
-        if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Waterfox 102.4.0 (x64 en-US)") {
-            Remove-Item -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Waterfox 102.4.0 (x64 en-US)" -Recurse -ErrorAction SilentlyContinue
-            if (test-path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Waterfox 102.4.0 (x64 en-US)") {
-                "Failed to remove AppMaster => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\Waterfox 102.4.0 (x64 en-US)"
+
+        $runKeys = @("WaterfoxLimited", "AppSync", "AppMaster")
+        $runPath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+        foreach ($runKey in $runKeys) {
+            $exists = (Get-Item $runPath).Property -contains $runKey
+            if ($exists) {
+                Remove-ItemProperty -Path $runPath -Name $runKey -ErrorAction SilentlyContinue
+                $stillExists = (Get-Item $runPath).Property -contains $runKey
+                if ($stillExists) {
+                    "Failed to remove AppMaster => $runPath.$runKey"
+                }
             }
         }
     }
