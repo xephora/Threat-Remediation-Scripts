@@ -1,8 +1,5 @@
 # PDF Spark Remediation script
 
-### Other names for PDFMaker
-PDFast
-
 ### Actions
 - Terminates processes associated with PDF Spark
 - Remove PDF Spark from the file system.
