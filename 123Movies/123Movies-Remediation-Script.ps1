@@ -1,53 +1,67 @@
-Get-Process 123movies -ErrorAction SilentlyContinue | Stop-Process -Force
-Get-Process Update -ErrorAction SilentlyContinue | Stop-Process -Force
-sleep 2
+$processNames = @("123movies", "Update")
+foreach ($name in $processNames) {
+    $process = Get-Process -Name $name -ErrorAction SilentlyContinue
+    if ($process) {
+        $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    }
+    $process = Get-Process -Name $name -ErrorAction SilentlyContinue
+    if ($process) {
+        $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    }
+    $process = Get-Process -Name $name -ErrorAction SilentlyContinue
+    if ($process) {
+        $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    }
+}
 
-
-$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
-foreach ($i in $user_list) {
-    $installers = @(gci C:\users\$i -r -fi "123Movies*.exe" | % {$_.FullName})
-    foreach ($install in $installers) {
-        if (test-path -Path $install) {
-            rm "$install"
-            $installers = @(gci C:\users\$i -r -fi "123Movies*.exe" | % {$_.FullName})
-            if (test-path -Path $install) {
-                "Failed to remove 123Movies -> $install"
+Start-Sleep -Seconds 2
+$user_list = Get-Item C:\Users\* | Select-Object Name -ExpandProperty Name
+foreach ($user in $user_list) {
+    if ($user -notlike "*Public*") {
+        $exePaths = @(Get-ChildItem -Path "C:\Users\$user" -Recurse -Filter "123Movies*.exe" -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })
+        foreach ($exe in $exePaths) {
+            if (Test-Path -Path $exe) {
+                Remove-Item $exe -Force -ErrorAction SilentlyContinue
+                if (Test-Path -Path $exe) {
+                    "Failed to remove 123Movies EXE => $exe"
+                }
             }
         }
-    }
-    if (test-path -Path "C:\Users\$i\appdata\local\123movies") {
-        rm "C:\Users\$i\appdata\local\123movies" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$i\appdata\local\123movies") {
-            "Failed to remove 123Movies -> C:\Users\$i\appdata\local\123movies"
-        }
-    }
-    if (test-path -Path "C:\Users\$i\appdata\roaming\123movies") {
-        rm "C:\Users\$i\appdata\roaming\123movies" -Force -Recurse -ErrorAction SilentlyContinue
-        if (test-path -Path "C:\Users\$i\appdata\roaming\123movies") {
-            "Failed to remove 123Movies -> C:\Users\$i\appdata\roaming\123movies"
+
+        $folders = @(
+            "C:\Users\$user\AppData\Local\123movies",
+            "C:\Users\$user\AppData\Roaming\123movies"
+        )
+        foreach ($folder in $folders) {
+            if (Test-Path $folder) {
+                Remove-Item $folder -Force -Recurse -ErrorAction SilentlyContinue
+                if (Test-Path $folder) {
+                    "Failed to remove 123Movies folder => $folder"
+                }
+            }
         }
     }
 }
 
-$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
-foreach ($i in $sid_list) {
-    if ($i -notlike "*_Classes*") {
-        $regkeys = @(gci "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Uninstall\123movies")
-        foreach ($key in $regkeys) {
-            if (test-path -Path $key) {
-                Remove-Item -Path "Registry::$key" -Recurse
-                if (test-path -Path $key) {
-                    "Failed to remove 123Movies -> $key"
-                }
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        $uninstallKey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\123movies"
+        if (Test-Path $uninstallKey) {
+            Remove-Item $uninstallKey -Recurse -ErrorAction SilentlyContinue
+            if (Test-Path $uninstallKey) {
+                "Failed to remove 123Movies uninstall key => $uninstallKey"
             }
         }
-        $keypath = "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run"
-        $keyexists = (Get-Item $keypath).Property -contains "com.squirrel.123movies.123movies"
-        if ($keyexists -eq $True) {
-            Remove-ItemProperty -Path "Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run" -Name "com.squirrel.123movies.123movies" -ErrorAction SilentlyContinue
-            $keyexists = (Get-Item $keypath).Property -contains "com.squirrel.123movies.123movies"
-            if ($keyexists -eq $True) {
-                "Failed to remove 123Movies => Registry::$i\Software\Microsoft\Windows\CurrentVersion\Run.com.squirrel.123movies.123movies"
+
+        $runKeyPath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+        $valueName = "com.squirrel.123movies.123movies"
+        $keyExists = (Get-ItemProperty -Path $runKeyPath -ErrorAction SilentlyContinue).PSObject.Properties.Name -contains $valueName
+        if ($keyExists) {
+            Remove-ItemProperty -Path $runKeyPath -Name $valueName -ErrorAction SilentlyContinue
+            $keyExists = (Get-ItemProperty -Path $runKeyPath -ErrorAction SilentlyContinue).PSObject.Properties.Name -contains $valueName
+            if ($keyExists) {
+                "Failed to remove 123Movies run key => $runKeyPath.$valueName"
             }
         }
     }
