@@ -15,7 +15,8 @@ Start-Sleep -Seconds 2
 $user_list = Get-Item C:\Users\* | Select-Object -ExpandProperty Name
 foreach ($user in $user_list) {
     $paths = @(
-    	  "C:\Users\$user\Downloads\calendaromatic*.exe",
+        "C:\users\$user\Downloads\EPIC Universe*.exe",
+    	"C:\Users\$user\Downloads\calendaromatic*.exe",
         "C:\Users\$user\AppData\Roaming\calendaromatic-win_x64.exe",
         "C:\Users\$user\AppData\Local\Temp\7ZipSfx.000",
         "C:\Users\$user\AppData\Local\calendaromatic"
