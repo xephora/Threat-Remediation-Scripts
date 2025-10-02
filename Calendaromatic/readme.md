@@ -12,3 +12,12 @@ A remediation script for Calendaromatic has been created. Thank you to @rdsece f
 
 ### References
 https://www.guidepointsecurity.com/blog/ai-exposes-homoglyph-hustle/
+
+### Update Oct, 02, 2025
+
+The following paths were added to the remediation script as alternative installer file names.
+
+```
+C:\Users\<username>\Downloads\EPIC Universe*.exe
+C:\Users\<username>\Downloads\7ZSfxMod*.exe
+```
