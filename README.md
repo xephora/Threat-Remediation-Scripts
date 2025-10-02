@@ -34,7 +34,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 
 ### Crowdstrike Remediation Scripts
 
-The following library contains a list of common unwanted software/adware/malware that are seen in the wild.  If you see a particular software you would like to remediate, feel free to download and use it in your environment.
+The following library contains a collection of remediation scripts designed to remove common unwanted software, adware, and malware found in the wild. If you come across a particular program you’d like to remediate, feel free to download the corresponding script and use it in your environment.
 
 - [123Movies](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/123Movies)
 - [39bar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/39bar)
