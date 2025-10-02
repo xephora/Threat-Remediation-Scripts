@@ -47,6 +47,7 @@ The following library contains a list of common unwanted software/adware that ar
 - [BrightTramp](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BrightTramp)
 - [BrowserAssistant](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BrowserAssistant)
 - [ByteFence](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ByteFence)
+- [Calendaromatic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Calendaromatic)
 - [Cash](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Cash)
 - [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
