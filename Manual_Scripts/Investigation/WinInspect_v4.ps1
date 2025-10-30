@@ -56,6 +56,14 @@ gci C:\ -force -ErrorAction SilentlyContinue | % { $_.FullName }
 "C:\ProgramData"
 gci "C:\ProgramData" -force -ErrorAction SilentlyContinue | % { $_.FullName }
 
+"`n`n [+]  Checking 64bit Program Files"
+"C:\program files"
+gci "C:\program files" -force -ErrorAction SilentlyContinue | % { $_.FullName }
+
+"`n`n [+]  Checking 32bit Program Files"
+"C:\program files (x86)"
+gci "C:\program files (x86)" -force -ErrorAction SilentlyContinue | % { $_.FullName }
+
 "`n`n [+]  Checking Common Files"
 "C:\program files\Common Files"
 gci "C:\program files\Common Files" -force -ErrorAction SilentlyContinue | % { $_.FullName }
@@ -303,6 +311,17 @@ if (Test-Path $filePath) {
 
     Write-Host "Path: $($file.FullName)"
     Write-Host "Size (MB): $sizeInMB"
+}
+
+$sid_list = Get-Item -Path "Registry::HKU\*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        "`n`n[+] Enumerating RunMRU"
+        if (test-path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU") {
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
+            Get-ItemProperty -Path "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -ErrorAction SilentlyContinue | ConvertTo-Json
+        }
+    }
 }
 
 "`n`n [+] Enumerating Chrome Extensions"
