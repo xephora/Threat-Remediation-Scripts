@@ -42,6 +42,10 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Checks for user's PowerShell history file.
 - Removed the temporary file enumeration to improve runtime efficiency and preserve screen real estate.
 
+### Update to WinInspect (10-30-2025)
+- Added Program Files (x86 + x64) to the script.
+- Added enumeration of RunMRU registry.
+
 ## ScanDLL
 
 Description:  
