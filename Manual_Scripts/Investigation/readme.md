@@ -46,6 +46,9 @@ The Inspect script does not thoroughly investigate through the system.  The scri
 - Added Program Files (x86 + x64) to the script.
 - Added enumeration of RunMRU registry.
 
+### Update to WinInspect (11-14-2025)
+- Added enumeration of users Outlook profile
+
 ## ScanDLL
 
 Description:  
