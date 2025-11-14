@@ -35,7 +35,6 @@ foreach ($user in $user_list) {
     }
 }
 
-# Registry Key Cleanup
 $sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
 foreach ($sid in $sid_list) {
     if ($sid -notlike "*_Classes*") {
