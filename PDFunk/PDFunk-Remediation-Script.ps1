@@ -1,69 +1,49 @@
-Get-Process PDFunk -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-sleep 2
-$user_list = Get-Item C:\users\* | Select-Object Name -ExpandProperty Name
+$process = Get-Process "PDFunk" -ErrorAction SilentlyContinue
+if ($process) {
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+}
+Start-Sleep -Seconds 2
 
-foreach ($i in $user_list) {
-    if ($i -notlike "*Public*") {
-        $exists = test-path "C:\users\$i\appdata\local\PDFunk"
-        $exists2 = test-path "C:\users\$i\appdata\roaming\PDFunk"
-        $exists3 = test-path "C:\users\$i\appdata\local\pdfunk-updater"
-        $exists4 = test-path "C:\Users\$i\AppData\Local\Programs\PDFunk"
-        $exists5 = test-path "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PDFunk.lnk"        
-        $exists6 = test-path "C:\Users\$i\Downloads\PdfConverters*"  
-        if ($exists -eq $True) {
-            rm "C:\users\$i\appdata\local\PDFunk" -Force -Recurse -ErrorAction SilentlyContinue 
-            $exists = test-path "C:\users\$i\appdata\local\PDFunk"
-            if ($exists -eq $True) {
-                "PDFunk Removal Unsuccessful => C:\users\$i\appdata\local\PDFunk" 
-            }
-        } 
-        if ($exists2 -eq $True) {
-            rm "C:\users\$i\appdata\roaming\PDFunk" -Force -Recurse -ErrorAction SilentlyContinue 
-            $exists2 = test-path "C:\users\$i\appdata\roaming\PDFunk"
-            if ($exists2 -eq $True) {
-                "PDFunk Removal Unsuccessful => C:\users\$i\appdata\roaming\PDFunk"
+$user_list = Get-Item C:\Users\* | Select-Object -ExpandProperty Name
+foreach ($user in $user_list) {
+    $file_paths = @(
+        "C:\Users\$user\AppData\Local\PDFunk",
+        "C:\Users\$user\AppData\Roaming\PDFunk",
+        "C:\Users\$user\AppData\Local\pdfunk-updater",
+        "C:\Users\$user\AppData\Local\Programs\PDFunk",
+        "C:\Users\$user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PDFunk.lnk",
+        "C:\Users\$user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\PDFunk.lnk"
+    )
+    foreach ($path in $file_paths) {
+        if (Test-Path $path) {
+            Remove-Item $path -Force -Recurse -ErrorAction SilentlyContinue
+            if (Test-Path $path) {
+                "Failed to remove PDFunk -> $path"
             }
         }
-        if ($exists3 -eq $True) {
-            rm "C:\users\$i\appdata\local\pdfunk-updater" -Force -Recurse -ErrorAction SilentlyContinue 
-            $exists3 = test-path "C:\users\$i\appdata\local\pdfunk-updater"
-            if ($exists3 -eq $True) {
-                "PDFunk Removal Unsuccessful => C:\users\$i\appdata\local\pdfunk-updater"
-            }
-        }
-        if ($exists4 -eq $True) {
-            rm "C:\Users\$i\AppData\Local\Programs\PDFunk" -Force -Recurse -ErrorAction SilentlyContinue 
-            $exists4 = test-path "C:\Users\$i\AppData\Local\Programs\PDFunk"
-            if ($exists4 -eq $True) {
-                "PDFunk Removal Unsuccessful => C:\Users\$i\AppData\Local\Programs\PDFunk"
-            }
-        }
-        if ($exists5 -eq $True) {
-            rm "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PDFunk.lnk" -Force -Recurse -ErrorAction SilentlyContinue 
-            $exists5 = test-path "C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PDFunk.lnk"
-            if ($exists5 -eq $True) {
-                "PDFunk Removal Unsuccessful => C:\Users\$i\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PDFunk.lnk"
-             }
-        }
-        if ($exists6 -eq $True) {
-            rm "C:\Users\$i\Downloads\PdfConverters*"
-            $exists6 = $exists6 = test-path "C:\Users\$i\Downloads\PdfConverters*"
-            if ($exists6 -eq $True) {
-                "PdfConverters Removal Unsuccessful => C:\Users\$i\Downloads"
+    }
+
+    $downloads = Get-ChildItem "C:\Users\$user\Downloads\" -Filter "PdfConverters*" -ErrorAction SilentlyContinue
+    foreach ($item in $downloads) {
+        $fullpath = $item.FullName
+        if (Test-Path $fullpath) {
+            Remove-Item $fullpath -Force -Recurse -ErrorAction SilentlyContinue
+            if (Test-Path $fullpath) {
+                "Failed to remove PdfConverters -> $fullpath"
             }
         }
     }
 }
 
-$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+"
-foreach($j in $sid_list) {
-    if ($j -notlike "*_Classes*") {
-    	$exists7 = test-path -path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
-        if ($exists7 -eq $True) {
-            rm "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803" -ErrorAction SilentlyContinue
-    	    $exists7 = test-path -path "Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
-            if ($exists7 -eq $True) {
-                "PDFunk Removal Unsuccessful => Registry::$j\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
+# Registry Key Cleanup
+$sid_list = Get-Item -Path "Registry::HKU\S-*" | Select-String -Pattern "S-\d-(?:\d+-){5,14}\d+" | ForEach-Object { $_.ToString().Trim() }
+foreach ($sid in $sid_list) {
+    if ($sid -notlike "*_Classes*") {
+        $uninstall_key = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\98da245b-e554-5838-b247-454aefcb1803"
+        if (Test-Path $uninstall_key) {
+            Remove-Item $uninstall_key -Recurse -Force -ErrorAction SilentlyContinue
+            if (Test-Path $uninstall_key) {
+                "Failed to remove PDFunk => $uninstall_key"
             }
         }
     }
