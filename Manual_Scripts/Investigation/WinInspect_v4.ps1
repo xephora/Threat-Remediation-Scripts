@@ -373,6 +373,12 @@ if (test-path "C:\Users\$username\appdata\local\Google\chrome\User Data\Profile*
     }
 }
 
+"`n`n[+] Enumerating Outlook Profile"
+$path = "C:\Users\$username\AppData\Local\Microsoft\Outlook"
+if (Test-Path $path) {
+    Get-ChildItem -Path $path -Filter *.ost -ErrorAction SilentlyContinue
+}
+
 "`n`n[+] Checking for AppxPacakages"
 Get-AppxPackage `
 | Where-Object { $_.Name -like "*Microsoft*" } `
