@@ -54,6 +54,7 @@ The following library contains a collection of remediation scripts designed to r
 - [DebuggerStepperBoundaryAttribute](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DebuggerStepperBoundaryAttribute)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
 - [DriverTonic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverTonic)
+- [Easy2Convert](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Easy2Convert)
 - [Editor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Editor)
 - [ElevenClock](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ElevenClock)
 - [Energy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Energy)
