@@ -67,6 +67,7 @@ The following library contains a collection of remediation scripts designed to r
 - [IBuddy](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/IBuddy)
 - [LiteBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/LiteBrowser)
 - [Music](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Music)
+- [OneBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/OneBrowser)
 - [OneLaunch](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/OneLaunch)
 - [OneStart](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/OneStart)
 - [Ouroborosbrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Ouroborosbrowser)
