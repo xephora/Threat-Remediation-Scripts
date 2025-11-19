@@ -26,6 +26,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 - [Win-DiskImage-Toolkit](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/Win-DiskImage-Toolkit.ps1) - A simple tool to quickly enumerate or unmount a disk image.
 - [ScreenConnect-C2Extractor](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Manual_Scripts/Investigation/ScreenConnect-C2Extractor.ps1) - ScreenConnect-C2Extractor retrieves the C2 from the `user.config` of ScreenConnect aka ConnectWise Client.
 - [Win-PacketCapture](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/Win-PacketCapture.ps1) - A guided script to generate a packet dump for analysis.
+- [jsonspection](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/jsonspection) - JSONSpection is a utility designed to thoroughly inspect and enumerate JSON data structures. It helps you break down complex or nested JSON blobs, identify all key-value paths, and understand the overall schema and relationships within the data. This makes it useful for debugging APIs, analyzing logs, or preparing data for parsing and automation workflows.
 
 ### Crowdstrike API Scripts
 
