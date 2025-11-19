@@ -50,6 +50,7 @@ The following library contains a collection of remediation scripts designed to r
 - [Calendaromatic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Calendaromatic)
 - [Cash](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Cash)
 - [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
+- [Convertmate](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Convertmate)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
 - [DebuggerStepperBoundaryAttribute](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DebuggerStepperBoundaryAttribute)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
