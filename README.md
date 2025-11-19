@@ -77,6 +77,8 @@ The following library contains a collection of remediation scripts designed to r
 - [PDFMaker](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFMaker)
 - [PDFProSuite](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFProSuite)
 - [PDFSpark](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFSpark)
+- [PDFTool](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFTool)
+- [PDFast](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFast)
 - [PDFunk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFunk)
 - [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
