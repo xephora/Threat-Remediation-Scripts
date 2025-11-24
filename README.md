@@ -53,6 +53,7 @@ The following library contains a collection of remediation scripts designed to r
 - [Cash](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Cash)
 - [Clearbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Clearbar)
 - [Convertmate](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Convertmate)
+- [CrystalPDF](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/CrystalPDF)
 - [DSOne Agent](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DSOne%20Agent)
 - [DebuggerStepperBoundaryAttribute](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DebuggerStepperBoundaryAttribute)
 - [DriverSupportAOsvc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/DriverSupportAOsvc)
