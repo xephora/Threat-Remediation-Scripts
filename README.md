@@ -87,6 +87,7 @@ The following library contains a collection of remediation scripts designed to r
 - [PDFast](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFast)
 - [PDFunk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFunk)
 - [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
+- [PowerDoc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PowerDoc)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
 - [RecipeListener](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RecipeListener)
 - [ReimageProtector](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ReimageProtector)
