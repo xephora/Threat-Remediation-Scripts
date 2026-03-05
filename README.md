@@ -130,6 +130,7 @@ The following library contains a collection of remediation scripts designed to r
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
 - [RecipeListener](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RecipeListener)
 - [ReimageProtector](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ReimageProtector)
+- [RemotePC](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RemotePC)
 - [Restoro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Restoro)
 - [ShiftBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ShiftBrowser)
 - [Sleuth](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Sleuth)
