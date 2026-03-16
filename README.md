@@ -76,6 +76,7 @@ WFP Blocked - Windows Filtering Platform blocked connection (Event ID 5157)
 The following library contains a collection of remediation scripts designed to remove common unwanted software, adware, and malware found in the wild. If you come across a particular program you’d like to remediate, feel free to download the corresponding script and use it in your environment.
 
 - [123Movies](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/123Movies)
+- [1browser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/1browser)
 - [39bar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/39bar)
 - [AceLauncher](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AceLauncher)
 - [AppMaster](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AppMaster)
