@@ -53,3 +53,6 @@ Code has been cleaned up and templated.
 ### Update 08-16-2024
 - Due to a recent update of OneLaunch (v5.32.1), additional paths were added to the remediation script.
 - Thank you to @CartmansPiehole for reporting the issue. https://github.com/xephora/Threat-Remediation-Scripts/issues/8
+
+### Update 03-31-2026
+- Standard error was suppressed while recursively searching the user’s directory for installers.
