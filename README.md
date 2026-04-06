@@ -145,6 +145,7 @@ The following library contains a collection of remediation scripts designed to r
 - [WebDiscoverBrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/WebDiscoverBrowser)
 - [Wellness](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Wellness)
 - [XMRig](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/XMRig)
+- [ZoomInfoContactContributor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ZoomInfoContactContributor)
 - [flbmusic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/flbmusic)
 - [leading](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/leading)
 - [streaming](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streaming)
