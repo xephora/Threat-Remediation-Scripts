@@ -73,3 +73,18 @@ C:\Users\{USERNAME}\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Use
 WaveBrowser-Remediation-Script-Win7-BrowserKill.ps1
 WaveBrowser-Remediation-Script-Win7.ps1
 ```
+
+*Update 04-07-2026
+- Additional paths have been added to the remediation script.
+
+```
+Process entries:
+SWUpdaterSetup
+
+File System Entries:
+C:\Program Files (x86)\Wavesor
+
+Registry Entries:
+HKLM\SOFTWARE\Policies\Wavesor
+HKLM\Software\WOW6432Node\Wavesor
+```
