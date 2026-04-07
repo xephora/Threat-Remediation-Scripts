@@ -1,12 +1,19 @@
 $process = Get-Process wavebrowser -ErrorAction SilentlyContinue
-if ($process) {
+if ($process) { 
     $process | Stop-Process -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 2 
 }
+
 $process = Get-Process SWUpdater -ErrorAction SilentlyContinue
-if ($process) {
+if ($process) { 
     $process | Stop-Process -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 2 
+}
+
+$process = Get-Process SWUpdaterSetup -ErrorAction SilentlyContinue
+if ($process) { 
+    $process | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2 
 }
 Start-Sleep -Seconds 2
 
@@ -28,9 +35,22 @@ foreach ($username in $user_list) {
             if (Test-Path -Path $path) {
                 Remove-Item $path -Force -Recurse -ErrorAction SilentlyContinue
                 if (Test-Path -Path $path) {
-                    Write-Host "WaveBrowser Removal Unsuccessful => $path"
+                    "WaveBrowser Removal Unsuccessful => $path"
                 }
             }
+        }
+    }
+}
+
+$programPaths = @(
+    "C:\Program Files (x86)\Wavesor"
+)
+
+foreach ($programPath in $programPaths) {
+    if (Test-Path -Path $programPath) {
+        Remove-Item $programPath -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path -Path $programPath) {
+            "WaveBrowser Removal Unsuccessful => $programPath"
         }
     }
 }
@@ -47,6 +67,20 @@ $taskPaths = @(
 foreach ($taskPath in $taskPaths) {
     if (Test-Path -Path $taskPath) {
         Remove-Item $taskPath -Recurse -ErrorAction SilentlyContinue
+    }
+}
+
+$regHKLM = @(
+    "Registry::HKLM\SOFTWARE\Policies\Wavesor",
+    "Registry::HKLM\Software\WOW6432Node\Wavesor"
+)
+
+foreach ($reg in $regHKLM) {
+    if (Test-Path -Path $reg) {
+        Remove-Item $reg -Recurse -ErrorAction SilentlyContinue
+        if (Test-Path -Path $reg) {
+            "WaveBrowser Removal Unsuccessful => $reg"
+        }
     }
 }
 
@@ -68,24 +102,26 @@ foreach ($sid in $sid_list) {
             if (Test-Path -Path $keypath) {
                 Remove-Item $keypath -Recurse -ErrorAction SilentlyContinue
                 if (Test-Path -Path $keypath) {
-                    Write-Host "WaveBrowser Removal Unsuccessful => $keypath"
+                    "WaveBrowser Removal Unsuccessful => $keypath"
                 }
             }
         }
+
         $runKey = "Wavesor SWUpdater"
         $keypath = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
         if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
             Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
             if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
-                Write-Host "WaveBrowser Removal Unsuccessful => $keypath.$runKey"
+                "WaveBrowser Removal Unsuccessful => $keypath.$runKey"
             }
         }
+
         $runKey = "WaveBrowser.5QMLTPZDDJG2BQZHV26QUN4ZK4"
         $keypath = "Registry::$sid\Software\RegisteredApplications"
         if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
             Remove-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue
             if ((Get-ItemProperty -Path $keypath -Name $runKey -ErrorAction SilentlyContinue)) {
-                Write-Host "WaveBrowser Removal Unsuccessful => $keypath.$runKey"
+                "WaveBrowser Removal Unsuccessful => $keypath.$runKey"
             }
         }
     }
@@ -113,7 +149,7 @@ foreach ($sid in $sid_list) {
             if (Test-Path -Path $classPath) {
                 Remove-Item $classPath -Recurse -ErrorAction SilentlyContinue
                 if (Test-Path -Path $classPath) {
-                    Write-Host "WaveBrowser Removal Unsuccessful => $classPath"
+                    "WaveBrowser Removal Unsuccessful => $classPath"
                 }
             }
         }
