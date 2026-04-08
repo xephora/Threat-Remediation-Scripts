@@ -120,6 +120,7 @@ The following library contains a collection of remediation scripts designed to r
 - [PCHelpSoftDriverUpdater](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PCHelpSoftDriverUpdater)
 - [PC_Cleaner](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PC_Cleaner)
 - [PDFArchitect](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFArchitect)
+- [PDFMaestro](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFMaestro)
 - [PDFMaker](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFMaker)
 - [PDFProSuite](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFProSuite)
 - [PDFSpark](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PDFSpark)
