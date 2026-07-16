@@ -1,4 +1,73 @@
 #!/usr/bin/env python3
+"""
+Example Usage:
+
+Running the script
+`````````
+python3 macosx_db_forensic_extraction.py "/home/ubuntu/mac/root/Library/Application Support/com.apple.TCC/"
+python3 macosx_db_forensic_extraction.py "/home/ubuntu/mac/root/Users/profile/Library/Group Containers/group.com.apple.usernoted/db2"
+`````````
+
+Output
+`````````
+python3 extract_db2.py "/home/ubuntu/mac/root/Library/Application Support/com.apple.TCC/"
+[+] Evidence root: /home/ubuntu/mac/root/Library/Application Support/com.apple.TCC
+[+] Output root:   /home/ubuntu/mac_sqlite_output
+[+] Searching for SQLite databases...
+[+] Found 2 SQLite databases.
+
+[1/2] Processing:
+    /home/ubuntu/mac/root/Library/Application Support/com.apple.TCC/REG.db
+        admin: 2 rows -> admin.csv
+        registry: 3 rows -> registry.csv
+
+[2/2] Processing:
+    /home/ubuntu/mac/root/Library/Application Support/com.apple.TCC/TCC.db
+        access: 1 rows -> access.csv
+        access_overrides: 0 rows -> access_overrides.csv
+        active_policy: 0 rows -> active_policy.csv
+        admin: 1 rows -> admin.csv
+        expired: 0 rows -> expired.csv
+        policies: 0 rows -> policies.csv
+        [+] TCC report: permissions_decoded.csv
+
+========================================================================
+[+] Processing complete
+[+] Databases found:    2
+[+] Databases exported: 2
+[+] Databases failed:   0
+[+] Inventory:          /home/ubuntu/mac_sqlite_output/database_inventory.csv
+[+] Output directory:   /home/ubuntu/mac_sqlite_output
+`````````
+
+Directory/File structure
+`````````
+~/mac_sqlite_output$ ls -tl
+total 12
+-rw-r--r-- 1 ubuntu ubuntu  579 Jul 16 22:36 database_inventory.csv
+drwxr-xr-x 2 ubuntu ubuntu 4096 Jul 16 22:36 TCC.db_d59f0ed309
+drwxr-xr-x 2 ubuntu ubuntu 4096 Jul 16 22:36 REG.db_04e0c20579
+
+find .
+.
+./REG.db_04e0c20579
+./REG.db_04e0c20579/registry.csv
+./REG.db_04e0c20579/schema.csv
+./REG.db_04e0c20579/sqlite_master.csv
+./REG.db_04e0c20579/admin.csv
+./TCC.db_d59f0ed309
+./TCC.db_d59f0ed309/active_policy.csv
+./TCC.db_d59f0ed309/schema.csv
+./TCC.db_d59f0ed309/policies.csv
+./TCC.db_d59f0ed309/sqlite_master.csv
+./TCC.db_d59f0ed309/access.csv
+./TCC.db_d59f0ed309/access_overrides.csv
+./TCC.db_d59f0ed309/expired.csv
+./TCC.db_d59f0ed309/permissions_decoded.csv
+./TCC.db_d59f0ed309/admin.csv
+./database_inventory.csv
+`````````
+"""
 from __future__ import annotations
 
 import argparse
