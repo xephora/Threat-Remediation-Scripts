@@ -5,6 +5,8 @@ python3 FalconFlank_hextract.py doc.h
 [+] Extracted 93696 bytes
 [+] Saved to payload.bin
 SHA256 : d556a95fd234088ac0319d1e15674db729784c06980ca2e362e8ce08c2767ac7
+
+https://github.com/MSNightmare/FalconFlank/blob/main/doc.h
 """
 import re
 import hashlib
