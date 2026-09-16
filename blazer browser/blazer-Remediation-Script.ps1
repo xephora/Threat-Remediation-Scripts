@@ -11,7 +11,6 @@ foreach ($proc in $processes) {
 }
 
 Start-Sleep -Seconds 2
-
 $user_list = Get-Item C:\Users\* | Select-Object -ExpandProperty Name
 foreach ($user in $user_list) {
     if ($user -notlike "*Public*" -and $user -notlike "*Default*") {
@@ -58,16 +57,6 @@ $regHKLM = @(
 )
 
 foreach ($regPath in $regHKLM) {
-    if (Test-Path $regPath) {
-        Remove-Item $regPath -Recurse -Force -ErrorAction SilentlyContinue
-    }
-}
-
-$regHKCU = @(
-    "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Blazer"
-)
-
-foreach ($regPath in $regHKCU) {
     if (Test-Path $regPath) {
         Remove-Item $regPath -Recurse -Force -ErrorAction SilentlyContinue
     }
