@@ -13,7 +13,6 @@ foreach ($proc in $processes) {
 Start-Sleep -Seconds 2
 
 $user_list = Get-Item C:\Users\* | Select-Object -ExpandProperty Name
-
 foreach ($user in $user_list) {
     if ($user -notlike "*Public*" -and $user -notlike "*Default*") {
         $paths = @(
@@ -48,9 +47,29 @@ foreach ($task in $tasks) {
     $taskPath = "C:\Windows\System32\Tasks\$task"
     if (Test-Path $taskPath) {
         Remove-Item $taskPath -Recurse -Force -ErrorAction SilentlyContinue
-        if (Test-Path $taskPath) {
-            "Failed to remove Blazer scheduled task -> $taskPath"
-        }
+    }
+}
+
+$regHKLM = @(
+    "HKLM:\Software\WOW6432Node\Blazer",
+    "HKLM:\Software\Microsoft\Tracing\blazer_pdf_installer_Mz4jAePC_RASAPI32",
+    "HKLM:\Software\Microsoft\Tracing\blazer_pdf_installer_Mz4jAePC_RASMANCS",
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Blazer"
+)
+
+foreach ($regPath in $regHKLM) {
+    if (Test-Path $regPath) {
+        Remove-Item $regPath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
+$regHKCU = @(
+    "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Blazer"
+)
+
+foreach ($regPath in $regHKCU) {
+    if (Test-Path $regPath) {
+        Remove-Item $regPath -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 
@@ -65,14 +84,22 @@ foreach ($sid in $sid_list) {
             "Registry::$sid\Software\Classes\AppUserModelId\Blazer.7SPNXAJ6RTUZWN3PPCU2UIIWXM",
             "Registry::$sid\Software\Classes\BlazerHTM.7SPNXAJ6RTUZWN3PPCU2UIIWXM",
             "Registry::$sid\Software\Classes\BlazerPDF.7SPNXAJ6RTUZWN3PPCU2UIIWXM",
-            "Registry::$sid\Software\Clients\StartMenuInternet\Blazer.7SPNXAJ6RTUZWN3PPCU2UIIWXM"
+            "Registry::$sid\Software\Clients\StartMenuInternet\Blazer.7SPNXAJ6RTUZWN3PPCU2UIIWXM",
+            "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Uninstall\Blazer"
         )
 
         foreach ($regPath in $regHKU) {
             if (Test-Path $regPath) {
                 Remove-Item $regPath -Recurse -Force -ErrorAction SilentlyContinue
-                if (Test-Path $regPath) {
-                    "Failed to remove Blazer registry key -> $regPath"
+            }
+        }
+
+        $runKey = "Registry::$sid\Software\Microsoft\Windows\CurrentVersion\Run"
+        if (Test-Path $runKey) {
+            $runValues = Get-ItemProperty -Path $runKey -ErrorAction SilentlyContinue
+            foreach ($property in $runValues.PSObject.Properties) {
+                if ($property.Name -like "BlazerAutoLaunch_*") {
+                    Remove-ItemProperty -Path $runKey -Name $property.Name -Force -ErrorAction SilentlyContinue
                 }
             }
         }
