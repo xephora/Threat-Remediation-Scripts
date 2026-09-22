@@ -87,6 +87,7 @@ The following library contains a collection of remediation scripts designed to r
 - [AskPartnerNetwork](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AskPartnerNetwork)
 - [Ask Toolbar](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/AskToolbar)
 - [BBSK(SecureBrowser)](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BBSK(SecureBrowser))
+- [Blazer Browser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/blazer%20browser)
 - [Bloom](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Bloom)
 - [BrightTramp](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BrightTramp)
 - [BrowserAssistant](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/BrowserAssistant)
