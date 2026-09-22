@@ -49,8 +49,9 @@ static int g_tmpdir_created = 0;
 static char *g_root = NULL;
 static pid_t g_child_pid = -1;
 
-static struct termios orig_term;
-static int term_raw = 0;
+static struct termios g_saved_termios;
+static int g_have_saved_termios = 0;
+static int g_terminal_raw = 0;
 
 static char *results[MAX_RESULTS];
 static int result_count = 0;
@@ -58,10 +59,10 @@ static int selected = 0;
 static char *current_dir = NULL;
 static char *history[MAX_HISTORY];
 static int history_count = 0;
-static int history_pos = -1;
 
 static void reset_results(void);
 static void restore_terminal(void);
+static void force_terminal_sane(void);
 
 static int unlink_cb(const char *fpath, const struct stat *sb, int t, struct FTW *ftw)
 {
@@ -73,10 +74,7 @@ static int unlink_cb(const char *fpath, const struct stat *sb, int t, struct FTW
 
 static void cleanup(void)
 {
-    if (term_raw) {
-        tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_term);
-        term_raw = 0;
-    }
+    force_terminal_sane();
 
     if (g_child_pid > 0) {
         killpg(g_child_pid, SIGTERM);
@@ -103,52 +101,84 @@ static void cleanup(void)
         free(g_root);
         g_root = NULL;
     }
+
+    for (int i = 0; i < history_count; i++) {
+        free(history[i]);
+        history[i] = NULL;
+    }
+    history_count = 0;
+
+    force_terminal_sane();
 }
 
-static void sigint_handler(int sig)
+static void signal_handler(int sig)
 {
-    (void)sig;
-    restore_terminal();
-    if (g_child_pid > 0) {
-        killpg(g_child_pid, SIGTERM);
-        usleep(200000);
-        int status;
-        if (waitpid(g_child_pid, &status, WNOHANG) == 0) {
-            killpg(g_child_pid, SIGKILL);
-            waitpid(g_child_pid, NULL, 0);
-        }
-        g_child_pid = -1;
-    }
-    if (g_tmpdir_created) {
-        nftw(g_tmpdir, unlink_cb, 64, FTW_DEPTH | FTW_PHYS);
-        g_tmpdir_created = 0;
-    }
-    _exit(130);
+    if (g_have_saved_termios)
+        tcsetattr(STDIN_FILENO, TCSANOW, &g_saved_termios);
+    _exit(128 + sig);
 }
 
-static void raw_terminal(void)
+static void save_terminal(void)
 {
-    if (term_raw) return;
-
-    if (tcgetattr(STDIN_FILENO, &orig_term) == -1)
+    if (!isatty(STDIN_FILENO))
         return;
 
-    struct termios t = orig_term;
+    if (tcgetattr(STDIN_FILENO, &g_saved_termios) == -1) {
+        perror("[x3] tcgetattr");
+        return;
+    }
 
-    t.c_lflag &= ~(ICANON | ECHO);
+    g_have_saved_termios = 1;
+}
+
+static int raw_terminal(void)
+{
+    if (!g_have_saved_termios)
+        return 0;
+    if (g_terminal_raw)
+        return 1;
+
+    struct termios t = g_saved_termios;
+
+    t.c_lflag &= ~(ICANON | ECHO | ISIG);
     t.c_cc[VMIN] = 1;
     t.c_cc[VTIME] = 0;
-    
-    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &t) == 0)
-        term_raw = 1;
+
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &t) == -1) {
+        perror("[x3] tcsetattr raw");
+        return 0;
+    }
+
+    g_terminal_raw = 1;
+    return 1;
 }
 
 static void restore_terminal(void)
 {
-    if (term_raw) {
-        tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_term);
-        term_raw = 0;
+    if (!g_have_saved_termios)
+        return;
+
+    while (tcsetattr(STDIN_FILENO, TCSANOW, &g_saved_termios) == -1) {
+        if (errno != EINTR) {
+            perror("[x3] tcsetattr restore");
+            break;
+        }
     }
+    g_terminal_raw = 0;
+}
+
+static void force_terminal_sane(void)
+{
+    restore_terminal();
+    if (!isatty(STDIN_FILENO))
+        return;
+
+    struct termios t;
+    if (tcgetattr(STDIN_FILENO, &t) == -1)
+        return;
+
+    t.c_lflag |= ECHO | ICANON | ISIG;
+    tcsetattr(STDIN_FILENO, TCSANOW, &t);
 }
 
 static void open_file_manager(const char *path)
@@ -272,17 +302,22 @@ static char *unique_dest(const char *base)
     if (has_ext) {
         *ext = '\0';
         char *ext_part = ext + 1;
-        asprintf(&path, "%s/%s.%s", g_tmpdir, name, ext_part);
+        if (asprintf(&path, "%s/%s.%s", g_tmpdir, name, ext_part) < 0)
+            path = NULL;
     } else {
-        asprintf(&path, "%s/%s", g_tmpdir, name);
+        if (asprintf(&path, "%s/%s", g_tmpdir, name) < 0)
+            path = NULL;
     }
 
     while (path && access(path, F_OK) == 0) {
         free(path);
+        path = NULL;
         if (has_ext) {
-            asprintf(&path, "%s/%s_%d.%s", g_tmpdir, name, ++n, ext + 1);
+            if (asprintf(&path, "%s/%s_%d.%s", g_tmpdir, name, ++n, ext + 1) < 0)
+                path = NULL;
         } else {
-            asprintf(&path, "%s/%s_%d", g_tmpdir, name, ++n);
+            if (asprintf(&path, "%s/%s_%d", g_tmpdir, name, ++n) < 0)
+                path = NULL;
         }
     }
 
@@ -739,7 +774,8 @@ static void draw(const char *mode)
 
 static void selector(const char *mode)
 {
-    raw_terminal();
+    if (!raw_terminal())
+        return;
     draw(mode);
 
     while (1) {
@@ -749,6 +785,10 @@ static void selector(const char *mode)
 
         if (c == 'q' || c == 3) {
             restore_terminal();
+            if (c == 3) {
+                printf("\n^C\n");
+                fflush(stdout);
+            }
             if (g_child_pid > 0) {
                 killpg(g_child_pid, SIGTERM);
                 usleep(200000);
@@ -848,18 +888,8 @@ static void selector(const char *mode)
 
 static int read_line_with_history(char *buf, size_t size)
 {
-    struct termios old_term, new_term;
-    if (tcgetattr(STDIN_FILENO, &old_term) == -1)
+    if (!raw_terminal())
         return 0;
-    
-    new_term = old_term;
-    new_term.c_lflag &= ~(ICANON | ECHO);
-    new_term.c_cc[VMIN] = 1;
-    new_term.c_cc[VTIME] = 0;
-    
-    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &new_term) == -1) {
-        return 0;
-    }
     
     int pos = 0;
     int hist_idx = -1;
@@ -872,20 +902,27 @@ static int read_line_with_history(char *buf, size_t size)
         char c;
         ssize_t n = read(STDIN_FILENO, &c, 1);
         if (n != 1) {
-            tcsetattr(STDIN_FILENO, TCSAFLUSH, &old_term);
+            restore_terminal();
             printf("\n");
             return 0;
         }
         
         if (c == '\n') {
             buf[pos] = '\0';
-            tcsetattr(STDIN_FILENO, TCSAFLUSH, &old_term);
+            restore_terminal();
             printf("\n");
             return 1;
         }
-        else if (c == 3 || c == 4) {
-            tcsetattr(STDIN_FILENO, TCSAFLUSH, &old_term);
+        else if (c == 3) {
+            restore_terminal();
+            printf("^C\n");
+            fflush(stdout);
+            return 0;
+        }
+        else if (c == 4) {
+            restore_terminal();
             printf("\n");
+            fflush(stdout);
             return 0;
         }
         else if (c == 27) {
@@ -1051,12 +1088,24 @@ static void interactive(void)
 
 int main(int argc, char *argv[])
 {
-    signal(SIGINT, sigint_handler);
+    save_terminal();
+
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = signal_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGINT,  &sa, NULL);
+    sigaction(SIGTERM, &sa, NULL);
+    sigaction(SIGHUP,  &sa, NULL);
+    sigaction(SIGQUIT, &sa, NULL);
+
     atexit(cleanup);
 
     char *cwd = getcwd(NULL, 0);
     if (!cwd) {
         perror("getcwd");
+        force_terminal_sane();
         return 1;
     }
     g_root = realpath(cwd, NULL);
@@ -1087,6 +1136,7 @@ int main(int argc, char *argv[])
 
             free(rp);
             interactive();
+            force_terminal_sane();
             return 0;
         }
         free(rp);
@@ -1094,6 +1144,7 @@ int main(int argc, char *argv[])
 
     if (argc == 1) {
         interactive();
+        force_terminal_sane();
         return 0;
     }
 
@@ -1114,5 +1165,6 @@ int main(int argc, char *argv[])
     }
 
     interactive();
+    force_terminal_sane();
     return 0;
 }
