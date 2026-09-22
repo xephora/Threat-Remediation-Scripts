@@ -43,7 +43,7 @@ This provides a clean, file-centric workspace without modifying or navigating th
 
 ### Installation
 ```
-gcc x3.c -o x3
+gcc -Wall -Wextra -Wpedantic -O2 -o x3 x3.c
 sudo mv x3 /usr/local/bin/
 ```
 
