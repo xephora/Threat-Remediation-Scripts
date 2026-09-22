@@ -1,4 +1,4 @@
-## x3 — Ephemeral File Explorer (Experimental but works)
+## x3 — Ephemeral File Explorer
 x3 is a lightweight Linux utility designed to streamline analyst workflows by launching a graphical file manager in a context-aware way. It supports direct directory browsing, as well as isolated, temporary workspaces for one or more files.
 
 ## Core Functionality
