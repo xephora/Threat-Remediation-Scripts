@@ -3,7 +3,7 @@
 lin-jextract automatically identifies EXT filesystems within a Linux disk image and extracts their filesystem journals for forensic analysis.
 
 ```
-$ sudo python3 extractfs_journal.py sample_disk.img
+$ sudo python3 lin-jextract.py sample_disk.img
 
 [+] Image: /path/to/sample_disk.img
 [+] losetup --find --show --read-only --partscan /path/to/sample_disk.img
