@@ -32,7 +32,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 - [Win-datebased_filehunt](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/Win-datebased_filehunt.ps1) - This PowerShell script uses embedded C# code to recursively search the C:\ drive for files that were modified on a specific date. It logs all matching files, including their full path, last modified timestamp, and file size, to a log file located at `C:\Windows\Temp\hunter_log_results.log`.
 - [lin-EnumDisk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/lin-diskenum) - `lin-diskenum.py` enumerates raw disk images such as `.img`, `.dd`, and `.raw` files on Linux. It creates a read-only loop device, detects partitions/filesystems, and saves enumeration results separately under the `enum/` directory.
 - [lin-jextract](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/Linux-Journal-Parsing) - lin-jextract automatically identifies EXT filesystems within a Linux disk image and extracts their filesystem journals for forensic analysis.
-
+- [x3 Ephemeral File Explorer](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/x3) - x3 is a lightweight Linux utility designed to streamline analyst workflows by launching a graphical file manager in a context-aware way. It supports direct directory browsing, as well as isolated, temporary workspaces for one or more files.
 ```
 Process Execution Rules (Event ID 4688)
 Net.exe Execution - General net.exe usage
