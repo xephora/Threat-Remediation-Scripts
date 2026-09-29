@@ -1,242 +1,200 @@
-# Currently doesn't work with CrowdStrike due to protections (I need to further debug).  However, it works locally in the context of NT Authority\System.
+# UserTokenRunner - Enhanced Debug Build
+# Adds:
+# - Child process exit code logging
+# - WaitForSingleObject()
+# - user_output.log existence checks
+# - Automatic temp script cleanup
+# - Automatic output capture
 
 Add-Type -TypeDefinition @"
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.IO;
+using System.Text;
+using System.Security.Principal;
 
 public class UserTokenRunner
 {
-
-    const uint SE_PRIVILEGE_ENABLED = 0x00000002;
-
-    [StructLayout(LayoutKind.Sequential)]
-    struct LUID { public uint LowPart; public int HighPart; }
-
-    [StructLayout(LayoutKind.Sequential)]
-    struct TOKEN_PRIVILEGES
-    {
-        public uint PrivilegeCount;
-        public LUID Luid;
-        public uint Attributes;
-    }
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    static extern bool AdjustTokenPrivileges(IntPtr TokenHandle, bool DisableAllPrivileges,
-        ref TOKEN_PRIVILEGES NewState, int BufferLength, IntPtr PreviousState, IntPtr ReturnLength);
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    static extern bool LookupPrivilegeValue(string lpSystemName, string lpName, out LUID lpLuid);
-
-    static bool EnablePrivilege(string privName)
-    {
-        IntPtr hToken;
-        if (!OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out hToken))
-            return false;
-
-        LUID luid;
-        if (!LookupPrivilegeValue(null, privName, out luid))
-            return false;
-
-        TOKEN_PRIVILEGES tp = new TOKEN_PRIVILEGES
-        {
-            PrivilegeCount = 1,
-            Luid = luid,
-            Attributes = SE_PRIVILEGE_ENABLED
-        };
-
-        bool result = AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
-        CloseHandle(hToken);
-        return result;
-    }
-
+    const uint SE_PRIVILEGE_ENABLED = 0x2;
     const uint TOKEN_DUPLICATE = 0x0002;
     const uint TOKEN_QUERY = 0x0008;
     const uint TOKEN_ASSIGN_PRIMARY = 0x0001;
     const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
     const uint TOKEN_ALL_ACCESS = 0xF01FF;
+    const uint PROCESS_QUERY_INFORMATION = 0x0400;
     const uint CREATE_NO_WINDOW = 0x08000000;
+
+    const uint WAIT_OBJECT_0 = 0x0;
+    const uint WAIT_TIMEOUT = 0x102;
+
     const int SecurityImpersonation = 2;
     const int TokenPrimary = 1;
 
+    [StructLayout(LayoutKind.Sequential)]
+    struct LUID { public uint LowPart; public int HighPart; }
+
+    [StructLayout(LayoutKind.Sequential)]
+    struct TOKEN_PRIVILEGES {
+        public uint PrivilegeCount;
+        public LUID Luid;
+        public uint Attributes;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    struct SID_AND_ATTRIBUTES {
+        public IntPtr Sid;
+        public int Attributes;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    struct TOKEN_USER {
+        public SID_AND_ATTRIBUTES User;
+    }
+
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    public struct STARTUPINFO
-    {
+    public struct STARTUPINFO {
         public int cb;
         public string lpReserved;
         public string lpDesktop;
         public string lpTitle;
-        public uint dwX, dwY, dwXSize, dwYSize;
-        public uint dwXCountChars, dwYCountChars;
+        public uint dwX,dwY,dwXSize,dwYSize;
+        public uint dwXCountChars,dwYCountChars;
         public uint dwFillAttribute;
         public uint dwFlags;
         public short wShowWindow;
         public short cbReserved2;
         public IntPtr lpReserved2;
-        public IntPtr hStdInput, hStdOutput, hStdError;
+        public IntPtr hStdInput,hStdOutput,hStdError;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PROCESS_INFORMATION
-    {
+    public struct PROCESS_INFORMATION {
         public IntPtr hProcess;
         public IntPtr hThread;
         public uint dwProcessId;
         public uint dwThreadId;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
-    struct SID_AND_ATTRIBUTES
-    {
-        public IntPtr Sid;
-        public int Attributes;
+    [DllImport("kernel32.dll")] static extern IntPtr OpenProcess(uint access, bool inherit, uint pid);
+    [DllImport("kernel32.dll")] static extern bool CloseHandle(IntPtr h);
+    [DllImport("kernel32.dll", SetLastError=true)] static extern uint WaitForSingleObject(IntPtr h, uint ms);
+    [DllImport("kernel32.dll", SetLastError=true)] static extern bool GetExitCodeProcess(IntPtr h, out uint exitCode);
+
+    [DllImport("advapi32.dll", SetLastError=true)] static extern bool OpenProcessToken(IntPtr h, uint access, out IntPtr token);
+    [DllImport("advapi32.dll", SetLastError=true)] static extern bool LookupPrivilegeValue(string sys, string priv, out LUID luid);
+    [DllImport("advapi32.dll", SetLastError=true)] static extern bool AdjustTokenPrivileges(IntPtr h, bool d, ref TOKEN_PRIVILEGES tp, int len, IntPtr p, IntPtr r);
+    [DllImport("advapi32.dll", SetLastError=true)] static extern bool DuplicateTokenEx(IntPtr existing, uint access, IntPtr attrs, int imp, int type, out IntPtr token);
+    [DllImport("advapi32.dll", SetLastError=true)] static extern bool GetTokenInformation(IntPtr h, int cls, IntPtr buf, int len, out int ret);
+    [DllImport("advapi32.dll", CharSet=CharSet.Unicode, SetLastError=true)] static extern bool LookupAccountSid(string sys, IntPtr sid, StringBuilder name, ref int nl, StringBuilder dom, ref int dl, out int use);
+    [DllImport("advapi32.dll", CharSet=CharSet.Unicode, SetLastError=true)] static extern bool CreateProcessAsUser(IntPtr token, string app, string cmd, IntPtr pa, IntPtr ta, bool inherit, uint flags, IntPtr env, string cwd, ref STARTUPINFO si, out PROCESS_INFORMATION pi);
+
+    static void Log(StreamWriter w,string m){ w.WriteLine("["+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")+"] "+m); w.Flush(); }
+    static string LastErr(){ int e=Marshal.GetLastWin32Error(); return "Win32Error="+e+" (0x"+e.ToString("X8")+")"; }
+
+    static string GetUsernameFromToken(IntPtr token){
+        int len=0; GetTokenInformation(token,1,IntPtr.Zero,0,out len);
+        IntPtr buf=Marshal.AllocHGlobal(len);
+        if(!GetTokenInformation(token,1,buf,len,out len)) return null;
+        TOKEN_USER tu=(TOKEN_USER)Marshal.PtrToStructure(buf, typeof(TOKEN_USER));
+        StringBuilder n=new StringBuilder(256); StringBuilder d=new StringBuilder(256);
+        int nl=256, dl=256, use=0;
+        bool ok=LookupAccountSid(null,tu.User.Sid,n,ref nl,d,ref dl,out use);
+        Marshal.FreeHGlobal(buf);
+        return ok ? d.ToString()+"\\"+n.ToString() : null;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
-    struct TOKEN_USER
+    public static void RunAsUser(string targetUser)
     {
-        public SID_AND_ATTRIBUTES User;
-    }
+        string logPath=@"C:\Windows\Temp\results.log";
+        string outputPath=@"C:\Windows\Temp\user_output.log";
+        string scriptPath=@"C:\Windows\Temp\temp_user_script.ps1";
 
-    [DllImport("kernel32.dll")]
-    static extern IntPtr OpenProcess(uint access, bool inherit, uint pid);
-
-    [DllImport("kernel32.dll")]
-    static extern bool CloseHandle(IntPtr handle);
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    static extern bool OpenProcessToken(IntPtr processHandle, uint desiredAccess, out IntPtr tokenHandle);
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    static extern bool DuplicateTokenEx(IntPtr existingToken, uint desiredAccess, IntPtr tokenAttributes,
-        int impersonationLevel, int tokenType, out IntPtr newToken);
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    static extern bool GetTokenInformation(IntPtr TokenHandle, int TokenInformationClass,
-        IntPtr TokenInformation, int TokenInformationLength, out int ReturnLength);
-
-    [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-    static extern bool LookupAccountSid(string lpSystemName, IntPtr Sid,
-        StringBuilder Name, ref int cchName, StringBuilder ReferencedDomainName, ref int cchRefDomainName, out int peUse);
-
-    [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-    static extern bool CreateProcessAsUser(
-        IntPtr token,
-        string appName,
-        string commandLine,
-        IntPtr procAttrs,
-        IntPtr threadAttrs,
-        bool inheritHandles,
-        uint flags,
-        IntPtr env,
-        string cwd,
-        ref STARTUPINFO si,
-        out PROCESS_INFORMATION pi);
-
-    static string GetUsernameFromToken(IntPtr token)
-    {
-        int len = 0;
-        GetTokenInformation(token, 1, IntPtr.Zero, 0, out len);
-        IntPtr buffer = Marshal.AllocHGlobal(len);
-        if (!GetTokenInformation(token, 1, buffer, len, out len)) return null;
-
-        TOKEN_USER tu = (TOKEN_USER)Marshal.PtrToStructure(buffer, typeof(TOKEN_USER));
-
-        StringBuilder name = new StringBuilder(256);
-        StringBuilder domain = new StringBuilder(256);
-        int nameLen = 256;
-        int domainLen = 256;
-        int useType = 0;
-
-        bool resolved = LookupAccountSid(null, tu.User.Sid, name, ref nameLen, domain, ref domainLen, out useType);
-        Marshal.FreeHGlobal(buffer);
-
-        if (!resolved) return null;
-        return domain.ToString() + "\\" + name.ToString();
-    }
-
-    public static void RunAsUser(string targetUser, string cmd)
-    {
-        string logPath = @"C:\Windows\Temp\results.log";
-        using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+        using(StreamWriter w=new StreamWriter(logPath,true,Encoding.UTF8))
         {
-            writer.WriteLine("[*] Attempting to run as user: " + targetUser);
-            EnablePrivilege("SeAssignPrimaryTokenPrivilege");
-            EnablePrivilege("SeIncreaseQuotaPrivilege");
-
-            foreach (var proc in Process.GetProcessesByName("explorer"))
+            try
             {
-                IntPtr hProc = OpenProcess(0x0400, false, (uint)proc.Id);
-                if (hProc == IntPtr.Zero) continue;
-                writer.WriteLine("[+] Got handle to explorer.exe: " + hProc);
+                string wrapped="$ErrorActionPreference='Continue'\r\n"+
+                "'===== START =====' | Out-File '"+outputPath+"' -Force\r\n"+
+                "whoami | Out-File '"+outputPath+"' -Append\r\n" +
+                "'===== END =====' | Out-File '"+outputPath+"' -Append\r\n";
 
-                IntPtr hToken;
-                if (!OpenProcessToken(hProc, TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY | TOKEN_QUERY, out hToken))
+                File.WriteAllText(scriptPath, wrapped, Encoding.UTF8);
+
+                foreach(Process p in Process.GetProcessesByName("explorer"))
                 {
-                    writer.WriteLine("[-] Failed to open token for process " + proc.Id);
-                    CloseHandle(hProc);
-                    continue;
+                    IntPtr hp=OpenProcess(PROCESS_QUERY_INFORMATION,false,(uint)p.Id);
+                    if(hp==IntPtr.Zero) continue;
+
+                    IntPtr ht;
+                    if(!OpenProcessToken(hp,TOKEN_DUPLICATE|TOKEN_ASSIGN_PRIMARY|TOKEN_QUERY,out ht)) continue;
+
+                    string owner=GetUsernameFromToken(ht);
+                    Log(w,"Token Owner: "+owner);
+
+                    if(owner==null || !owner.EndsWith("\\"+targetUser,StringComparison.OrdinalIgnoreCase)) continue;
+
+                    IntPtr dup;
+                    if(!DuplicateTokenEx(ht,TOKEN_ALL_ACCESS,IntPtr.Zero,SecurityImpersonation,TokenPrimary,out dup))
+                    {
+                        Log(w,"DuplicateTokenEx failed: "+LastErr());
+                        continue;
+                    }
+
+                    STARTUPINFO si=new STARTUPINFO();
+                    si.cb=Marshal.SizeOf(si);
+                    si.lpDesktop=@"winsta0\default";
+
+                    PROCESS_INFORMATION pi;
+                    string launch = "\"C:\\Windows\\System32\\cmd.exe\" /c COMMAND_HERE > C:\\Windows\\Temp\\user_output.log ";
+
+                    bool created=CreateProcessAsUser(dup,null,launch,IntPtr.Zero,IntPtr.Zero,false,CREATE_NO_WINDOW,IntPtr.Zero,null,ref si,out pi);
+
+                    if(created)
+                    {
+                        Log(w,"CreateProcessAsUser succeeded. PID="+pi.dwProcessId);
+
+                        uint wait=WaitForSingleObject(pi.hProcess,15000);
+                        Log(w,"Wait Result="+wait);
+
+                        uint exitCode;
+                        if(GetExitCodeProcess(pi.hProcess,out exitCode))
+                            Log(w,"Child Exit Code="+exitCode);
+
+                        Log(w, File.Exists(outputPath) ? "user_output.log exists" : "user_output.log missing");
+                    }
+                    else
+                    {
+                        Log(w,"CreateProcessAsUser failed: "+LastErr());
+                    }
+					Log(w, "===== SCRIPT BEGIN =====");
+					Log(w, File.ReadAllText(scriptPath));
+					Log(w, "===== SCRIPT END =====");
+
+                    try
+                    {
+                        if(File.Exists(scriptPath))
+                        {
+                            File.Delete(scriptPath);
+                            Log(w,"temp_user_script.ps1 removed");
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Log(w,"Cleanup failed: "+ex.Message);
+                    }
+                    return;
                 }
-                writer.WriteLine("[+] Opened token: " + hToken);
-
-                string owner = GetUsernameFromToken(hToken);
-                writer.WriteLine("[*] Token belongs to: " + (owner ?? "NULL"));
-
-                if (owner == null ||
-                    !(owner.Equals(targetUser, StringComparison.OrdinalIgnoreCase) ||
-                    owner.EndsWith("\\" + targetUser, StringComparison.OrdinalIgnoreCase)))
-                {
-                    writer.WriteLine("[-] Token not for target user: " + targetUser);
-                    CloseHandle(hToken);
-                    CloseHandle(hProc);
-                    continue;
-                }
-
-                IntPtr hDupToken;
-                if (!DuplicateTokenEx(hToken, TOKEN_ALL_ACCESS, IntPtr.Zero, SecurityImpersonation, TokenPrimary, out hDupToken))
-                {
-                    writer.WriteLine("[-] Failed to duplicate token");
-                    CloseHandle(hToken);
-                    CloseHandle(hProc);
-                    continue;
-                }
-                writer.WriteLine("[+] Token duplicated");
-
-                STARTUPINFO si = new STARTUPINFO();
-                si.cb = Marshal.SizeOf(si);
-                PROCESS_INFORMATION pi;
-
-                string fullCmd = "powershell.exe -NoProfile -Command \"" + cmd + "\" > C:\\Windows\\Temp\\user_output.log";
-                bool created = CreateProcessAsUser(hDupToken, null, fullCmd, IntPtr.Zero, IntPtr.Zero, false,
-                                                CREATE_NO_WINDOW, IntPtr.Zero, null, ref si, out pi);
-
-                if (created)
-                {
-                    writer.WriteLine("[+] Successfully launched process as " + owner);
-                    CloseHandle(pi.hProcess);
-                    CloseHandle(pi.hThread);
-                }
-                else
-                {
-                    writer.WriteLine("[-] Failed to launch process as " + owner);
-                }
-
-                CloseHandle(hDupToken);
-                CloseHandle(hToken);
-                CloseHandle(hProc);
-                return;
             }
-
-            writer.WriteLine("[-] No matching explorer.exe process found for user: " + targetUser);
+            catch(Exception ex)
+            {
+                File.AppendAllText(logPath, ex.ToString());
+            }
         }
     }
 }
 "@
 
-$targetUser = "USERNAME_HERE"
-$command = "COMMAND_HERE"
-[UserTokenRunner]::RunAsUser($targetUser, $command)
-# Results logged to C:\Windows\Temp\user_output.log
-# Debugging logged to C:\Windows\Temp\results.log
+
+$targetUser = "TARGET_USER"
+[UserTokenRunner]::RunAsUser($targetUser)
