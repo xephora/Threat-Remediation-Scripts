@@ -104,7 +104,7 @@ public class UserTokenRunner
         return ok ? d.ToString()+"\\"+n.ToString() : null;
     }
 
-    public static void RunAsUser(string targetUser)
+    public static void RunAsUser(string targetUser, string Command)
     {
         string logPath=@"C:\Windows\Temp\results.log";
         string outputPath=@"C:\Windows\Temp\user_output.log";
@@ -146,7 +146,7 @@ public class UserTokenRunner
                     si.lpDesktop=@"winsta0\default";
 
                     PROCESS_INFORMATION pi;
-                    string launch = "\"C:\\Windows\\System32\\cmd.exe\" /c COMMAND_HERE > C:\\Windows\\Temp\\user_output.log ";
+                    string launch = "\"C:\\Windows\\System32\\cmd.exe\" /c " + Command +" > C:\\Windows\\Temp\\user_output.log ";
 
                     bool created=CreateProcessAsUser(dup,null,launch,IntPtr.Zero,IntPtr.Zero,false,CREATE_NO_WINDOW,IntPtr.Zero,null,ref si,out pi);
 
@@ -195,6 +195,10 @@ public class UserTokenRunner
 }
 "@
 
-
+$Command = "COMMAND_HERE"
 $targetUser = "TARGET_USER"
-[UserTokenRunner]::RunAsUser($targetUser)
+[UserTokenRunner]::RunAsUser($targetUser, $Command)
+# Debug Logs stored:
+# C:\Windows\Temp\results.log
+# Command Output stored:
+# C:\Windows\Temp\user_output.log 
