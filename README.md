@@ -32,7 +32,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 - [Win-TokenImpersonateExec.ps1](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/Win-TokenImpersonateExec.ps1) - This script enables analysts to execute commands within the security context of a specified user by leveraging the user's access token. Please use this script only when necessary. As it executes commands within a target user's security context, it should be reserved for situations where user-specific artifacts, settings, or data must be collected and cannot be obtained through standard administrative or SYSTEM-level access.
 - [Win-EnumLockedFile](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/Win-EnumLockedFile.ps1) - This script leverages the Windows Restart Manager API to identify processes that currently have a specified file open or locked.
 
-### Misc Scripts
+### Misc Scripts or Utilities
 
 - [jsonspection](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/jsonspection) - JSONSpection is a utility designed to thoroughly inspect and enumerate JSON data structures. It helps you break down complex or nested JSON blobs, identify all key-value paths, and understand the overall schema and relationships within the data. This makes it useful for debugging APIs, analyzing logs, or preparing data for parsing and automation workflows.
 - [lin-EnumDisk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/lin-diskenum) - `lin-diskenum.py` enumerates raw disk images such as `.img`, `.dd`, and `.raw` files on Linux. It creates a read-only loop device, detects partitions/filesystems, and saves enumeration results separately under the `enum/` directory.
