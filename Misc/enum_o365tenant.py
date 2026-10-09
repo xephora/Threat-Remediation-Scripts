@@ -3,6 +3,7 @@
 #
 # enum_o365tenant is a Microsoft 365 / Entra ID tenant enumeration tool that performs unauthenticated reconnaissance against Microsoft identity endpoints and DNS records.
 # For each supplied domain, the script collects tenant metadata from Microsoft tenant discovery APIs and enriches the results.
+# Usage: python enum_o365tenant.py domains.txt 
 #
 
 import csv
