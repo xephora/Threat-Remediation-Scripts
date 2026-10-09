@@ -34,6 +34,7 @@ The purpose of my scripts is to assist a SOC or Incident Response Analyst with t
 
 ### Misc Scripts or Utilities
 
+- [enum_o365tenant](https://github.com/xephora/Threat-Remediation-Scripts/blob/main/Misc/enum_o365tenant.py) - enum_o365tenant is a Microsoft 365 / Entra ID tenant enumeration tool that performs unauthenticated reconnaissance against Microsoft identity endpoints and DNS records.
 - [jsonspection](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/jsonspection) - JSONSpection is a utility designed to thoroughly inspect and enumerate JSON data structures. It helps you break down complex or nested JSON blobs, identify all key-value paths, and understand the overall schema and relationships within the data. This makes it useful for debugging APIs, analyzing logs, or preparing data for parsing and automation workflows.
 - [lin-EnumDisk](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/lin-diskenum) - `lin-diskenum.py` enumerates raw disk images such as `.img`, `.dd`, and `.raw` files on Linux. It creates a read-only loop device, detects partitions/filesystems, and saves enumeration results separately under the `enum/` directory.
 - [lin-jextract](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Misc/Linux-Journal-Parsing) - lin-jextract automatically identifies EXT filesystems within a Linux disk image and extracts their filesystem journals for forensic analysis.
