@@ -9,7 +9,7 @@
 ### Description
 I have created an automated script to remove Zenith Backdoor. The script is intended for CrowdStrike but can be run without it.
 
-### Source links for Zenith Backdoor:
+### Source Links for Additional Information on the Zenith Backdoor:
 https://x.com/vxunderground/status/2110222399241126337  
 https://rogueauthority.org/quartzline-signed-pdf-viewer-zenith-backdoor  
 https://expel.com/blog/quartzline-a-working-pdf-viewer-with-a-backdoor-inside/  
