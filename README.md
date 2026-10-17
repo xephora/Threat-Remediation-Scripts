@@ -141,6 +141,7 @@ The following library contains a collection of remediation scripts designed to r
 - [Player](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Player)
 - [PowerDoc](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/PowerDoc)
 - [Prime](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/Prime)
+- [QuartzLine](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/QuartzLine-Zenith-Backdoor)
 - [RecipeListener](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RecipeListener)
 - [ReimageProtector](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ReimageProtector)
 - [RemotePC](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/RemotePC)
