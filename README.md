@@ -164,6 +164,7 @@ The following library contains a collection of remediation scripts designed to r
 - [ZoomInfoContactContributor](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/ZoomInfoContactContributor)
 - [flbmusic](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/flbmusic)
 - [leading](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/leading)
+- [pulsebrowser](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/pulsebrowser)
 - [streaming](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streaming)
 - [streamlink-twitch-gui](https://github.com/xephora/Threat-Remediation-Scripts/tree/main/streamlink-twitch-gui)
 
